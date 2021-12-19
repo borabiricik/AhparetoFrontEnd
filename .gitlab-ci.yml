@@ -1,0 +1,10 @@
+workflow:
+  rules:
+    - if: $CI_COMMIT_REF_NAME =~ "origin/main"
+
+build project:  
+  image: node:14  
+  script:
+  - npm install
+  - npm start
+  interruptible: true
