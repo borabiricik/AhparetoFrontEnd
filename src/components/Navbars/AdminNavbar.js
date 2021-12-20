@@ -21,12 +21,13 @@ import {
   UncontrolledTooltip,
 } from "reactstrap";
 import { useHistory } from "react-router-dom";
-
+import { useDispatch, useSelector } from "react-redux";
+import { logout } from "stores/Auth/authSlice";
 const AdminNavbar = (props) => {
   const [collapseOpen, setCollapseOpen] = React.useState(false);
   const [modalSearch, setModalSearch] = React.useState(false);
   const [color, setColor] = React.useState("navbar-transparent");
-  const history = useHistory()
+  const history = useHistory();
   React.useEffect(() => {
     window.addEventListener("resize", updateColor);
     return function cleanup() {
@@ -54,15 +55,7 @@ const AdminNavbar = (props) => {
   const toggleModalSearch = () => {
     setModalSearch(!modalSearch);
   };
-
-  const logOut = () => {
-    localStorage.removeItem("token")
-    history.push("/auth/login")
-  }
-
-
-
-
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -202,8 +195,16 @@ const AdminNavbar = (props) => {
                     <DropdownItem className="nav-item">Settings</DropdownItem>
                   </NavLink>
                   <DropdownItem divider tag="li" />
-                  <NavLink tag="li" onClick={logOut}>
-                    <DropdownItem className="nav-item text-danger font-bold">Çıkış Yap</DropdownItem>
+                  <NavLink tag="li">
+                    <DropdownItem
+                      
+                      className="nav-item text-danger font-bold"
+                    >
+                      <div onClick={()=> dispatch(logout(history))}>
+                        Çıkış Yap
+                      </div>
+                      
+                    </DropdownItem>
                   </NavLink>
                 </DropdownMenu>
               </UncontrolledDropdown>

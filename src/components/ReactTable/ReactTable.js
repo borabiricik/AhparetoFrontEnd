@@ -29,7 +29,7 @@ function DefaultColumnFilter({
         onChange={(e) => {
           setFilter(e.target.value || undefined); // Set undefined to remove the filter entirely
         }}
-        placeholder={`Search ${count} records...`}
+        placeholder={`${count} kayıt içerisinden ara...`}
       />
     </FormGroup>
   );
@@ -114,7 +114,7 @@ function Table({ columns, data }) {
   return (
     <>
       <div className="ReactTable -striped -highlight">
-        <div className="pagination-top">
+        {/* <div className="pagination-top">
           <div className="-pagination">
             <div className="-previous">
               <button
@@ -174,7 +174,7 @@ function Table({ columns, data }) {
               </button>
             </div>
           </div>
-        </div>
+        </div> */}
         <table {...getTableProps()} className="rt-table">
           <thead className="rt-thead -header">
             {headerGroups.map((headerGroup) => (
@@ -228,7 +228,67 @@ function Table({ columns, data }) {
             })}
           </tbody>
         </table>
-        <div className="pagination-bottom"></div>
+        <div className="pagination-bottom">
+          <div className="-pagination">
+            <div className="-previous">
+              <button
+                type="button"
+                onClick={() => previousPage()}
+                disabled={!canPreviousPage}
+                className="-btn"
+              >
+                Önceki Sayfa
+              </button>
+            </div>
+            <div className="-center flex-nowrap">
+              <Select
+                className="react-select info mx-5 w-100"
+                classNamePrefix="react-select"
+                name="singleSelect"
+                value={pageSelect}
+                onChange={(value) => {
+                  gotoPage(value.value);
+                  handlePageSelect(value);
+                }}
+                options={pageSelectData.map((prop, key) => {
+                  return {
+                    value: key,
+                    label: "Page " + (key + 1),
+                  };
+                })}
+                placeholder="Sayfa Seç"
+              />
+              {/* <Select
+                className="react-select info mx-5 w-100"
+                classNamePrefix="react-select"
+                name="singleSelect"
+                value={numberOfRows}
+                onChange={(value) => {
+                  console.log(value);
+                  setPageSize(value.value);
+                  setNumberOfRows(value);
+                }}
+                options={numberOfRowsData.map((prop) => {
+                  return {
+                    value: prop,
+                    label: prop + " rows",
+                  };
+                })}
+                placeholder="Select #rows"
+              /> */}
+            </div>
+            <div className="-next">
+              <button
+                type="button"
+                onClick={() => nextPage()}
+                disabled={!canNextPage}
+                className="-btn"
+              >
+                Sonraki Sayfa
+              </button>
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

@@ -1,5 +1,11 @@
 import React from "react";
-import { Route, Switch, Redirect, useLocation, useHistory } from "react-router-dom";
+import {
+  Route,
+  Switch,
+  Redirect,
+  useLocation,
+  useHistory,
+} from "react-router-dom";
 // javascript plugin used to create scrollbars on windows
 import PerfectScrollbar from "perfect-scrollbar";
 // react plugin for creating notifications over the dashboard
@@ -11,13 +17,12 @@ import Footer from "components/Footer/Footer.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
 import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
-import routes from "routes.js";
-
 import logo from "assets/img/react-logo.png";
+import userRoutes from "user.routes";
 
 var ps;
 
-const Admin = (props) => {
+const User = (props) => {
   const [activeColor, setActiveColor] = React.useState("blue");
   const [sidebarMini, setSidebarMini] = React.useState(true);
   const [opacity, setOpacity] = React.useState(0);
@@ -25,13 +30,11 @@ const Admin = (props) => {
   const mainPanelRef = React.useRef(null);
   const notificationAlertRef = React.useRef(null);
   const location = useLocation();
-  const history = useHistory()
+  const history = useHistory();
 
   // if(!localStorage.getItem("token")){
   //   history.push("/auth/login")
   // }
-
-  
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -88,7 +91,7 @@ const Admin = (props) => {
       if (prop.collapse) {
         return getRoutes(prop.views);
       }
-      if (prop.layout === "/admin") {
+      if (prop.layout === "/user") {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -152,59 +155,62 @@ const Admin = (props) => {
     setSidebarOpened(false);
     document.documentElement.classList.remove("nav-open");
   };
-  return (
-    <div className="wrapper">
-      <div className="rna-container">
-        <NotificationAlert ref={notificationAlertRef} />
-      </div>
-      <div className="navbar-minimize-fixed" style={{ opacity: opacity }}>
-        <button
-          className="minimize-sidebar btn btn-link btn-just-icon"
-          onClick={handleMiniClick}
-        >
-          <i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
-          <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
-        </button>
-      </div>
-      <Sidebar
-        {...props}
-        routes={routes}
-        activeColor={activeColor}
-        logo={{
-          outterLink: "https://www.creative-tim.com/",
-          text: "Creative Tim",
-          imgSrc: logo,
-        }}
-        closeSidebar={closeSidebar}
-      />
-      <div className="main-panel" ref={mainPanelRef} data={activeColor}>
-        <AdminNavbar
+  // if (localStorage.getItem("token")) {
+    return (
+      <div className="wrapper">
+        <div className="rna-container">
+          <NotificationAlert ref={notificationAlertRef} />
+        </div>
+        <div className="navbar-minimize-fixed" style={{ opacity: opacity }}>
+          <button
+            className="minimize-sidebar btn btn-link btn-just-icon"
+            onClick={handleMiniClick}
+          >
+            <i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
+            <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
+          </button>
+        </div>
+        <Sidebar
           {...props}
-          handleMiniClick={handleMiniClick}
-          brandText={getActiveRoute(routes)}
-          sidebarOpened={sidebarOpened}
-          toggleSidebar={toggleSidebar}
+          routes={userRoutes}
+          activeColor={activeColor}
+          logo={{
+            outterLink: "https://www.creative-tim.com/",
+            text: "Creative Tim",
+            imgSrc: logo,
+          }}
+          closeSidebar={closeSidebar}
         />
-        <Switch>
-          {getRoutes(routes)}
-          <Redirect from="*" to="/admin/dashboard" />
-          
-        </Switch>
-        {
-          // we don't want the Footer to be rendered on full screen maps page
-          props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
-            <Footer fluid />
-          )
-        }
+        <div className="main-panel" ref={mainPanelRef} data={activeColor}>
+          <AdminNavbar
+            {...props}
+            handleMiniClick={handleMiniClick}
+            brandText={getActiveRoute(userRoutes)}
+            sidebarOpened={sidebarOpened}
+            toggleSidebar={toggleSidebar}
+          />
+          <Switch>
+            {getRoutes(userRoutes)}
+            <Redirect from="*" to="/user/dashboard" />
+          </Switch>
+          {/* {
+            // we don't want the Footer to be rendered on full screen maps page
+            props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
+              <Footer fluid />
+            )
+          } */}
+        </div>
+        <FixedPlugin
+          activeColor={activeColor}
+          sidebarMini={sidebarMini}
+          handleActiveClick={handleActiveClick}
+          handleMiniClick={handleMiniClick}
+        />
       </div>
-      <FixedPlugin
-        activeColor={activeColor}
-        sidebarMini={sidebarMini}
-        handleActiveClick={handleActiveClick}
-        handleMiniClick={handleMiniClick}
-      />
-    </div>
-  );
+    );
+  // } else {
+  //   return <Redirect to={"/auth/login"} />;
+  // }
 };
 
-export default Admin;
+export default User;

@@ -20,6 +20,9 @@ import {
   Container,
   Col,
 } from "reactstrap";
+import { useForm } from "react-hook-form";
+import { useDispatch } from "react-redux";
+import { login } from "stores/Auth/authSlice";
 
 const Login = (props) => {
   const [state, setState] = React.useState({});
@@ -32,18 +35,13 @@ const Login = (props) => {
     };
   });
 
+   const dispatch = useDispatch()
+
   const history = useHistory()
-
-  if (localStorage.getItem("token")) {
-    history.push("/admin/dashboard")
-  }
-
-
-
-
-
-  const loginClick = async (e) => {
-    await e.preventDefault();
+  const {handleSubmit,register,formState:{errors}} = useForm()
+  const onSubmit= (data) => {
+    console.log(data)
+    dispatch(login({...data,history}))
   }
 
   return (
@@ -51,7 +49,7 @@ const Login = (props) => {
       <div className="content">
         <Container>
           <Col className="ml-auto mr-auto" lg="4" md="6">
-            <Form className="form">
+            <Form className="form" onSubmit={handleSubmit(onSubmit)}>
               <Card className="card-login card-white">
                 <CardHeader>
                   {/* <img
@@ -72,13 +70,22 @@ const Login = (props) => {
                         <i className="tim-icons icon-email-85" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input
+                    {/* <Input
                       placeholder="Kullanıcı Adı"
                       type="text"
                       onFocus={(e) => setState({ ...state, emailFocus: true })}
                       onBlur={(e) => setState({ ...state, emailFocus: false })}
                       value={username}
                       onChange={(e) => setusername(e.target.value)}
+                    /> */}
+                    <input 
+                    name="email"
+                    ref={register({
+                      required:true,
+                      pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                    })}
+                    className="form-control"
+                    placeholder="E-Mail"
                     />
                   </InputGroup>
                   <InputGroup
@@ -91,13 +98,20 @@ const Login = (props) => {
                         <i className="tim-icons icon-lock-circle" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    <Input
+                    {/* <Input
                       placeholder="Şifre"
                       type="password"
                       onFocus={(e) => setState({ ...state, passFocus: true })}
                       onBlur={(e) => setState({ ...state, passFocus: false })}
                       value={password}
                       onChange={(e) => { setpassword(e.target.value) }}
+                    /> */}
+                    <input 
+                    ref={register({reqired:true})}
+                    name="password"
+                    placeholder="Şifre"
+                    type="password"
+                    className="form-control"
                     />
                   </InputGroup>
                 </CardBody>
@@ -106,9 +120,8 @@ const Login = (props) => {
                     block
                     className="mb-3"
                     color="primary"
-                    href="#pablo"
-                    onClick={loginClick}
                     size="lg"
+                    type="submit"
                   >
                     Giriş Yap
                   </Button>

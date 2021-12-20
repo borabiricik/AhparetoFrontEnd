@@ -364,7 +364,7 @@ const routes = [
     icon: "tim-icons icon-time-alarm",
     component: Calendar,
     layout: "/admin",
-  },
+  }
 ];
 
 export default routes;
