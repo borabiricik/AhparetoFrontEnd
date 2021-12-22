@@ -1,1 +1,1 @@
-export const apiUrl = "https://localhost:44326/api/"
+export const apiUrl = "https://app.ahpareto.com/api/"

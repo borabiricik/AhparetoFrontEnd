@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import classnames from "classnames";
 // reactstrap components
 
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 
 import {
   Button,
@@ -35,14 +34,18 @@ const Login = (props) => {
     };
   });
 
-   const dispatch = useDispatch()
+  const dispatch = useDispatch();
 
-  const history = useHistory()
-  const {handleSubmit,register,formState:{errors}} = useForm()
-  const onSubmit= (data) => {
-    console.log(data)
-    dispatch(login({...data,history}))
-  }
+  const history = useHistory();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = (data) => {
+    console.log(data);
+    dispatch(login({ ...data, history }));
+  };
 
   return (
     <>
@@ -56,8 +59,12 @@ const Login = (props) => {
                     alt="..."
                     src={require("assets/img/card-primary.png").default}
                   /> */}
-                  <CardTitle className="text-dark font-weight-700 text-center" tag="h5">Giriş Yap</CardTitle>
-
+                  <CardTitle
+                    className="text-dark font-weight-700 text-center"
+                    tag="h5"
+                  >
+                    Giriş Yap
+                  </CardTitle>
                 </CardHeader>
                 <CardBody>
                   <InputGroup
@@ -78,14 +85,15 @@ const Login = (props) => {
                       value={username}
                       onChange={(e) => setusername(e.target.value)}
                     /> */}
-                    <input 
-                    name="email"
-                    ref={register({
-                      required:true,
-                      pattern: /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    })}
-                    className="form-control"
-                    placeholder="E-Mail"
+                    <input
+                      name="email"
+                      ref={register({
+                        required: true,
+                        pattern:
+                          /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                      })}
+                      className="form-control"
+                      placeholder="E-Mail"
                     />
                   </InputGroup>
                   <InputGroup
@@ -106,12 +114,12 @@ const Login = (props) => {
                       value={password}
                       onChange={(e) => { setpassword(e.target.value) }}
                     /> */}
-                    <input 
-                    ref={register({reqired:true})}
-                    name="password"
-                    placeholder="Şifre"
-                    type="password"
-                    className="form-control"
+                    <input
+                      ref={register({ reqired: true })}
+                      name="password"
+                      placeholder="Şifre"
+                      type="password"
+                      className="form-control"
                     />
                   </InputGroup>
                 </CardBody>

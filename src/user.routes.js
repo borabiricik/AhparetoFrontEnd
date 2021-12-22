@@ -1,4 +1,5 @@
 import Dashboard from "layouts/User/Pages/Dashboard";
+import Demografik from "layouts/User/Pages/Demografik";
 import Pollsters from "layouts/User/Pages/Pollsters";
 import Surveys from "layouts/User/Pages/Surveys";
 
@@ -27,4 +28,13 @@ export default [
     component: Pollsters,
     layout: "/user",
   },
+  {
+    path: "/demografik",
+    name: "Demografik",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Demografik,
+    layout: "/user",
+  },
+
 ];

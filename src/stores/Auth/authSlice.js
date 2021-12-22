@@ -4,7 +4,9 @@ import { AuthSuccessAlert } from "components/Alerts/AuthSuccessAlert";
 import { FailAlert } from "components/Alerts/FailAlert";
 import { apiUrl } from "Constants/api";
 
-const initialState = {};
+const initialState = {
+  id: null,
+};
 
 export const registerF = createAsyncThunk(
   "registerF",
@@ -29,27 +31,18 @@ export const login = createAsyncThunk("loginF", async (state) => {
   return { ...response, history };
 });
 
-export const logout = createAsyncThunk("logoutF",async (state,action) => {
-  localStorage.removeItem("token")
-  localStorage.removeItem("role")
-  localStorage.removeItem("expiration")
-console.log(state)
-  state.go("/auth/login")
-  
-})
+export const logout = createAsyncThunk("logoutF", async (state, action) => {
+  localStorage.removeItem("token");
+  localStorage.removeItem("role");
+  localStorage.removeItem("expiration");
+  console.log(state);
+  state.go("/auth/login");
+});
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {
-    logout: (state) => {
-      // localStorage.removeItem("token")
-      // localStorage.removeItem("role")
-      // localStorage.removeItem("expiration")
-      // action.payload.history.go("/auth/login")
-      console.log(state);
-    },
-  },
+  reducers: {},
   extraReducers: {
     [registerF.fulfilled]: (state, action) => {
       console.log(action.payload);
@@ -66,10 +59,8 @@ export const authSlice = createSlice({
     },
     [login.fulfilled]: (state, action) => {
       if (action.payload.data.success) {
-        const { token, expiration, role } = action.payload.data.data;
+        const { token, expiration, role, id } = action.payload.data.data;
         const expirationDate = new Date(expiration);
-        console.log(expirationDate);
-        console.log(action.payload);
         AuthSuccessAlert(
           "Başarıyla Giriş Yapıldı",
           action.payload.history,
@@ -78,12 +69,14 @@ export const authSlice = createSlice({
         localStorage.removeItem("token");
         localStorage.removeItem("role");
         localStorage.removeItem("expiration");
+        localStorage.removeItem("userId");
         localStorage.setItem("token", token);
+        localStorage.setItem("userId", id);
         localStorage.setItem("role", role);
         localStorage.setItem("expiration", expiration);
+        state.id = id;
       } else {
         FailAlert(action.payload.data.message);
-        console.log(action.payload);
       }
     },
   },
