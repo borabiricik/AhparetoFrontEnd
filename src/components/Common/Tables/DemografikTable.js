@@ -19,10 +19,7 @@ const dataTable = [["Deneme Anket"], ["Deneme Anket2"]];
 const DemografikTable = () => {
   const [data, setData] = React.useState(
     dataTable.map((prop, key) => {
-      console.log("demografik:"+ prop)
       return {
-        // id: key,
-        // description: prop[0],
         actions: (
           // we've added some custom button actions
           <div className="actions-right">
@@ -61,7 +58,6 @@ const DemografikTable = () => {
                     // here you should add some custom code so you can delete the data
                     // from this component and from your server as well
                     data.splice(i, 1);
-                    console.log(data);
                     return true;
                   }
                   return false;

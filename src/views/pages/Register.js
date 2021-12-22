@@ -39,7 +39,6 @@ const Register = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
     if (data) {
       dispatch(registerF({...data,history}));
     }

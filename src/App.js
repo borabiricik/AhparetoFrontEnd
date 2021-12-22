@@ -57,7 +57,7 @@ const App = () => {
         <Redirect from="/" to="/admin/dashboard" />
       )}
       {localStorage.getItem("token") &&
-      localStorage.getItem("expiration") < isoDateTime ? history.push("/auth/login") : console.log("not redirecting...")}
+      localStorage.getItem("expiration") < isoDateTime ? history.push("/auth/login") : null}
     </Switch>
   );
 };

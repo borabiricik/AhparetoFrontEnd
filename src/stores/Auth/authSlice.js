@@ -35,7 +35,6 @@ export const logout = createAsyncThunk("logoutF", async (state, action) => {
   localStorage.removeItem("token");
   localStorage.removeItem("role");
   localStorage.removeItem("expiration");
-  console.log(state);
   state.go("/auth/login");
 });
 
@@ -45,7 +44,6 @@ export const authSlice = createSlice({
   reducers: {},
   extraReducers: {
     [registerF.fulfilled]: (state, action) => {
-      console.log(action.payload);
       if (action.payload.data.success) {
         AuthSuccessAlert(
           "Başarıyla Kayıt Oluşturuldu",
@@ -60,6 +58,7 @@ export const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       if (action.payload.data.success) {
         const { token, expiration, role, id } = action.payload.data.data;
+        console.log(action.payload)
         const expirationDate = new Date(expiration);
         AuthSuccessAlert(
           "Başarıyla Giriş Yapıldı",

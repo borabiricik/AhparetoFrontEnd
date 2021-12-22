@@ -1,5 +1,7 @@
 import Dashboard from "layouts/User/Pages/Dashboard";
 import Demografik from "layouts/User/Pages/Demografik";
+import Create from "layouts/User/Pages/Demografik/Create";
+import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
 import Pollsters from "layouts/User/Pages/Pollsters";
 import Surveys from "layouts/User/Pages/Surveys";
 
@@ -36,5 +38,13 @@ export default [
     component: Demografik,
     layout: "/user",
   },
-
+  {
+    path: "/create/demografik",
+    name: "Create Demografik",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreateDemografik,
+    layout: "/user",
+    invisible:true
+  },
 ];

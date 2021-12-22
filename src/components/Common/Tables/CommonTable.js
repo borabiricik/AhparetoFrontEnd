@@ -40,8 +40,6 @@ const CommonTable = ({ columns }) => {
       </Row>
     ),
   };
-
-  console.log(dataColumns);
   return (
     <>
       <Row className="mt-5">

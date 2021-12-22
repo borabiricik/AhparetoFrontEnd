@@ -13,19 +13,24 @@ import { FaRegUserCircle } from "@react-icons/all-files/fa/FaRegUserCircle";
 import { useDispatch, useSelector } from "react-redux";
 import { getDemografik } from "stores/Demografik/demografikSlice";
 import CommonTable from "components/Common/Tables/CommonTable";
-import DemografikTable from "components/Common/Tables/DemografikTable";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { getLayoutName } from "Functions/Router";
+import { Link } from "react-router-dom";
 
 const Demografik = () => {
   const dispatch = useDispatch();
-  const demografikData = useSelector((state) => state.demografik.demografikData);
-  const loading = useSelector(state=> state.demografik.loading)
+  const history = useHistory();
+  const demografikData = useSelector(
+    (state) => state.demografik.demografikData
+  );
+  const loading = useSelector((state) => state.demografik.loading);
   const getData = async () => {
-    await dispatch(getDemografik());  
+    await dispatch(getDemografik());
   };
   useEffect(() => {
     getData();
   }, []);
-  if(loading == false){
+  if (loading == false) {
     return (
       <div className="content">
         <Card className="p-3">
@@ -34,7 +39,12 @@ const Demografik = () => {
               <CardTitle className="m-0 p-0" tag={"h2"}>
                 Demografik Bilgi Listesi
               </CardTitle>
-              <Button color="info">Demografik Bilgi oluştur</Button>
+              <Link to={{
+                pathname:getLayoutName(history) + "/create/demografik",
+                state:{type:"demografik",data:demografikData}
+              }} >
+                <Button color="info">Demografik Bilgi oluştur</Button>
+              </Link>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">
@@ -47,7 +57,7 @@ const Demografik = () => {
                     </CardText>
                     <p>Demografik Bilgi Sayısı</p>
                   </div>
-  
+
                   <div className="bg-primary rounded-circle p-3">
                     <FaRegUserCircle
                       style={{ fontSize: "3rem", color: "white" }}
@@ -56,22 +66,20 @@ const Demografik = () => {
                 </Row>
               </Card>
             </Col>
-  
+
             {/* <DemografikTable / > */}
             {/*{"API field ismi": "Tabloda gözükmesini istediğimiz isim"} */}
-            <CommonTable columns={[{"description":"Açıklama"}]} />
+            <CommonTable columns={[{ description: "Açıklama" }]} />
           </CardBody>
         </Card>
       </div>
     );
-  }
-  else{
-    console.log("yükleniyor")
-    return(
+  } else {
+    return (
       <div className="content">
         <h1>Yükleniyor...</h1>
       </div>
-    )
+    );
   }
 };
 

@@ -114,68 +114,7 @@ function Table({ columns, data }) {
   return (
     <>
       <div className="ReactTable -striped -highlight">
-        {/* <div className="pagination-top">
-          <div className="-pagination">
-            <div className="-previous">
-              <button
-                type="button"
-                onClick={() => previousPage()}
-                disabled={!canPreviousPage}
-                className="-btn"
-              >
-                Previous
-              </button>
-            </div>
-            <div className="-center flex-nowrap">
-              <Select
-                className="react-select info mx-5 w-100"
-                classNamePrefix="react-select"
-                name="singleSelect"
-                value={pageSelect}
-                onChange={(value) => {
-                  gotoPage(value.value);
-                  handlePageSelect(value);
-                }}
-                options={pageSelectData.map((prop, key) => {
-                  return {
-                    value: key,
-                    label: "Page " + (key + 1),
-                  };
-                })}
-                placeholder="Select page"
-              />
-              <Select
-                className="react-select info mx-5 w-100"
-                classNamePrefix="react-select"
-                name="singleSelect"
-                value={numberOfRows}
-                onChange={(value) => {
-                  console.log(value);
-                  setPageSize(value.value);
-                  setNumberOfRows(value);
-                }}
-                options={numberOfRowsData.map((prop) => {
-                  return {
-                    value: prop,
-                    label: prop + " rows",
-                  };
-                })}
-                placeholder="Select #rows"
-              />
-            </div>
-            <div className="-next">
-              <button
-                type="button"
-                onClick={() => nextPage()}
-                disabled={!canNextPage}
-                className="-btn"
-              >
-                Next
-              </button>
-            </div>
-          </div>
-        </div> */}
-        <table {...getTableProps()} className="rt-table">
+          <table {...getTableProps()} className="rt-table">
           <thead className="rt-thead -header">
             {headerGroups.map((headerGroup) => (
               <tr {...headerGroup.getHeaderGroupProps()} className="rt-tr">
@@ -258,24 +197,6 @@ function Table({ columns, data }) {
                 })}
                 placeholder="Sayfa Seç"
               />
-              {/* <Select
-                className="react-select info mx-5 w-100"
-                classNamePrefix="react-select"
-                name="singleSelect"
-                value={numberOfRows}
-                onChange={(value) => {
-                  console.log(value);
-                  setPageSize(value.value);
-                  setNumberOfRows(value);
-                }}
-                options={numberOfRowsData.map((prop) => {
-                  return {
-                    value: prop,
-                    label: prop + " rows",
-                  };
-                })}
-                placeholder="Select #rows"
-              /> */}
             </div>
             <div className="-next">
               <button
