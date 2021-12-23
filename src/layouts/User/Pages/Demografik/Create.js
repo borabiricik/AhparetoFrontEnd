@@ -1,18 +1,18 @@
-import React, { useEffect } from "react";
+import React, { Component, createElement, useEffect } from "react";
 import renderForms from "Functions/Forms/index";
 import { useSelector } from "react-redux";
-import { Card, CardBody, CardHeader, Row } from "reactstrap";
+import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 
-const Create = ({forms,options,data}) => {
+const Create = ({ forms, options, data }) => {
   return (
-    <div className="content">
-      <Card>
-        <CardHeader tag={"h1"}>Add Demographic Info</CardHeader>
-        <CardBody>
-          <Row>{renderForms(forms, options, data)}</Row>
-        </CardBody>
-      </Card>
-    </div>
+    <>
+      <CardHeader tag={"h1"}>Add Demographic Info</CardHeader>
+      <CardBody>
+        <Row>
+          {renderForms(forms, options, data)}
+        </Row>
+      </CardBody>
+    </>
   );
 };
 
