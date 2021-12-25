@@ -39,7 +39,7 @@ const Pollsters = () => {
               <CardTitle className="m-0 p-0" tag={"h2"}>
                 Anketör Listesi
               </CardTitle>
-              <Button color="info">Anketör Oluştur</Button>
+              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/pollster")}>Anketör Oluştur</Button>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">

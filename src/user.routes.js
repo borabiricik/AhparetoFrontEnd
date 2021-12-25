@@ -5,6 +5,7 @@ import EditDemografik from "layouts/User/Pages/Demografik/EditDemografik";
 import CreatePollsterGroup from "layouts/User/Pages/PollsterGroups/CreatePollsterGroup";
 import EditPollsterGroup from "layouts/User/Pages/PollsterGroups/EditPollsterGroup";
 import PollsterGroups from "layouts/User/Pages/PollsterGroups/PollsterGroups";
+import CreatePollster from "layouts/User/Pages/Pollsters/CreatePollster";
 import Pollsters from "layouts/User/Pages/Pollsters/Pollsters";
 import Surveys from "layouts/User/Pages/Surveys";
 
@@ -82,6 +83,15 @@ export default [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: EditPollsterGroup,
+    layout: "/user",
+    invisible:true
+  },
+  {
+    path: "/create/pollster",
+    name: "Anketör Oluştur",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreatePollster,
     layout: "/user",
     invisible:true
   },

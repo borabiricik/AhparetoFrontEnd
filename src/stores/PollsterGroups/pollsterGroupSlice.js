@@ -6,7 +6,7 @@ import Swal from "sweetalert2";
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 const initialState = {
-  pollsterGroupsData: {},
+  pollsterGroupsData: [],
   loading: null,
   success: false,
 };
