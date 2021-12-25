@@ -1,36 +1,17 @@
-import CustomDynamicInput from "components/CustomComponents/CustomDynamicInput";
-import CustomSelect from "components/CustomComponents/CustomSelect";
-import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
-import { Formik } from "formik";
-import { getLayoutName } from "Functions/Router";
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  Col,
-  Form,
-  Input,
-  Row,
-} from "reactstrap";
-import { createDemografik } from "stores/Demografik/demografikSlice";
-import Swal from "sweetalert2";
-import * as Yup from "yup";
+import { Formik } from 'formik';
+import React from 'react'
+import { useDispatch } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import { Button, Card, CardBody, CardFooter, CardHeader, Col, Form, Row } from 'reactstrap';
+import * as Yup from "yup"
 
 const validationSchema = Yup.object({
-  description: Yup.string().required("Zorunlu Alan").trim(),
-  fieldTypeId: Yup.number().required().min(1, "Zorunlu Alan"),
-});
+    description: Yup.string().required("Zorunlu Alan").trim(),
+    fieldTypeId: Yup.number().required().min(1, "Zorunlu Alan"),
+  });
 
-const CreateDemografik = () => {
-  const successData = useSelector(state=>state.demografik.success)
-  const [success, setsuccess] = useState(successData)
-  const history = useHistory();
+const CreatePollster = () => {
+    const history = useHistory();
   const dispatch = useDispatch();
   const options = [
     { value: 1, label: "Sayı" },
@@ -47,7 +28,8 @@ const CreateDemografik = () => {
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {
-          dispatch(createDemografik({ ...values, history }));
+        //   const data = dispatch(createDemografik({ ...values, history }));
+          history.push(getLayoutName(history) + "/demografik");
         }}
       >
         {({ errors, setFieldValue, handleChange, handleSubmit, values }) => (
@@ -103,6 +85,6 @@ const CreateDemografik = () => {
       </Formik>
     </div>
   );
-};
+}
 
-export default CreateDemografik;
+export default CreatePollster

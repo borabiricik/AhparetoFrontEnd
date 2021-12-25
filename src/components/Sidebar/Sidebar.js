@@ -98,6 +98,7 @@ const Sidebar = (props) => {
               href="#pablo"
               data-toggle="collapse"
               aria-expanded={state[prop.state]}
+
               onClick={(e) => {
                 e.preventDefault();
                 setState({ ...state, ...st });
@@ -139,14 +140,14 @@ const Sidebar = (props) => {
             {prop.icon !== undefined ? (
               <>
                 <i className={prop.icon} />
-                <p>{rtlActive ? prop.rtlName : prop.name}</p>
+                <p style={{fontSize:16}}>{rtlActive ? prop.rtlName : prop.name}</p>
               </>
             ) : (
               <>
-                <span className="sidebar-mini-icon">
+                <span className="sidebar-mini-icon" style={{fontSize:16}}>
                   {rtlActive ? prop.rtlMini : prop.mini}
                 </span>
-                <span className="sidebar-normal">
+                <span className="sidebar-normal" style={{fontSize:16}}>
                   {rtlActive ? prop.rtlName : prop.name}
                 </span>
               </>

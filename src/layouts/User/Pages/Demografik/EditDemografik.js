@@ -1,12 +1,12 @@
 import CustomDynamicInput from "components/CustomComponents/CustomDynamicInput";
 import CustomSelect from "components/CustomComponents/CustomSelect";
 import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
-import { Formik } from "formik";
+import { Formik, useFormik } from "formik";
 import { getLayoutName } from "Functions/Router";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
+import { Redirect, useHistory } from "react-router-dom";
 import {
   Button,
   Card,
@@ -18,7 +18,7 @@ import {
   Input,
   Row,
 } from "reactstrap";
-import { createDemografik } from "stores/Demografik/demografikSlice";
+import { editDemografik } from "stores/Demografik/demografikSlice";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 
@@ -27,27 +27,38 @@ const validationSchema = Yup.object({
   fieldTypeId: Yup.number().required().min(1, "Zorunlu Alan"),
 });
 
-const CreateDemografik = () => {
-  const successData = useSelector(state=>state.demografik.success)
-  const [success, setsuccess] = useState(successData)
-  const history = useHistory();
+const EditDemografik = ({
+  match: {
+    params: { id },
+  },
+}) => {
   const dispatch = useDispatch();
+  const history = useHistory();
+  const demografikData = useSelector(
+    (state) => state.demografik.demografikData
+  );
+ 
   const options = [
     { value: 1, label: "Sayı" },
     { value: 2, label: "Metin" },
     { value: 3, label: "Tarih" },
   ];
+if(demografikData){
+  const editData = demografikData.find((data) => data.id == id);
   return (
     <div className="content">
       <Formik
         initialValues={{
-          description: "",
-          fieldTypeId: 0,
-          demografikDetails: [],
+          id: editData.id,
+          description: editData.description,
+          fieldTypeId: editData.fieldTypeId,
+          demografikDetails: editData.demografikDetails,
+          typeId: editData.typeId,
+          userId: editData.userId,
         }}
         validationSchema={validationSchema}
-        onSubmit={(values) => {
-          dispatch(createDemografik({ ...values, history }));
+        onSubmit={async (values) => {
+          dispatch(editDemografik({...values,history}));
         }}
       >
         {({ errors, setFieldValue, handleChange, handleSubmit, values }) => (
@@ -103,6 +114,11 @@ const CreateDemografik = () => {
       </Formik>
     </div>
   );
+}
+else{
+  return <Redirect to={getLayoutName(history)+"/demografik"} />
+}
+  
 };
 
-export default CreateDemografik;
+export default EditDemografik;

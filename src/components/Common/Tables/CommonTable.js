@@ -9,60 +9,114 @@ import {
   Col,
   Button,
 } from "reactstrap";
+import { BiTrashAlt, BiEditAlt } from "react-icons/bi";
 
 import ReactTable from "components/ReactTable/ReactTable.js";
-import { useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import Swal from "sweetalert2";
 
-const CommonTable = ({ columns }) => {
-  const tableData = useSelector((state) => state.demografik.demografikData);
-  const dataColumns = columns.map((column, key) => {
-    return {
-      Header: Object.values(columns[key]).toString(),
-      accessor: Object.keys(columns[key]).toString(),
-      sortable: true,
-      filterable: true,
-    };
-  });
+const CommonTable = ({ columns, tableData, actionPageNames, deleteAction }) => {
+  const history = useHistory();
+  const dispatch = useDispatch();
 
-  dataColumns[dataColumns.length] = {
-    Header: "İşlemler",
-    accessor: "actions",
-    Cell: ({ cell }) => (
-      <Row className="justify-content-end w-100">
+  if (tableData) {
+    const dataColumns = columns.map((column, key) => {
+      if (column.isArray) {
+        return {
+          Header: Object.values(column)[0].toString(),
+          accessor: (row) => {
+            return row[Object.keys(column)[0].toString()][0].name;
+          },
+          sortable: true,
+          filterable: true,
+        };
+      } else {
+        return {
+          Header: Object.values(column).toString(),
+          accessor: Object.keys(column).toString(),
+          sortable: true,
+          filterable: true,
+        };
+      }
+    });
+
+    dataColumns[dataColumns.length] = {
+      Header: "İşlemler",
+      accessor: "actions",
+      Cell: (props) => (
+        <Row className="justify-content-end w-100">
           <Button
-        color="info"
-        size="sm"
-        className={classNames("btn-icon btn-link like")}
-        onClick={()=>alert("asdasd")}
-      >
-        <i className="tim-icons icon-heart-2" />
-      </Button>
-      </Row>
-    ),
-  };
-  return (
-    <>
-      <Row className="mt-5">
-        <Col xs={12} md={12}>
-          <Card>
-            <CardHeader>
-              <CardTitle tag="h4">Demografik Bilgi Listesi</CardTitle>
-            </CardHeader>
-            <CardBody>
-              <ReactTable
-                data={tableData}
-                filterable
-                resizable={true}
-                columns={dataColumns}
-                defaultPageSize={10}
-                className="-striped -highlight"
-              />
-            </CardBody>
-          </Card>
-        </Col>
-      </Row>
-    </>
-  );
+            color="info"
+            size="sm"
+            className={classNames("btn-icon btn-round btn-warning")}
+            onClick={() => {
+              if (actionPageNames) {
+                history.push(actionPageNames["edit"] + props.row.original.id);
+              } else {
+                alert("Button Clicked!");
+              }
+            }}
+          >
+            <BiEditAlt size={20} color="white" />
+          </Button>
+          <Button
+            color="danger"
+            size="sm"
+            className={classNames("btn-icon btn-round")}
+            onClick={() => {
+              if (deleteAction) {
+                Swal.fire({
+                  title: "Silmek istediğinize emin misiniz ?",
+                  confirmButtonText: "Evet",
+                  cancelButtonText: "Hayıt",
+                  showCancelButton: true,
+                }).then((result) => {
+                  if (result.isConfirmed) {
+                    const success = dispatch(
+                      deleteAction(parseInt(props.row.original.id))
+                    );
+                    if (success) {
+                      history.go(history.location.pathname);
+                    }
+                  }
+                });
+              } else {
+                alert("Button Clicked");
+              }
+            }}
+          >
+            <BiTrashAlt size={20} color="white" />
+          </Button>
+        </Row>
+      ),
+    };
+    return (
+      <>
+        <Row className="mt-5">
+          <Col xs={12} md={12}>
+            <Card>
+              <CardHeader>
+                <CardTitle tag="h4">Demografik Bilgi Listesi</CardTitle>
+              </CardHeader>
+              <CardBody>
+                <ReactTable
+                  data={tableData && tableData}
+                  filterable
+                  resizable={true}
+                  columns={dataColumns}
+                  defaultPageSize={10}
+                  className="-striped -highlight"
+                />
+              </CardBody>
+            </Card>
+          </Col>
+        </Row>
+      </>
+    );
+  } else {
+    <h2>Data yok ...</h2>;
+  }
 };
 
 export default CommonTable;

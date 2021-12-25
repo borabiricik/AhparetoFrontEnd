@@ -16,6 +16,7 @@ import CommonTable from "components/Common/Tables/CommonTable";
 import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getLayoutName } from "Functions/Router";
 import { Link } from "react-router-dom";
+import { deleteDemografik } from "stores/Demografik/demografikSlice";
 
 const Demografik = () => {
   const dispatch = useDispatch();
@@ -24,6 +25,7 @@ const Demografik = () => {
     (state) => state.demografik.demografikData
   );
   const loading = useSelector((state) => state.demografik.loading);
+
   const getData = async () => {
     await dispatch(getDemografik());
   };
@@ -39,12 +41,8 @@ const Demografik = () => {
               <CardTitle className="m-0 p-0" tag={"h2"}>
                 Demografik Bilgi Listesi
               </CardTitle>
-              <Link to={{
-                pathname:getLayoutName(history) + "/create/demografik",
-                state:{type:"demografik",data:demografikData}
-              }} >
-                <Button color="info">Demografik Bilgi oluştur</Button>
-              </Link>
+
+              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/demografik")}>Demografik Bilgi oluştur</Button>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">
@@ -66,10 +64,14 @@ const Demografik = () => {
                 </Row>
               </Card>
             </Col>
-
-            {/* <DemografikTable / > */}
-            {/*{"API field ismi": "Tabloda gözükmesini istediğimiz isim"} */}
-            <CommonTable columns={[{ description: "Açıklama" }]} />
+            <CommonTable
+              deleteAction={deleteDemografik}
+              actionPageNames={{
+                edit: getLayoutName(history) + "/edit/demografik/",
+              }}
+              tableData={demografikData}
+              columns={[{ description: "Açıklama" }]}
+            />
           </CardBody>
         </Card>
       </div>

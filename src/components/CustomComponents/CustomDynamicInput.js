@@ -1,10 +1,14 @@
-import { Field, FieldArray, Formik } from "formik";
-import React from "react";
+import { Field, FieldArray } from "formik";
+import React, { useEffect } from "react";
 import { Button, Col, Form, Input, Row } from "reactstrap";
 import { BiTrashAlt } from "react-icons/bi";
-import FormErrorMessage from "./FormErrorMessage";
+import { useRouteMatch } from "react-router-dom";
 
 const CustomDynamicInput = ({errors}) => {
+  const match = useRouteMatch()
+  useEffect(() => {
+   console.log()
+  }, [])
   return (
     <FieldArray
       name="demografikDetails"
@@ -18,7 +22,7 @@ const CustomDynamicInput = ({errors}) => {
             {demografikDetails && demografikDetails.length > 0
               ? demografikDetails.map((field, index) => {
                   return (
-                    <Row key={index}>
+                    <Row key={index} className="align-items-center">
                       <Col sm="10">
                         <label>Seçenek {index + 1}</label>
                         <Field
@@ -46,7 +50,14 @@ const CustomDynamicInput = ({errors}) => {
               </div>
             <Button
               color="info"
-              onClick={() => arrayHelpers.push({ description: "" })}
+              onClick={() => {
+                if(match.params.id){
+                  arrayHelpers.push({demografikId:parseInt(match.params.id), description: "" })
+                }
+                else{
+                  arrayHelpers.push({description:""})
+                }
+              }}
             >
               + Ekle
             </Button>
