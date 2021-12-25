@@ -17,11 +17,14 @@ import { useSelector } from "react-redux";
 import { getLayoutName } from "Functions/Router";
 import { useHistory } from "react-router-dom";
 import { deletePollsterGroup } from "stores/PollsterGroups/pollsterGroupSlice";
+import { deletePollster } from "stores/Pollsters/pollsterSlice";
 
-const Pollsters = () => {
+const Pollsters = ({match:{params:{id}}}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const pollstersData = useSelector((state) => state.pollsters.pollstersData);
+  
+
   const loading = useSelector((state) => state.pollsters.loading);
   const getData = () => {
     dispatch(getPollsters());
@@ -30,7 +33,9 @@ const Pollsters = () => {
     getData();
   }, []);
 
-  if (loading === false) {
+  if (loading === false && pollstersData) {
+    const editData = pollstersData.find(d=> d.pollsterId == id)
+    console.log(editData)
     return (
       <div className="content">
         <Card className="p-3">
@@ -39,7 +44,14 @@ const Pollsters = () => {
               <CardTitle className="m-0 p-0" tag={"h2"}>
                 Anketör Listesi
               </CardTitle>
-              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/pollster")}>Anketör Oluştur</Button>
+              <Button
+                color="info"
+                onClick={() =>
+                  history.push(getLayoutName(history) + "/create/pollster")
+                }
+              >
+                Anketör Oluştur
+              </Button>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">
@@ -64,11 +76,18 @@ const Pollsters = () => {
 
             <CommonTable
               tableData={pollstersData}
+              columns={[
+                { nameSurName: "Grup İsmi" },
+                { email: "E-mail" },
+                { phone: "Tel.No." },
+                { identityNumber: "Kimlik No" },
+                { pollsterGroup: "Grup Adı", isArray: true },
+              ]}
               // actionPageNames={{
-              //   edit: getLayoutName(history) + "/edit/pollstergroup/",
+              //   edit: getLayoutName(history) + "/edit/pollster/",
               // }}
-              columns={[{ nameSurName: "Grup İsmi" },{email:"E-mail"},{phone:"Tel.No."},{identityNumber:"Kimlik No"},{pollsterGroup:"Grup Adı",isArray:true}]}
-              // deleteAction={deletePollsterGroup}
+              deleteAction={deletePollster}
+              idKey={"pollsterId"}
             />
           </CardBody>
         </Card>

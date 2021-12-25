@@ -22,6 +22,11 @@ export const getPollsterGroups = createAsyncThunk(
   }
 );
 
+export const getPollsterGroupsById = createAsyncThunk("getPollsterGroupsById",async (state) => {
+  const response = await axios.get(apiUrl+"User/GetAllPollsterGroupByDto/"+localStorage.getItem("userId"))
+  return response
+})
+
 export const createPollsterGroup = createAsyncThunk(
   "createPollsterGroup",
   async (state) => {
@@ -41,7 +46,9 @@ export const createPollsterGroup = createAsyncThunk(
 export const deletePollsterGroup = createAsyncThunk(
   "deletePollsterGroup",
   async (state) => {
-    const response = axios.get(apiUrl + "User/DeletePollsterGroup/" + state);
+    console.log(state)
+    const response = await axios.get(apiUrl + "User/DeletePollsterGroup/" + state);
+    
     if(response.data.success){
       Swal.fire({
         icon:"success",
@@ -80,6 +87,11 @@ const pollsterGroupSlice = createSlice({
     builder.addCase(getPollsterGroups.fulfilled,(state,action) => {
       state.pollsterGroupsData = action.payload.data.data
       state.loading=false
+    })
+    builder.addCase(getPollsterGroupsById.fulfilled,(state,action) => {
+      console.log(action.payload.data)
+      state.pollsterGroupsData = action.payload.data.data
+      state.loading =false
     })
   }
   // extraReducers: {

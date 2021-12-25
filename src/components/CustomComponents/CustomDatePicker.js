@@ -15,7 +15,7 @@ export const CustomDatePicker = ({ ...props }) => {
       locale={"tr"}
       selected={(field.value && new Date(field.value)) || null}
       onChange={val => {
-        setFieldValue(field.name, val);
+        setFieldValue(field.name, val.toISOString());
       }}
     />
   );

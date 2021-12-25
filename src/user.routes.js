@@ -6,8 +6,11 @@ import CreatePollsterGroup from "layouts/User/Pages/PollsterGroups/CreatePollste
 import EditPollsterGroup from "layouts/User/Pages/PollsterGroups/EditPollsterGroup";
 import PollsterGroups from "layouts/User/Pages/PollsterGroups/PollsterGroups";
 import CreatePollster from "layouts/User/Pages/Pollsters/CreatePollster";
+import EditPollster from "layouts/User/Pages/Pollsters/EditPollster";
 import Pollsters from "layouts/User/Pages/Pollsters/Pollsters";
-import Surveys from "layouts/User/Pages/Surveys";
+import CreateSurvey from "layouts/User/Pages/Surveys/CreateSurvey";
+import EditSurvey from "layouts/User/Pages/Surveys/EditSurvey";
+import Surveys from "layouts/User/Pages/Surveys/Surveys";
 
 export default [
   {
@@ -92,6 +95,33 @@ export default [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: CreatePollster,
+    layout: "/user",
+    invisible:true
+  },
+  {
+    path: "/edit/pollster/:id",
+    name: "Anketör Düzenle",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditPollster,
+    layout: "/user",
+    invisible:true
+  },
+  {
+    path: "/edit/survey/:id",
+    name: "Anketi Düzenle",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditSurvey,
+    layout: "/user",
+    invisible:true
+  },
+  {
+    path: "/create/survey",
+    name: "Anket Oluştur",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreateSurvey,
     layout: "/user",
     invisible:true
   },

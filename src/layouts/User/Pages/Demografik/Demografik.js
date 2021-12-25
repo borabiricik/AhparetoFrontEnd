@@ -71,6 +71,7 @@ const Demografik = () => {
               }}
               tableData={demografikData}
               columns={[{ description: "Açıklama" }]}
+              idKey="id"
             />
           </CardBody>
         </Card>

@@ -1,14 +1,12 @@
-import CustomDynamicInput from "components/CustomComponents/CustomDynamicInput";
 import CustomSelect from "components/CustomComponents/CustomSelect";
 import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
-import { Field, Formik, useField } from "formik";
-import { getLayoutName } from "Functions/Router";
-import React from "react";
-import { useState } from "react";
+import { Field, Formik } from "formik";
+import React, { useState } from "react";
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
+import Select from "react-select";
 import {
   Button,
   Card,
@@ -22,27 +20,33 @@ import {
 } from "reactstrap";
 import { getPollsterGroups } from "stores/PollsterGroups/pollsterGroupSlice";
 import * as Yup from "yup";
-import Datetime from "react-datetime";
 import { CustomDatePicker } from "components/CustomComponents/CustomDatePicker";
 import { createPollster } from "stores/Pollsters/pollsterSlice";
+import { getPollsterGroupsById } from "stores/PollsterGroups/pollsterGroupSlice";
+import CustomMultipleSelect from "components/CustomComponents/CustomMultipleSelect";
 
-const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
+const phoneRegExp =
+  /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 
 const validationSchema = Yup.object({
   name: Yup.string().required("Zorunlu Alan").trim(),
   surName: Yup.string().required("Zorunlu Alan").trim(),
   email: Yup.string().required("Zorunlu Alan").email(),
-  pollsterGroup: Yup.number().required().min(1,"Zorunlu Alan"),
-  phone: Yup.string().matches(phoneRegExp,"Telefon Numarası Doğru Girilmedi")
-
+  // pollsterGroup: Yup.number().required().min(1, "Zorunlu Alan"),
+  phone: Yup.string().matches(phoneRegExp, "Telefon Numarası Doğru Girilmedi"),
 });
 
-const CreatePollster = () => {
+const EditPollster = ({
+  match: {
+    params: { id },
+  },
+}) => {
   const history = useHistory();
   const dispatch = useDispatch();
   const options = useSelector(
     (state) => state.pollsterGroups.pollsterGroupsData
   );
+  const data = useSelector((state) => state.pollsters.pollstersData);
 
   const getPollsterGroupData = () => {
     dispatch(getPollsterGroups());
@@ -52,25 +56,27 @@ const CreatePollster = () => {
     getPollsterGroupData();
   }, []);
 
-  if (options) {
-    // console.log(options.pollsterGroup)
-    console.log(options);
+  if (options && data) {
+    const editData = data.find((d) => d.pollsterId == id);
+    console.log(editData);
+    // console.log(options);
     return (
       <div className="content">
         <Formik
           initialValues={{
-            name: "",
-            surName: "",
-            email: "",
-            pollsterGroup: 0,
-            birthDate: "",
-            identityNumber: 0,
+            name: editData.name,
+            surName: editData.surName,
+            email: editData.email,
+            pollsterGroup: editData.pollsterGroup,
+            birthDate: editData.birthDate,
+            identityNumber: editData.identityNumber,
             userId: localStorage.getItem("userId"),
-            phone:0
+            phone: editData.phone,
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
-            dispatch(createPollster({...values,history}))
+            console.log(values);
+            // dispatch(editPollster({ ...values, history }));
           }}
         >
           {({ errors, setFieldValue, handleChange, handleSubmit, values }) => (
@@ -81,7 +87,13 @@ const CreatePollster = () => {
                   <Row>
                     <Col sm="4">
                       <label>Ad</label>
-                      <Input className="m-0" type="text" name="name" onChange={handleChange} />
+                      <Input
+                        className="m-0"
+                        type="text"
+                        name="name"
+                        onChange={handleChange}
+                        value={values.name}
+                      />
                       {errors.name && (
                         <FormErrorMessage message={errors.name} />
                       )}
@@ -93,38 +105,41 @@ const CreatePollster = () => {
                         name="surName"
                         onChange={handleChange}
                         className="m-0"
+                        value={values.surName}
                       />
                       <label>{errors.surName && errors.surName}</label>
                     </Col>
                     <Col sm="4">
                       <label>E-Mail</label>
-                      <Input type="text" name="email" onChange={handleChange} />
+                      <Input
+                        type="text"
+                        name="email"
+                        value={values.email}
+                        onChange={handleChange}
+                      />
                       <label>{errors.email && errors.email}</label>
                     </Col>
                   </Row>
                   <Row>
+                   {console.log(options)}
                     <Col sm="4">
-                      <label>Anketör Grubu</label>
-                      <CustomSelect
-                        className={`react-select info m-0 `}
-                        options={options}
-                        value={values.name}
-                        onChange={(inputValue) =>
-                          setFieldValue("pollsterGroup", inputValue.value)
-                        }
-                        fromApi={true}
-                        labelKey={"name"}
-                        valueKey={"id"}
+                      <Field
+                        className="custom-select"
+                        name="pollsterGroup"
+                        options={options.map(o=>{
+                          return {label:o.name,value:o.id}
+                        })}
+                        component={CustomMultipleSelect}
+                        placeholder="Select multi languages..."
+                        isMulti={true}
                       />
-                      {errors.pollsterGroup && (
-                        <FormErrorMessage message={errors.pollsterGroup} />
-                      )}
                     </Col>
                     <Col sm="4">
                       <label>Doğum Tarihi</label>
                       <CustomDatePicker
                         placeholder="Doğum Tarihi Seçiniz..."
                         name="birthDate"
+                        value={values.birthDate}
                       />
                     </Col>
                     <Col sm="4">
@@ -133,6 +148,7 @@ const CreatePollster = () => {
                         type="text"
                         name="identityNumber"
                         onChange={handleChange}
+                        value={values.identityNumber}
                       />
                       <label>
                         {errors.identityNumber && errors.identityNumber}
@@ -159,10 +175,11 @@ const CreatePollster = () => {
                       <Input
                         type="text"
                         name="phone"
+                        value={values.phone}
                         onChange={handleChange}
                       />
                       <label>
-                      <FormErrorMessage message={errors.phone} />
+                        <FormErrorMessage message={errors.phone} />
                       </label>
                     </Col>
                   </Row>
@@ -187,4 +204,4 @@ const CreatePollster = () => {
   }
 };
 
-export default CreatePollster;
+export default EditPollster;

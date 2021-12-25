@@ -10,27 +10,27 @@ const Footer = (props) => {
       <Container fluid={props.fluid ? true : false}>
         <ul className="nav">
           <li className="nav-item">
-            <a className="nav-link" href="http://www.edumatic.net" target="_blank">
-              Edumatic
+            <a className="nav-link" href="http://www.ahpareto.com" target="_blank">
+              Ahpareto
             </a>
           </li>
           <li className="nav-item">
             <a
               className="nav-link"
-              href="http://www.edumatic.net"
+              href="http://www.ahpareto.com"
               target="_blank"
             >
               Hakkımızda
             </a>
           </li>
           <li className="nav-item">
-            <a className="nav-link"  href="http://www.edumatic.net" target="_blank">
+            <a className="nav-link"  href="http://www.ahpareto.com" target="_blank">
               Blog
             </a>
           </li>
         </ul>
         <div className="copyright">
-          © {new Date().getFullYear()} - Edumatic Tüm Hakları Saklıdır.         
+          © {new Date().getFullYear()} - Ahpareto Tüm Hakları Saklıdır.         
         </div>
       </Container>
     </footer>

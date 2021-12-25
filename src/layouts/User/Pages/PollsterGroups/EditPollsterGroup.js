@@ -31,6 +31,8 @@ const EditPollsterGroup = ({
 
   if (data) {
     const editData = data.find((d) => d.id == parseInt(id));
+    console.log(data)
+    console.log(id)
     return (
       <div className="content">
         <Formik

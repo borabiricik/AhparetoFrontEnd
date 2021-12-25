@@ -10,24 +10,21 @@ import {
   Row,
 } from "reactstrap";
 import { FaRegUserCircle } from "@react-icons/all-files/fa/FaRegUserCircle";
-import CommonTable from "components/Common/Tables/CommonTable";
-import { getPollsterGroups } from "stores/PollsterGroups/pollsterGroupSlice";
+import CustomTable from "components/Common/Tables/CustomTable";
 import { useDispatch } from "react-redux";
+import { getSurveys } from "stores/Survyes/surveySlice";
 import { useSelector } from "react-redux";
-import { useHistory } from "react-router-dom";
+import CommonTable from "components/Common/Tables/CommonTable";
 import { getLayoutName } from "Functions/Router";
-import { deletePollsterGroup } from "stores/PollsterGroups/pollsterGroupSlice";
+import { useHistory } from "react-router-dom";
 
-const PollsterGroups = () => {
+const Surveys = () => {
+  const history = useHistory()
+  const surveys = useSelector((state) => state.surveys.surveysData);
+  const loading = useSelector((state) => state.surveys.loading);
   const dispatch = useDispatch();
-  const history = useHistory();
-  const pollsterGroupsData = useSelector(
-    (state) => state.pollsterGroups.pollsterGroupsData
-  );
-  const loading = useSelector((state) => state.pollsterGroups.loading);
-
   const getData = async () => {
-    await dispatch(getPollsterGroups());
+    await dispatch(await getSurveys());
   };
   useEffect(() => {
     getData();
@@ -40,16 +37,9 @@ const PollsterGroups = () => {
           <CardHeader>
             <Row className="justify-content-between align-items-center">
               <CardTitle className="m-0 p-0" tag={"h2"}>
-                Anketör Grubu Listesi
+                Anket Listesi
               </CardTitle>
-              <Button
-                color="info"
-                onClick={() =>
-                  history.push(getLayoutName(history) + "/create/pollstergroup")
-                }
-              >
-                Anketör Grubu Oluştur
-              </Button>
+              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/survey")}>Anket Oluştur</Button>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">
@@ -58,9 +48,9 @@ const PollsterGroups = () => {
                 <Row className="m-4 justify-content-between align-items-center">
                   <div>
                     <CardText tag={"h2"} className="m-0">
-                      {pollsterGroupsData.length}
+                      0
                     </CardText>
-                    <p>Anketör Grubu Sayısı</p>
+                    <p>Anket Sayısı</p>
                   </div>
 
                   <div className="bg-primary rounded-circle p-3">
@@ -71,14 +61,20 @@ const PollsterGroups = () => {
                 </Row>
               </Card>
             </Col>
+
             <CommonTable
-              idKey={"id"}
-              tableData={pollsterGroupsData}
+              title={"Anket Listesi"}
+              columns={[
+                { name: "Anket Adı" },
+                { startDate: "Başlangıç Tarihi", date: true },
+                { endDate: "Bitiş Tarihi", date: true },
+                { pollsterAnswerCount: "Katılım Sayısı" },
+              ]}
+              tableData={surveys}
               actionPageNames={{
-                edit: getLayoutName(history) + "/edit/pollstergroup/",
+                edit: getLayoutName(history) + "/edit/survey/",
               }}
-              columns={[{ name: "Grup İsmi" }]}
-              deleteAction={deletePollsterGroup}
+              idKey = "id"
             />
           </CardBody>
         </Card>
@@ -93,4 +89,4 @@ const PollsterGroups = () => {
   }
 };
 
-export default PollsterGroups;
+export default Surveys;
