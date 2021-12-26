@@ -6,33 +6,47 @@ import Step2 from "./Steps/Step2";
 import Step3 from "./Steps/Step3";
 import { Formik } from "formik";
 import { useState } from "react";
+import Step4 from "./Steps/Step4";
+import Step5 from "./Steps/Step5";
 
 const CreateSurvey = () => {
-  const [steps, setsteps] = useState([
+  const steps = [
     {
-      stepName: "About",
+      stepName: "Genel Bilgiler",
       stepIcon: "tim-icons icon-single-02",
       component: Step1,
     },
     {
-      stepName: "Account",
+      stepName: "Demografik Bilgiler",
       stepIcon: "tim-icons icon-settings-gear-63",
       component: Step2,
     },
     {
-      stepName: "Address",
+      stepName: "Anketör Bilgileri",
       stepIcon: "tim-icons icon-delivery-fast",
       component: Step3,
     },
-  ]);
+    {
+      stepName: "Seçenekler",
+      stepIcon: "tim-icons icon-delivery-fast",
+      component: Step4,
+    },
+    {
+      stepName: "Sorular",
+      stepIcon: "tim-icons icon-delivery-fast",
+      component: Step5,
+    },
+  ];
   return (
     <>
-      <Formik ini>
+      <Formik initialValues={{
+          methodType:1,
+      }}>
         <div className="content">
           <Col md="10" className="mx-auto">
             <ReactWizard
               steps={steps}
-              navSurveys
+              navSteps
               title="Anket Oluştur"
               headerTextCenter
               finishButtonClasses="btn-wd btn-info"

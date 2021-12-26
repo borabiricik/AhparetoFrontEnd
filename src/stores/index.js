@@ -4,6 +4,7 @@ import demografikSlice from "./Demografik/demografikSlice";
 import pollsterGroupSlice from "./PollsterGroups/pollsterGroupSlice";
 import pollsterSlice from "./Pollsters/pollsterSlice";
 import surveySlice from "./Survyes/surveySlice";
+import wizardSlice from "./Wizard/wizardSlice";
 
 export default configureStore({
   reducer: {
@@ -11,7 +12,8 @@ export default configureStore({
     demografik: demografikSlice,
     pollsterGroups: pollsterGroupSlice,
     pollsters:pollsterSlice,
-    surveys: surveySlice
+    surveys: surveySlice,
+    wizard: wizardSlice
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck:false}),
 });

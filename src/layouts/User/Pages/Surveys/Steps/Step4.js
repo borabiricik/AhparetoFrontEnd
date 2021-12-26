@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import { Button, Col, Row } from "reactstrap";
 import Select from "react-select";
 
-const Step3 = React.forwardRef((props, ref) => {
+const Step4 = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const desiredSurveyType = useSelector(
     (state) => state.wizard.desiredSurveyType
@@ -20,8 +20,8 @@ const Step3 = React.forwardRef((props, ref) => {
   }));
   return (
     <div>
-      <h2>Anketör Bilgisi Ekle</h2>
-      <Col sm="4">
+     <h2>Seçenek Ekle</h2>
+     <Col sm="4">
         <Select
           className="react-select info"
           classNamePrefix="react-select"
@@ -62,4 +62,4 @@ const Step3 = React.forwardRef((props, ref) => {
   );
 });
 
-export default Step3
+export default Step4
