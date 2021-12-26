@@ -13,9 +13,11 @@ import {
 import Select from "react-select";
 import { useState } from "react";
 import { BiTrashAlt } from "react-icons/bi/index";
+import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
 
 const Step5 = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
+  console.log(props.errors)
   const [questions, setquestions] = useState([
     {
       label: "Seçenek",
@@ -82,6 +84,7 @@ const Step5 = React.forwardRef((props, ref) => {
           </Card>
         );
       })}
+      {Object.keys(props.errors).length >0 && <FormErrorMessage message={"Eksik Alanlar Var ! "} />}
     </div>
   );
 });

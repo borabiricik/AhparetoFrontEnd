@@ -1,14 +1,19 @@
-import React from "react";
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
+import React, { useEffect } from "react";
 import { Button, Col, Row } from "reactstrap";
 import Select from "react-select";
+import { useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import { getDemografik } from "stores/Demografik/demografikSlice";
+import { Field, FieldArray, useField, useFormikContext } from "formik";
+import { getPollsters } from "stores/Pollsters/pollsterSlice";
+import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
 
 const Step3 = React.forwardRef((props, ref) => {
+  const pollstersData = useSelector((state) => state.pollsters.pollstersData);
+  const loading = useSelector((state) => state.pollsters.loading);
   const dispatch = useDispatch();
-  const desiredSurveyType = useSelector(
-    (state) => state.wizard.desiredSurveyType
-  );
+  const [field] = useField();
+  const { setFieldValue } = useFormikContext();
   /*eslint-disable-next-line*/
   const isValidated = () => {
     return true;
@@ -18,48 +23,59 @@ const Step3 = React.forwardRef((props, ref) => {
       return isValidated();
     },
   }));
-  return (
-    <div>
-      <h2>Anketör Bilgisi Ekle</h2>
-      <Col sm="4">
-        <Select
-          className="react-select info"
-          classNamePrefix="react-select"
-          placeholder="Choose City"
-          name="multipleSelect"
-          closeMenuOnSelect={false}
-          isMulti
-          // value={multipleSelect}
-          // onChange={(value) => setmultipleSelect(value)}
-          options={[
-            {
-              value: "",
-              label: " Multiple Options",
-              isDisabled: true,
-            },
-            { value: "2", label: "Paris " },
-            { value: "3", label: "Bucharest" },
-            { value: "4", label: "Rome" },
-            { value: "5", label: "New York" },
-            { value: "6", label: "Miami " },
-            { value: "7", label: "Piatra Neamt" },
-            { value: "8", label: "Paris " },
-            { value: "9", label: "Bucharest" },
-            { value: "10", label: "Rome" },
-            { value: "11", label: "New York" },
-            { value: "12", label: "Miami " },
-            { value: "13", label: "Piatra Neamt" },
-            { value: "14", label: "Paris " },
-            { value: "15", label: "Bucharest" },
-            { value: "16", label: "Rome" },
-            { value: "17", label: "New York" },
-            { value: "18", label: "Miami " },
-            { value: "19", label: "Piatra Neamt" },
-          ]}
-        />
-      </Col>
-    </div>
-  );
+  const getData = async () => {
+    dispatch(getPollsters());
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  if (loading === false) {
+    return (
+      <div>
+        <h2>Anketör Bilgisi Ekle</h2>
+        <Col sm="4">
+          <FieldArray
+            render={(arrayHelper) => {
+              return (
+                <Select
+                  className="react-select info"
+                  classNamePrefix="react-select"
+                  placeholder="Anketör Bilgisi Seçiniz..."
+                  name="pollsterJson"
+                  closeMenuOnSelect={false}
+                  isMulti
+                  onChange={(value, selected) => {
+                    console.log(selected);
+                    console.log(value);
+                    if (value) {
+                      const tempArr = [...value];
+
+                      setFieldValue(
+                        "pollsterJson",
+                        tempArr.map((i) => {
+                          return { description: i.label, id: i.value };
+                        })
+                      );
+                    }
+                  }}
+                  options={pollstersData.map((d) => {
+                    return { label: d.nameSurName, value: d.pollsterId };
+                  })}
+                />
+              );
+            }}
+          />
+          {props.errors.pollsterJson && (
+            <FormErrorMessage message={props.errors.pollsterJson} />
+          )}
+        </Col>
+      </div>
+    );
+  } else {
+    return <h2>Yükleniyor...</h2>;
+  }
 });
 
-export default Step3
+export default Step3;
