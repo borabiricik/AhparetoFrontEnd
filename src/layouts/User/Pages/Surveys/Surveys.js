@@ -48,7 +48,7 @@ const Surveys = () => {
                 <Row className="m-4 justify-content-between align-items-center">
                   <div>
                     <CardText tag={"h2"} className="m-0">
-                      0
+                      {surveys.length}
                     </CardText>
                     <p>Anket Sayısı</p>
                   </div>
@@ -74,6 +74,7 @@ const Surveys = () => {
               actionPageNames={{
                 edit: getLayoutName(history) + "/edit/survey/",
               }}
+              // deleteAction={}
               idKey = "id"
             />
           </CardBody>

@@ -15,17 +15,18 @@ import { useState } from "react";
 import { BiTrashAlt } from "react-icons/bi/index";
 import { FieldArray, useFormikContext } from "formik";
 import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
+import { v4 as uuidv4 } from "uuid";
 
 const Step4 = React.forwardRef((props, ref) => {
   const dispatch = useDispatch();
   const { getFieldHelpers } = useFormikContext();
-  const [questions, setquestions] = useState([{ description: "" }]);
-  const handleClick = (arrayHelper) => {
-    setquestions([...questions, { description: "" }]);
+  const [options, setoptions] = useState([{ description: "", id: 0 }]);
+  const handleClick = () => {
+    setoptions([...options, { description: "", id: options.length }]);
   };
   /*eslint-disable-next-line*/
   const isValidated = () => {
-    return !Object.keys(props.errors).length;
+    return true;
   };
   React.useImperativeHandle(ref, () => ({
     isValidated: () => {
@@ -33,14 +34,14 @@ const Step4 = React.forwardRef((props, ref) => {
     },
   }));
   const handleRemove = (index) => {
-    const tempArr = [...questions];
+    const tempArr = [...options];
     tempArr.splice(tempArr[index], 1);
-    setquestions(tempArr);
+    setoptions(tempArr);
   };
   return (
     <div>
       <Row className="justify-content-between align-items-center mb-3 px-3">
-        <h2 className="m-0">Sorular</h2>
+        <h2 className="m-0">Sorular (En Az 2 Seçenek Olmalıdır)</h2>
         <Button color="success" onClick={handleClick}>
           + Ekle
         </Button>
@@ -50,7 +51,7 @@ const Step4 = React.forwardRef((props, ref) => {
         name="options"
         render={(arrayHelpers) => (
           <>
-            {questions.map((q, index) => {
+            {options.map((q, index) => {
               return (
                 <Card className="bg-dark">
                   <CardHeader
@@ -72,10 +73,13 @@ const Step4 = React.forwardRef((props, ref) => {
                     <Input
                       type="text"
                       name={`options[${index}].description`}
-                      onChange={props.handleChange}
+                      onChange={(e) => {
+                        var value = e.target.value
+                        props.setFieldValue(`options[${index}].description`,value)
+                        props.setFieldValue(`options[${index}].id`,index)
+                        props.setFieldValue(`options[${index}].scor`,0)
+                      }}
                     />
-                    {/* {props.errors && console.log(props.errors)} */}
-                    {props.errors.options && props.errors.options[index] ?  <FormErrorMessage message={props.errors.options[0].description}  /> : null}
                   </CardBody>
                 </Card>
               );

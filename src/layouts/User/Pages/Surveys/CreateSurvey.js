@@ -9,21 +9,33 @@ import { useState } from "react";
 import Step4 from "./Steps/Step4";
 import Step5 from "./Steps/Step5";
 import * as Yup from "yup";
+import { useDispatch } from "react-redux";
+import { addSurvey } from "stores/Survyes/surveySlice";
+import { useHistory } from "react-router-dom";
 
 const validationSchema = Yup.object().shape({
-  options: Yup.array().of(Yup.object().shape({
-    description: Yup.string().required("Zorunlu Alan")
-  })).min(1).required("Zorunlu Alan"),
+  options: Yup.array()
+    .of(
+      Yup.object().shape({
+        description: Yup.string().required("Zorunlu Alan"),
+      })
+    )
+    .min(1)
+    .required("Zorunlu Alan"),
+  // questions: Yup.array().of(Yup.object().shape({
+  //   description: Yup.object().required()
+  // })).min(1).required("Zorunlu Alan"),
   name: Yup.string().required("Zorunlu Alan"),
   purpose: Yup.string().required("Zorunlu Alan"),
   startDate: Yup.date("Geçerli Bir Tarih Giriniz").required("Zorunlu Alan"),
   endDate: Yup.date("Geçerli Bir Tarih Giriniz").required("Zorunlu Alan"),
   participantsCount: Yup.number().required("Zorunlu Alan"),
   firstDescription: Yup.string().required("Zorunlu Alan").trim(),
-  
 });
 
 const CreateSurvey = () => {
+  const dispatch = useDispatch();
+  const history = useHistory();
   return (
     <>
       <Formik
@@ -32,20 +44,39 @@ const CreateSurvey = () => {
           purpose: "",
           startDate: "",
           endDate: "",
-          methodType: 0,
+          methodType: 1,
           participantsCount: 0,
           firstDescription: "",
           demografikJson: [],
           pollsterJson: [],
           options: [],
+          questions: [
+            {
+              question: "",
+              optionA: -1,
+              optionB: -1,
+            },
+          ],
+          userId: parseInt(localStorage.getItem("userId")),
+          isSms: true,
+          draft: true,
+          shipmentText:"",
+          participantJson: "[]",
         }}
-        validateOnChange
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log(values);
+          dispatch(addSurvey({...values,history}));
         }}
       >
-        {({ handleSubmit, handleChange, values, isValid, errors }) => {
+        {({
+          handleSubmit,
+          handleChange,
+          values,
+          isValid,
+          errors,
+          setFieldValue,
+        }) => {
           const steps = [
             {
               stepName: "Genel Bilgiler",
@@ -79,8 +110,9 @@ const CreateSurvey = () => {
               component: Step4,
               stepProps: {
                 handleChange,
-                // questions: values.options,
-                errors
+                errors,
+                values,
+                setFieldValue,
               },
             },
             {
@@ -89,6 +121,8 @@ const CreateSurvey = () => {
               component: Step5,
               stepProps: {
                 errors,
+                values,
+                setFieldValue,
               },
             },
           ];

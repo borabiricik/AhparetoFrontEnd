@@ -1,49 +1,43 @@
-/*!
+import BuyCredits from "layouts/Admin/Pages/Actions/BuyCredits";
+import PasswordActions from "layouts/Admin/Pages/Actions/PasswordActions";
+import IyzicoSettings from "layouts/Admin/Pages/Settings/IyzicoSettings";
+import MailSettings from "layouts/Admin/Pages/Settings/MailSettings";
+import Pricing from "layouts/Admin/Pages/Settings/Pricing";
+import Dashboard from "layouts/User/Pages/Dashboard";
+import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
+import Demografik from "layouts/User/Pages/Demografik/Demografik";
+import EditDemografik from "layouts/User/Pages/Demografik/EditDemografik";
+import CreatePollsterGroup from "layouts/User/Pages/PollsterGroups/CreatePollsterGroup";
+import EditPollsterGroup from "layouts/User/Pages/PollsterGroups/EditPollsterGroup";
+import PollsterGroups from "layouts/User/Pages/PollsterGroups/PollsterGroups";
+import CreatePollster from "layouts/User/Pages/Pollsters/CreatePollster";
+import EditPollster from "layouts/User/Pages/Pollsters/EditPollster";
+import Pollsters from "layouts/User/Pages/Pollsters/Pollsters";
+import CreateSurvey from "layouts/User/Pages/Surveys/CreateSurvey";
+import EditSurvey from "layouts/User/Pages/Surveys/EditSurvey";
+import Surveys from "layouts/User/Pages/Surveys/Surveys";
+import Login from "views/pages/Login";
+import Register from "views/pages/Register";
 
-=========================================================
-* Black Dashboard PRO React - v1.2.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/black-dashboard-pro-react
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
-import VectorMap from "views/maps/VectorMap.js";
-import GoogleMaps from "views/maps/GoogleMaps.js";
-import FullScreenMap from "views/maps/FullScreenMap.js";
-import ReactTables from "views/tables/ReactTables.js";
-import RegularTables from "views/tables/RegularTables.js";
-import ExtendedTables from "views/tables/ExtendedTables.js";
-import Wizard from "views/forms/Wizard.js";
-import ValidationForms from "views/forms/ValidationForms.js";
-import ExtendedForms from "views/forms/ExtendedForms.js";
-import RegularForms from "views/forms/RegularForms.js";
-import Calendar from "views/Calendar.js";
-import Widgets from "views/Widgets.js";
-import Charts from "views/Charts.js";
-import Dashboard from "views/Dashboard.js";
-import Buttons from "views/components/Buttons.js";
-import SweetAlert from "views/components/SweetAlert.js";
-import Notifications from "views/components/Notifications.js";
-import Grid from "views/components/Grid.js";
-import Typography from "views/components/Typography.js";
-import Panels from "views/components/Panels.js";
-import Icons from "views/components/Icons.js";
-import Pricing from "views/pages/Pricing.js";
-import Register from "views/pages/Register.js";
-import Timeline from "views/pages/Timeline.js";
-import User from "views/pages/User.js";
-import Login from "views/pages/Login.js";
-import Rtl from "views/pages/Rtl.js";
-import Lock from "views/pages/Lock.js";
-
-const routes = [
+export default [
+  {
+    path: "/login",
+    name: "Login",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Login,
+    layout: "/auth",
+    invisible:true
+  },
+  {
+    path: "/register",
+    name: "Register",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Dashboard,
+    layout: "/auth",
+    invisible:true
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -53,318 +47,163 @@ const routes = [
     layout: "/admin",
   },
   {
-    collapse: true,
-    name: "Pages",
-    rtlName: "صفحات",
-    icon: "tim-icons icon-image-02",
-    state: "pagesCollapse",
-    views: [
-      {
-        path: "/pricing",
-        name: "Pricing",
-        rtlName: "عالتسعير",
-        mini: "P",
-        rtlMini: "ع",
-        component: Pricing,
-        layout: "/auth",
-      },
-      {
-        path: "/rtl-support",
-        name: "RTL Support",
-        rtlName: "صودعم رتل",
-        mini: "RS",
-        rtlMini: "صو",
-        component: Rtl,
-        layout: "/rtl",
-      },
-      {
-        path: "/timeline",
-        name: "Timeline",
-        rtlName: "تيالجدول الزمني",
-        mini: "T",
-        rtlMini: "تي",
-        component: Timeline,
-        layout: "/admin",
-      },
-      {
-        path: "/login",
-        name: "Login",
-        rtlName: "هعذاتسجيل الدخول",
-        mini: "L",
-        rtlMini: "هعذا",
-        component: Login,
-        layout: "/auth",
-      },
-      {
-        path: "/register",
-        name: "Register",
-        rtlName: "تسجيل",
-        mini: "R",
-        rtlMini: "صع",
-        component: Register,
-        layout: "/auth",
-      },
-      {
-        path: "/lock-screen",
-        name: "Lock Screen",
-        rtlName: "اقفل الشاشة",
-        mini: "LS",
-        rtlMini: "هذاع",
-        component: Lock,
-        layout: "/auth",
-      },
-      {
-        path: "/user-profile",
-        name: "User Profile",
-        rtlName: "ملف تعريفي للمستخدم",
-        mini: "UP",
-        rtlMini: "شع",
-        component: User,
-        layout: "/admin",
-      },
-    ],
+    path: "/surveys",
+    name: "Anketler",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Surveys,
+    layout: "/admin",
+  },
+  {
+    path: "/pollsters",
+    name: "Anketörler",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Pollsters,
+    layout: "/admin",
+  },
+  {
+    path: "/demografik",
+    name: "Demografik",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Demografik,
+    layout: "/admin",
+  },
+ 
+  {
+    path: "/create/demografik",
+    name: "Create Demografik",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreateDemografik,
+    layout: "/admin",
+    invisible:true
+  },
+  {
+    path: "/edit/demografik/:id",
+    name: "Edit Demografik",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditDemografik,
+    layout: "/admin",
+    invisible:true
+  },
+  {
+    path: "/pollstergroups",
+    name: "Anketör Grupları",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: PollsterGroups,
+    layout: "/admin",
+  },
+  {
+    path: "/create/pollstergroup",
+    name: "Anketör Grubu Oluştur",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreatePollsterGroup,
+    layout: "/admin",
+    invisible:true
+  },
+  {
+    path: "/edit/pollstergroup/:id",
+    name: "Anketör Grubu Düzenle",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditPollsterGroup,
+    layout: "/admin",
+    invisible:true
+  },
+  {
+    path: "/create/pollster",
+    name: "Anketör Oluştur",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreatePollster,
+    layout: "/admin",
+    invisible:true
+  },
+  {
+    path: "/edit/pollster/:id",
+    name: "Anketör Düzenle",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditPollster,
+    layout: "/admin",
+    invisible:true
+  },
+  {
+    path: "/edit/survey/:id",
+    name: "Anketi Düzenle",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditSurvey,
+    layout: "/admin",
+    invisible:true
+  },
+  {
+    path: "/create/survey",
+    name: "Anket Oluştur",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreateSurvey,
+    layout: "/admin",
+    invisible:true
   },
   {
     collapse: true,
-    name: "Components",
-    rtlName: "المكونات",
-    icon: "tim-icons icon-molecule-40",
-    state: "componentsCollapse",
-    views: [
-      {
-        collapse: true,
-        name: "Multi Level Collapse",
-        rtlName: "انهيار متعدد المستويات",
-        mini: "MLT",
-        rtlMini: "ر",
-        state: "multiCollapse",
-        views: [
-          {
-            path: "/buttons",
-            name: "Buttons",
-            rtlName: "وصفت",
-            mini: "B",
-            rtlMini: "ب",
-            component: Buttons,
-            layout: "/admin",
-          },
-        ],
-      },
-      {
-        path: "/buttons",
-        name: "Buttons",
-        rtlName: "وصفت",
-        mini: "B",
-        rtlMini: "ب",
-        component: Buttons,
-        layout: "/admin",
-      },
-      {
-        path: "/landing",
-        name: "Landing",
-        rtlName: "وصفت",
-        mini: "L",
-        rtlMini: "ب",
-        component: Panels,
-        layout: "/admin",
-      },
-      {
-        path: "/grid-system",
-        name: "Grid System",
-        rtlName: "نظام الشبكة",
-        mini: "GS",
-        rtlMini: "زو",
-        component: Grid,
-        layout: "/admin",
-      },
-      {
-        path: "/panels",
-        name: "Panels",
-        rtlName: "لوحات",
-        mini: "P",
-        rtlMini: "ع",
-        component: Panels,
-        layout: "/admin",
-      },
-      {
-        path: "/sweet-alert",
-        name: "Sweet Alert",
-        rtlName: "الحلو تنبيه",
-        mini: "SA",
-        rtlMini: "ومن",
-        component: SweetAlert,
-        layout: "/admin",
-      },
-      {
-        path: "/notifications",
-        name: "Notifications",
-        rtlName: "إخطارات",
-        mini: "N",
-        rtlMini: "ن",
-        component: Notifications,
-        layout: "/admin",
-      },
-      {
-        path: "/icons",
-        name: "Icons",
-        rtlName: "الرموز",
-        mini: "I",
-        rtlMini: "و",
-        component: Icons,
-        layout: "/admin",
-      },
-      {
-        path: "/typography",
-        name: "Typography",
-        rtlName: "طباعة",
-        mini: "T",
-        rtlMini: "ر",
-        component: Typography,
-        layout: "/admin",
-      },
-    ],
-  },
-  {
-    collapse: true,
-    name: "Forms",
-    rtlName: "إستمارات",
-    icon: "tim-icons icon-notes",
-    state: "formsCollapse",
-    views: [
-      {
-        path: "/regular-forms",
-        name: "Regular Forms",
-        rtlName: "أشكال عادية",
-        mini: "RF",
-        rtlMini: "صو",
-        component: RegularForms,
-        layout: "/admin",
-      },
-      {
-        path: "/extended-forms",
-        name: "Extended Forms",
-        rtlName: "نماذج موسعة",
-        mini: "EF",
-        rtlMini: "هوو",
-        component: ExtendedForms,
-        layout: "/admin",
-      },
-      {
-        path: "/validation-forms",
-        name: "Validation Forms",
-        rtlName: "نماذج التحقق من الصحة",
-        mini: "VF",
-        rtlMini: "تو",
-        component: ValidationForms,
-        layout: "/admin",
-      },
-      {
-        path: "/wizard",
-        name: "Wizard",
-        rtlName: "ساحر",
-        mini: "W",
-        rtlMini: "ث",
-        component: Wizard,
-        layout: "/admin",
-      },
-    ],
-  },
-  {
-    collapse: true,
-    name: "Tables",
-    rtlName: "الجداول",
-    icon: "tim-icons icon-puzzle-10",
-    state: "tablesCollapse",
-    views: [
-      {
-        path: "/regular-tables",
-        name: "Regular Tables",
-        rtlName: "طاولات عادية",
-        mini: "RT",
-        rtlMini: "صر",
-        component: RegularTables,
-        layout: "/admin",
-      },
-      {
-        path: "/extended-tables",
-        name: "Extended Tables",
-        rtlName: "جداول ممتدة",
-        mini: "ET",
-        rtlMini: "هور",
-        component: ExtendedTables,
-        layout: "/admin",
-      },
-      {
-        path: "/react-tables",
-        name: "React Tables",
-        rtlName: "رد فعل الطاولة",
-        mini: "RT",
-        rtlMini: "در",
-        component: ReactTables,
-        layout: "/admin",
-      },
-    ],
-  },
-  {
-    collapse: true,
-    name: "Maps",
+    name: "AYARLAR",
     rtlName: "خرائط",
     icon: "tim-icons icon-pin",
-    state: "mapsCollapse",
+    state: "settingsCollapse",
     views: [
       {
-        path: "/google-maps",
-        name: "Google Maps",
+        path: "/iyzico-settings",
+        name: "Iyzico Ayarları",
         rtlName: "خرائط جوجل",
-        mini: "GM",
+        mini: "IA",
         rtlMini: "زم",
-        component: GoogleMaps,
+        component: IyzicoSettings,
         layout: "/admin",
       },
       {
-        path: "/full-screen-map",
-        name: "Full Screen Map",
-        rtlName: "خريطة كاملة الشاشة",
-        mini: "FSM",
-        rtlMini: "ووم",
-        component: FullScreenMap,
+        path: "/mail-settings",
+        name: "Mail Ayarları",
+        rtlName: "خرائط جوجل",
+        mini: "MA",
+        rtlMini: "زم",
+        component: MailSettings,
         layout: "/admin",
       },
       {
-        path: "/vector-map",
-        name: "Vector Map",
-        rtlName: "خريطة المتجه",
-        mini: "VM",
-        rtlMini: "تم",
-        component: VectorMap,
+        path: "/pricing-settings",
+        name: "Fiyatlandırma",
+        rtlName: "خرائط جوجل",
+        mini: "F",
+        rtlMini: "زم",
+        component: Pricing,
         layout: "/admin",
       },
+      {
+        path: "/buy-credits",
+        name: "Kredi Satın Al",
+        rtlName: "خرائط جوجل",
+        mini: "KR",
+        rtlMini: "زم",
+        component: BuyCredits,
+        layout: "/admin",
+      },
+      {
+        path: "/password-actions",
+        name: "ŞİFRE İŞLEMLERİ",
+        rtlName: "خرائط جوجل",
+        mini: "Şİ",
+        rtlMini: "زم",
+        component: PasswordActions,
+        layout: "/admin",
+      },
+      
     ],
   },
-  {
-    path: "/widgets",
-    name: "Widgets",
-    rtlName: "الحاجيات",
-    icon: "tim-icons icon-settings",
-    component: Widgets,
-    layout: "/admin",
-  },
-  {
-    path: "/charts",
-    name: "Charts",
-    rtlName: "الرسوم البيانية",
-    icon: "tim-icons icon-chart-bar-32",
-    component: Charts,
-    layout: "/admin",
-  },
-  {
-    path: "/calendar",
-    name: "Calendar",
-    rtlName: "التقويم",
-    icon: "tim-icons icon-time-alarm",
-    component: Calendar,
-    layout: "/admin",
-  }
 ];
-
-export default routes;

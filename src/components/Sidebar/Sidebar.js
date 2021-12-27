@@ -107,17 +107,17 @@ const Sidebar = (props) => {
               {prop.icon !== undefined ? (
                 <>
                   <i className={prop.icon} />
-                  <p>
+                  <p style={{fontSize:16}}>
                     {rtlActive ? prop.rtlName : prop.name}
                     <b className="caret" />
                   </p>
                 </>
               ) : (
                 <>
-                  <span className="sidebar-mini-icon">
+                  <span className="sidebar-mini-icon "  style={{fontSize:12}}>
                     {rtlActive ? prop.rtlMini : prop.mini}
                   </span>
-                  <span className="sidebar-normal">
+                  <span className="sidebar-normal" style={{fontSize:12}} >
                     {rtlActive ? prop.rtlName : prop.name}
                     <b className="caret" />
                   </span>
@@ -144,10 +144,10 @@ const Sidebar = (props) => {
               </>
             ) : (
               <>
-                <span className="sidebar-mini-icon" style={{fontSize:16}}>
+                <span className="sidebar-mini-icon" style={{fontSize:14}}>
                   {rtlActive ? prop.rtlMini : prop.mini}
                 </span>
-                <span className="sidebar-normal" style={{fontSize:16}}>
+                <span className="sidebar-normal" style={{fontSize:14}}>
                   {rtlActive ? prop.rtlName : prop.name}
                 </span>
               </>

@@ -11,7 +11,7 @@ import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
 const Step1 = React.forwardRef((props, ref) => {
   /*eslint-disable-next-line*/
   const isValidated = () => {
-    return !Object.keys(props.errors).length;
+    return true;
   };
   React.useImperativeHandle(ref, () => ({
     isValidated: () => {
@@ -71,6 +71,7 @@ const Step1 = React.forwardRef((props, ref) => {
             type="textarea"
             name="firstDescription"
             onChange={props.handleChange}
+            className="p-2"
           />
           {props.errors.firstDescription && <FormErrorMessage message={props.errors.firstDescription} />}
 
