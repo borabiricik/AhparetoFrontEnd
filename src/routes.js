@@ -2,6 +2,8 @@ import BuyCredits from "layouts/Admin/Pages/Actions/BuyCredits";
 import PasswordActions from "layouts/Admin/Pages/Actions/PasswordActions";
 import IyzicoSettings from "layouts/Admin/Pages/Settings/IyzicoSettings";
 import MailSettings from "layouts/Admin/Pages/Settings/MailSettings";
+import CreatePrice from "layouts/Admin/Pages/Settings/Price/CreatePrice";
+import EditPrice from "layouts/Admin/Pages/Settings/Price/EditPrice";
 import Pricing from "layouts/Admin/Pages/Settings/Pricing";
 import Dashboard from "layouts/User/Pages/Dashboard";
 import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
@@ -34,7 +36,7 @@ export default [
     name: "Register",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
-    component: Dashboard,
+    component: Register,
     layout: "/auth",
     invisible:true
   },
@@ -202,6 +204,26 @@ export default [
         rtlMini: "زم",
         component: PasswordActions,
         layout: "/admin",
+      },
+      {
+        path: "/edit/price/:id",
+        name: "Paket Düzenle",
+        rtlName: "خرائط جوجل",
+        mini: "PD",
+        rtlMini: "زم",
+        component: EditPrice,
+        layout: "/admin",
+        invisible:true
+      },
+      {
+        path: "/create/price",
+        name: "Paket Oluştur",
+        rtlName: "خرائط جوجل",
+        mini: "PD",
+        rtlMini: "زم",
+        component: CreatePrice,
+        layout: "/admin",
+        invisible:true
       },
       
     ],

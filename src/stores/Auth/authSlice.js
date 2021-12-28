@@ -3,6 +3,8 @@ import axios from "axios";
 import { AuthSuccessAlert } from "components/Alerts/AuthSuccessAlert";
 import { FailAlert } from "components/Alerts/FailAlert";
 import { apiUrl } from "Constants/api";
+import { getLayoutName } from "Functions/Router";
+import Swal from "sweetalert2";
 
 const initialState = {
   id: null,
@@ -38,6 +40,11 @@ export const logout = createAsyncThunk("logoutF", async (state, action) => {
   state.go("/auth/login");
 });
 
+export const rePassword = createAsyncThunk("rePassword", async (state) => {
+  const response = await axios.post(apiUrl + "Auth/rePassword", state);
+  return { ...response, history: state.history };
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -50,7 +57,6 @@ export const authSlice = createSlice({
           action.payload.history,
           "/auth/login"
         );
-        // action.payload.history.push("/auth/login")
       } else {
         FailAlert(action.payload.data.message);
       }
@@ -77,6 +83,30 @@ export const authSlice = createSlice({
         FailAlert(action.payload.data.message);
       }
     },
+    [rePassword.fulfilled]: (state,action) => {
+      console.log(action.payload)
+      const {history,data} = action.payload
+      if (data.success) {
+        Swal.fire({
+          timer: 1000,
+          showConfirmButton: false,
+          title:"Başarılı",
+          icon:"success"
+        }).then((res=> {
+          logout()
+          history.push(getLayoutName(history)+"/dashboard")
+        }))
+      }
+      else{
+        Swal.fire({
+          title:"Başarısız",
+          showConfirmButton:false,
+          timer:3000,
+          icon:"error",
+          text: data.message
+        })
+      }
+    }
   },
 });
 

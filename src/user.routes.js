@@ -1,3 +1,5 @@
+import BuyCredits from "layouts/Admin/Pages/Actions/BuyCredits";
+import PasswordActions from "layouts/Admin/Pages/Actions/PasswordActions";
 import Dashboard from "layouts/User/Pages/Dashboard";
 import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
 import Demografik from "layouts/User/Pages/Demografik/Demografik";
@@ -11,8 +13,28 @@ import Pollsters from "layouts/User/Pages/Pollsters/Pollsters";
 import CreateSurvey from "layouts/User/Pages/Surveys/CreateSurvey";
 import EditSurvey from "layouts/User/Pages/Surveys/EditSurvey";
 import Surveys from "layouts/User/Pages/Surveys/Surveys";
+import Login from "views/pages/Login";
+import Register from "views/pages/Register";
 
 export default [
+  {
+    path: "/login",
+    name: "Login",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Login,
+    layout: "/auth",
+    invisible:true
+  },
+  {
+    path: "/register",
+    name: "Register",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Register,
+    layout: "/auth",
+    invisible:true
+  },
   {
     path: "/dashboard",
     name: "Dashboard",
@@ -52,7 +74,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreateDemografik,
     layout: "/user",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/demografik/:id",
@@ -61,7 +83,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditDemografik,
     layout: "/user",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/pollstergroups",
@@ -78,7 +100,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreatePollsterGroup,
     layout: "/user",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/pollstergroup/:id",
@@ -87,7 +109,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditPollsterGroup,
     layout: "/user",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/create/pollster",
@@ -96,7 +118,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreatePollster,
     layout: "/user",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/pollster/:id",
@@ -105,7 +127,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditPollster,
     layout: "/user",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/survey/:id",
@@ -114,7 +136,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditSurvey,
     layout: "/user",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/create/survey",
@@ -123,6 +145,33 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreateSurvey,
     layout: "/user",
-    invisible:true
+    invisible: true,
+  },
+  {
+    collapse: true,
+    name: "AYARLAR",
+    rtlName: "خرائط",
+    icon: "tim-icons icon-pin",
+    state: "settingsCollapse",
+    views: [
+      {
+        path: "/buy-credits",
+        name: "Kredi Satın Al",
+        rtlName: "خرائط جوجل",
+        mini: "KR",
+        rtlMini: "زم",
+        component: BuyCredits,
+        layout: "/user",
+      },
+      {
+        path: "/password-actions",
+        name: "ŞİFRE İŞLEMLERİ",
+        rtlName: "خرائط جوجل",
+        mini: "Şİ",
+        rtlMini: "زم",
+        component: PasswordActions,
+        layout: "/user",
+      },
+    ],
   },
 ];

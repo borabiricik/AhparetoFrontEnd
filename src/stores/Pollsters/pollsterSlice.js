@@ -32,6 +32,15 @@ export const createPollster = createAsyncThunk(
         icon:"success"
       }).then((res=> state.history.push(getLayoutName(state.history)+"/pollsters")))
     }
+    else{
+      Swal.fire({
+        title:"Başarısız",
+        showConfirmButton:false,
+        timer:2000,
+        icon:"error",
+        text: response.data.message
+      })
+    }
     return response;
   }
 );

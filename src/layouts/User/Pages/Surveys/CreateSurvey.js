@@ -62,6 +62,7 @@ const CreateSurvey = () => {
           draft: true,
           shipmentText:"",
           participantJson: "[]",
+          surveyAnswers:[]
         }}
         validationSchema={validationSchema}
         onSubmit={(values) => {

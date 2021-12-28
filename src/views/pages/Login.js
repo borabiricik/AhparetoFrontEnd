@@ -54,10 +54,6 @@ const Login = (props) => {
             <Form className="form" onSubmit={handleSubmit(onSubmit)}>
               <Card className="card-login card-white">
                 <CardHeader>
-                  {/* <img
-                    alt="..."
-                    src={require("assets/img/card-primary.png").default}
-                  /> */}
                   <CardTitle
                     className="text-dark font-weight-700 text-center"
                     tag="h5"
@@ -76,14 +72,6 @@ const Login = (props) => {
                         <i className="tim-icons icon-email-85" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    {/* <Input
-                      placeholder="Kullanıcı Adı"
-                      type="text"
-                      onFocus={(e) => setState({ ...state, emailFocus: true })}
-                      onBlur={(e) => setState({ ...state, emailFocus: false })}
-                      value={username}
-                      onChange={(e) => setusername(e.target.value)}
-                    /> */}
                     <input
                       name="email"
                       ref={register({
