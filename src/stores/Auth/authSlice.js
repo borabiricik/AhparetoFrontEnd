@@ -53,7 +53,7 @@ export const authSlice = createSlice({
     [registerF.fulfilled]: (state, action) => {
       if (action.payload.data.success) {
         AuthSuccessAlert(
-          "Başarıyla Kayıt Oluşturuldu",
+          "Successfully Registered",
           action.payload.history,
           "/auth/login"
         );

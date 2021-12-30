@@ -64,8 +64,8 @@ const Register = () => {
                       data2alt="..."
                       src={require("assets/img/card-primary.png").default}
                     />
-                    <CardTitle className="text-primary" tag="h4">
-                      Kayıt Ol
+                    <CardTitle className="text-dark" tag="h4">
+                      Register
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
@@ -165,14 +165,14 @@ const Register = () => {
                       <Button
                         type="submit"
                         className="btn-round"
-                        color="primary"
+                        color="success"
                         size="lg"
                       >
-                        Kayıt ol
+                        Register
                       </Button>
                       <Link to={"/auth/login"}>
-                        <Button className="btn-simple" color="primary">
-                          Giriş Yap
+                        <Button className="btn-simple" color="info">
+                          Login
                         </Button>
                       </Link>
                     </Row>

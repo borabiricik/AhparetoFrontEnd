@@ -18,6 +18,7 @@ import {
   InputGroup,
   Container,
   Col,
+  Row,
 } from "reactstrap";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -84,9 +85,10 @@ const Login = (props) => {
                     />
                   </InputGroup>
                   <InputGroup
-                    className={classnames({
+                    className={`mb-0 ${classnames({
                       "input-group-focus": state.passFocus,
-                    })}
+                      
+                    })}`}
                   >
                     <InputGroupAddon addonType="prepend">
                       <InputGroupText>
@@ -105,13 +107,21 @@ const Login = (props) => {
                 <CardFooter>
                   <Button
                     block
-                    className="mb-3"
-                    color="primary"
+                    className="mb-3 btn-round"
+                    color="success"
                     size="lg"
                     type="submit"
                   >
-                    Giriş Yap
+                    Login
                   </Button>
+                  <Row className="justify-content-center">
+                  <small className="bg-dark btn-round text-white py-2 px-3">
+                    No Account?
+                    <Button color="success" className="btn-link p-0 ml-2" onClick={()=>history.push("/auth/register")}>
+                      Register
+                    </Button>
+                  </small>
+                  </Row>
                 </CardFooter>
               </Card>
             </Form>
