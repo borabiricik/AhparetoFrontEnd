@@ -38,12 +38,12 @@ const PasswordActions = () => {
                 <Card>
                   <CardHeader>
                     <CardTitle className="font-weight-700 text-center" tag="h3">
-                      Şifre Yenile
+                      Renew Password
                     </CardTitle>
                   </CardHeader>
                   <CardBody>
                     <div>
-                      <label>Eski Şifre</label>
+                      <label>Old Password</label>
                       <Input
                         type="password"
                         value={values.oldPassword}
@@ -52,7 +52,7 @@ const PasswordActions = () => {
                       />
                     </div>
                     <div>
-                      <label>Yeni Şifre</label>
+                      <label>New Password</label>
                       <Input
                         type="password"
                         name="password"
@@ -61,7 +61,7 @@ const PasswordActions = () => {
                       />
                     </div>
                     <div>
-                      <label>Yeni Şifre Tekrar</label>
+                      <label>Re-New Password</label>
                       <Input
                         value={values.confirmPassword}
                         onChange={handleChange}
@@ -72,7 +72,7 @@ const PasswordActions = () => {
                   </CardBody>
                   <CardFooter>
                     <Button color="success" onClick={handleSubmit}>
-                      Kaydet
+                      Save
                     </Button>
                   </CardFooter>
                 </Card>

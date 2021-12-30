@@ -33,9 +33,9 @@ const CreateDemografik = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const options = [
-    { value: 1, label: "Sayı" },
-    { value: 2, label: "Metin" },
-    { value: 3, label: "Tarih" },
+    { value: 1, label: "Number" },
+    { value: 2, label: "Text" },
+    { value: 3, label: "Date" },
   ];
   return (
     <div className="content">
@@ -95,7 +95,7 @@ const CreateDemografik = () => {
             </CardBody>
             <CardFooter>
               <Button color="info" onClick={handleSubmit}>
-                Kaydet
+                Save
               </Button>
             </CardFooter>
           </Card>

@@ -90,7 +90,7 @@ export const authSlice = createSlice({
         Swal.fire({
           timer: 1000,
           showConfirmButton: false,
-          title:"Başarılı",
+          title:"Success",
           icon:"success"
         }).then((res=> {
           logout()

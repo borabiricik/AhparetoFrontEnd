@@ -24,12 +24,12 @@ const Step1 = React.forwardRef((props, ref) => {
       <h2>Genel Bilgiler</h2>
       <Row>
         <Col sm="4" className="mb-2">
-          <label>Anket Adı*</label>
+          <label>Survey Name*</label>
           <Input type="text" name="name" onChange={props.handleChange} />
           {props.errors.name && <FormErrorMessage message={props.errors.name} />}
         </Col>
         <Col sm="4" className="mb-2">
-          <label>Anket Amacı*</label>
+          <label>Survey Purpose*</label>
           <Input type="text" name="purpose" onChange={props.handleChange} />
           {props.errors.purpose && <FormErrorMessage message={props.errors.purpose} />}
 
@@ -37,19 +37,19 @@ const Step1 = React.forwardRef((props, ref) => {
       </Row>
       <Row>
         <Col sm="4" className="mb-2">
-          <label>Başlangıç Tarihi*</label>
+          <label>Start Date*</label>
           <CustomDatePicker
             name="startDate"
-            placeholder={"Başlangıç Tarihi Seçiniz..."}
+            placeholder={"Select Start Date..."}
           />
           {props.errors.startDate && <FormErrorMessage message={props.errors.startDate} />}
 
         </Col>
         <Col sm="4" className="mb-2">
-          <label>Bitiş Tarihi*</label>
+          <label>End Date*</label>
           <CustomDatePicker
             name="endDate"
-            placeholder={"Bitiş Tarihi Seçiniz..."}
+            placeholder={"Select End Date..."}
           />
           {props.errors.endDate && <FormErrorMessage message={props.errors.endDate} />}
 

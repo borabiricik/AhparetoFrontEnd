@@ -31,52 +31,55 @@ const EditPollsterGroup = ({
 
   if (data) {
     const editData = data.find((d) => d.id == parseInt(id));
-    console.log(data)
-    console.log(id)
-    return (
-      <div className="content">
-        <Formik
-          initialValues={{
-            id: editData.id,
-            name: editData.name,
-            userId: editData.userId,
-          }}
-          onSubmit={async (values) => {
-           dispatch(updatePollsterGroup({...values,history}));
-            
-          }}
-        >
-          {({ values, handleSubmit, handleChange }) => {
-            return (
-              <Card>
-                <CardHeader tag={"h2"}>Anketör Grubu Düzenle</CardHeader>
-                <CardBody>
-                  <Row>
-                    <Col sm="4">
-                      <Input
-                        name="name"
-                        type="text"
-                        value={values.name}
-                        onChange={handleChange}
-                        placeholder="İsim Giriniz..."
-                      />
-                    </Col>
-                  </Row>
-                </CardBody>
-                <CardFooter>
-                  <Button color="success" onClick={handleSubmit}>
-                    Kaydet
-                  </Button>
-                </CardFooter>
-              </Card>
-            );
-          }}
-        </Formik>
-      </div>
-    );
+    if(editData)
+    {
+      return (
+        <div className="content">
+          <Formik
+            initialValues={{
+              id: editData.id,
+              name: editData.name,
+              userId: editData.userId,
+            }}
+            onSubmit={async (values) => {
+             dispatch(updatePollsterGroup({...values,history}));
+              
+            }}
+          >
+            {({ values, handleSubmit, handleChange }) => {
+              return (
+                <Card>
+                  <CardHeader tag={"h2"}>Edit Pollster Group</CardHeader>
+                  <CardBody>
+                    <Row>
+                      <Col sm="4">
+                        <Input
+                          name="name"
+                          type="text"
+                          value={values.name}
+                          onChange={handleChange}
+                          placeholder="İsim Giriniz..."
+                        />
+                      </Col>
+                    </Row>
+                  </CardBody>
+                  <CardFooter>
+                    <Button color="success" onClick={handleSubmit}>
+                      Save
+                    </Button>
+                  </CardFooter>
+                </Card>
+              );
+            }}
+          </Formik>
+        </div>
+      );
+    }
+    else {
+      return <Redirect to={getLayoutName(history) + "/pollstergroups"} />
+    }
   } else {
-    history.push(getLayoutName(history) + "/pollstergroups");
-    return null;
+    return <Redirect to={getLayoutName(history) + "/pollstergroups"} />
   }
 };
 

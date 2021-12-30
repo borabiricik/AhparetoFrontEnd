@@ -80,14 +80,14 @@ const CreatePollster = () => {
                 <Form onSubmit={handleSubmit}>
                   <Row>
                     <Col sm="4">
-                      <label>Ad</label>
+                      <label>Name</label>
                       <Input className="m-0" type="text" name="name" onChange={handleChange} />
                       {errors.name && (
                         <FormErrorMessage message={errors.name} />
                       )}
                     </Col>
                     <Col sm="4">
-                      <label>Soyad</label>
+                      <label>Surname</label>
                       <Input
                         type="text"
                         name="surName"
@@ -104,7 +104,7 @@ const CreatePollster = () => {
                   </Row>
                   <Row>
                     <Col sm="4">
-                      <label>Anketör Grubu</label>
+                      <label>Pollster Group</label>
                       <CustomSelect
                         className={`react-select info m-0 `}
                         options={options}
@@ -121,14 +121,14 @@ const CreatePollster = () => {
                       )}
                     </Col>
                     <Col sm="4">
-                      <label>Doğum Tarihi</label>
+                      <label>Birthday</label>
                       <CustomDatePicker
-                        placeholder="Doğum Tarihi Seçiniz..."
+                        placeholder="Select Birthday..."
                         name="birthDate"
                       />
                     </Col>
                     <Col sm="4">
-                      <label>Kimlik No.</label>
+                      <label>Identity Number</label>
                       <Input
                         type="text"
                         name="identityNumber"
@@ -141,7 +141,7 @@ const CreatePollster = () => {
                   </Row>
                   <Row>
                     <Col sm="4">
-                      <label>Cinsiyet</label>
+                      <label>Gender</label>
                       <CustomSelect
                         className={`react-select info`}
                         options={[
@@ -155,7 +155,7 @@ const CreatePollster = () => {
                       />
                     </Col>
                     <Col sm="4">
-                      <label>Telefon No. (Örn: +905432123567)</label>
+                      <label>Phone Number. (Örn: (+90) 5432123567)</label>
                       <Input
                         type="text"
                         name="phone"
@@ -170,7 +170,7 @@ const CreatePollster = () => {
               </CardBody>
               <CardFooter>
                 <Button color="info" onClick={handleSubmit}>
-                  Kaydet
+                  Save
                 </Button>
               </CardFooter>
             </Card>

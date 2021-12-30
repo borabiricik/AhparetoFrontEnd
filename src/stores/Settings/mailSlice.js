@@ -44,7 +44,7 @@ const mailSlice = createSlice({
       if (action.payload.data.success) {
         Swal.fire({
           icon: "success",
-          title: "Başarılı",
+          title: "Success",
           timer: 1000,
           showConfirmButton: false,
         }).then((res) =>

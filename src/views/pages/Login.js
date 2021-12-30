@@ -93,18 +93,10 @@ const Login = (props) => {
                         <i className="tim-icons icon-lock-circle" />
                       </InputGroupText>
                     </InputGroupAddon>
-                    {/* <Input
-                      placeholder="Şifre"
-                      type="password"
-                      onFocus={(e) => setState({ ...state, passFocus: true })}
-                      onBlur={(e) => setState({ ...state, passFocus: false })}
-                      value={password}
-                      onChange={(e) => { setpassword(e.target.value) }}
-                    /> */}
                     <input
                       ref={register({ reqired: true })}
                       name="password"
-                      placeholder="Şifre"
+                      placeholder="Password"
                       type="password"
                       className="form-control"
                     />

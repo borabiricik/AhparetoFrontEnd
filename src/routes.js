@@ -50,7 +50,7 @@ export default [
   },
   {
     path: "/surveys",
-    name: "Anketler",
+    name: "Surveys",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: Surveys,
@@ -58,7 +58,7 @@ export default [
   },
   {
     path: "/pollsters",
-    name: "Anketörler",
+    name: "Pollsters",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: Pollsters,
@@ -66,7 +66,7 @@ export default [
   },
   {
     path: "/demografik",
-    name: "Demografik",
+    name: "Demographic",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: Demografik,
@@ -75,7 +75,7 @@ export default [
  
   {
     path: "/create/demografik",
-    name: "Create Demografik",
+    name: "Create Demographic",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: CreateDemografik,
@@ -84,7 +84,7 @@ export default [
   },
   {
     path: "/edit/demografik/:id",
-    name: "Edit Demografik",
+    name: "Edit Demographic",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: EditDemografik,
@@ -93,7 +93,7 @@ export default [
   },
   {
     path: "/pollstergroups",
-    name: "Anketör Grupları",
+    name: "Pollster Groups",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: PollsterGroups,
@@ -101,7 +101,7 @@ export default [
   },
   {
     path: "/create/pollstergroup",
-    name: "Anketör Grubu Oluştur",
+    name: "Create Pollster Group",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: CreatePollsterGroup,
@@ -110,7 +110,7 @@ export default [
   },
   {
     path: "/edit/pollstergroup/:id",
-    name: "Anketör Grubu Düzenle",
+    name: "Edit Pollster Group",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: EditPollsterGroup,
@@ -119,7 +119,7 @@ export default [
   },
   {
     path: "/create/pollster",
-    name: "Anketör Oluştur",
+    name: "Create Pollster",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: CreatePollster,
@@ -128,7 +128,7 @@ export default [
   },
   {
     path: "/edit/pollster/:id",
-    name: "Anketör Düzenle",
+    name: "Edit Pollster",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: EditPollster,
@@ -137,7 +137,7 @@ export default [
   },
   {
     path: "/edit/survey/:id",
-    name: "Anketi Düzenle",
+    name: "Edit Survey",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: EditSurvey,
@@ -146,7 +146,7 @@ export default [
   },
   {
     path: "/create/survey",
-    name: "Anket Oluştur",
+    name: "Create Survey",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: CreateSurvey,
@@ -155,14 +155,14 @@ export default [
   },
   {
     collapse: true,
-    name: "AYARLAR",
+    name: "Settings",
     rtlName: "خرائط",
     icon: "tim-icons icon-pin",
     state: "settingsCollapse",
     views: [
       {
         path: "/iyzico-settings",
-        name: "Iyzico Ayarları",
+        name: "Iyzico Settings",
         rtlName: "خرائط جوجل",
         mini: "IA",
         rtlMini: "زم",
@@ -171,7 +171,7 @@ export default [
       },
       {
         path: "/mail-settings",
-        name: "Mail Ayarları",
+        name: "Mail Settings",
         rtlName: "خرائط جوجل",
         mini: "MA",
         rtlMini: "زم",
@@ -180,7 +180,7 @@ export default [
       },
       {
         path: "/pricing-settings",
-        name: "Fiyatlandırma",
+        name: "Pricing",
         rtlName: "خرائط جوجل",
         mini: "F",
         rtlMini: "زم",
@@ -189,7 +189,7 @@ export default [
       },
       {
         path: "/buy-credits",
-        name: "Kredi Satın Al",
+        name: "Buy Credits",
         rtlName: "خرائط جوجل",
         mini: "KR",
         rtlMini: "زم",
@@ -198,7 +198,7 @@ export default [
       },
       {
         path: "/password-actions",
-        name: "ŞİFRE İŞLEMLERİ",
+        name: "Password Actions",
         rtlName: "خرائط جوجل",
         mini: "Şİ",
         rtlMini: "زم",
@@ -207,7 +207,7 @@ export default [
       },
       {
         path: "/edit/price/:id",
-        name: "Paket Düzenle",
+        name: "Edit Price",
         rtlName: "خرائط جوجل",
         mini: "PD",
         rtlMini: "زم",
@@ -217,7 +217,7 @@ export default [
       },
       {
         path: "/create/price",
-        name: "Paket Oluştur",
+        name: "Create Price",
         rtlName: "خرائط جوجل",
         mini: "PD",
         rtlMini: "زم",

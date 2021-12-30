@@ -14,7 +14,8 @@ import {
 import { CustomDatePicker } from "components/CustomComponents/CustomDatePicker";
 import { useDispatch } from "react-redux";
 import { updateSurvey } from "stores/Survyes/surveySlice";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
+import { getLayoutName } from "Functions/Router";
 
 const EditSurvey = ({
   match: {
@@ -22,7 +23,7 @@ const EditSurvey = ({
   },
 }) => {
   const dispatch = useDispatch();
-  const history= useHistory()
+  const history = useHistory();
   const surveyData = useSelector((state) => state.surveys.surveysData);
   if (surveyData) {
     const editData = surveyData.find((survey) => survey.id == id);
@@ -46,11 +47,11 @@ const EditSurvey = ({
           {({ handleChange, values, handleSubmit }) => {
             return (
               <Card>
-                <CardHeader tag={"h2"}>Anket Düzenle</CardHeader>
+                <CardHeader tag={"h2"}>Edit Survey</CardHeader>
                 <CardBody>
                   <Row>
                     <Col sm="4" className="p-3">
-                      <label>Anket Adı*</label>
+                      <label>Survey Title*</label>
                       <Input
                         name="name"
                         onChange={handleChange}
@@ -58,7 +59,7 @@ const EditSurvey = ({
                       />
                     </Col>
                     <Col sm="4" className="p-3">
-                      <label>Anketin Amacı*</label>
+                      <label>Survey Purpos*</label>
                       <Input
                         name="name"
                         onChange={handleChange}
@@ -69,23 +70,23 @@ const EditSurvey = ({
 
                   <Row>
                     <Col sm="4" className="p-3">
-                      <label>Başlangıç Tarihi*</label>
+                      <label>Start Date*</label>
                       <CustomDatePicker
-                        placeholder="Başlangıç Tarihi Seçiniz..."
+                        placeholder="Select Start Date..."
                         name="startDate"
                         value={values.startDate}
                       />
                     </Col>
                     <Col sm="4" className="p-3">
-                      <label>Bitiş Tarihi*</label>
+                      <label>End Date*</label>
                       <CustomDatePicker
-                        placeholder="Bitiş Tarihi Seçiniz..."
+                        placeholder="Select End Date...."
                         name="endDate"
                         value={values.endDate}
                       />
                     </Col>
                     <Col sm="4" className="p-3">
-                      <label>Katılımcı Sayısı*</label>
+                      <label>Participant Count*</label>
                       <Input
                         type="number"
                         name="participantsCount"
@@ -96,7 +97,7 @@ const EditSurvey = ({
                   </Row>
                   <Row>
                     <Col sm="6" className="p-3">
-                      <label>Ön Açıklama*</label>
+                      <label>First Description*</label>
                       <Input
                         type="textarea"
                         onChange={handleChange}
@@ -108,7 +109,7 @@ const EditSurvey = ({
                 </CardBody>
                 <CardFooter>
                   <Button color="success" onClick={handleSubmit}>
-                    Kaydet
+                    Save
                   </Button>
                 </CardFooter>
               </Card>
@@ -118,9 +119,9 @@ const EditSurvey = ({
       </div>
     );
   } else {
-    <div className="content">
-      <h2>Yükleniyor...</h2>
-    </div>;
+    return (
+      <Redirect to={getLayoutName(history)+"/surveys"} />
+    )
   }
 };
 

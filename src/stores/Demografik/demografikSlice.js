@@ -34,7 +34,7 @@ export const createDemografik = createAsyncThunk(
     if (response.data.success) {
       Swal.fire({
         icon: "success",
-        title: "Başarılı",
+        title: "Success",
         timer: 1000,
         showConfirmButton: false,
       }).then((res) =>
@@ -52,7 +52,7 @@ export const editDemografik = createAsyncThunk(
     if (response.data.success) {
       Swal.fire({
         icon: "success",
-        title: "Başarılı",
+        title: "Success",
         timer: 1000,
         showConfirmButton: false,
       }).then((res) =>
@@ -94,7 +94,7 @@ export const demografikSlice = createSlice({
   //   [deleteDemografik.fulfilled]: async (state, action) => {
   //     if (action.payload.data.success) {
   //       Swal.fire({
-  //         title: "Başarılı",
+  //         title: "Success",
   //         timer: 1000,
   //         showConfirmButton: false,
   //         icon: "success",

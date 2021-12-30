@@ -185,7 +185,7 @@ const AdminNavbar = (props) => {
                     />
                   </div>
                   <b className="caret d-none d-lg-block d-xl-block" />
-                  <p className="d-lg-none">Çıkış Yap</p>
+                  <p className="d-lg-none">Log Out</p>
                 </DropdownToggle>
                 <DropdownMenu className="dropdown-navbar" right tag="ul">
                   <NavLink tag="li">
@@ -201,7 +201,7 @@ const AdminNavbar = (props) => {
                       className="nav-item text-danger font-bold"
                     >
                       <div onClick={()=> dispatch(logout(history))}>
-                        Çıkış Yap
+                        Log Out
                       </div>
                       
                     </DropdownItem>

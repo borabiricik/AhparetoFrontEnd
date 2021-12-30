@@ -45,12 +45,12 @@ const Pricing = () => {
               }}
               tableData={tableData}
               columns={[
-                { title: "Başlık" },
-                { detail: "Detay" },
-                { month: "Ay" },
-                { tax: "KDV" },
-                { priceValue: "Fiyat" },
-                { row: "Sıralama" },
+                { title: "Title" },
+                { detail: "Detila" },
+                { month: "Month" },
+                { tax: "Tax-KDV" },
+                { priceValue: "Price" },
+                { row: "Row" },
               ]}
               idKey="id"
               title="Paket Listesi"

@@ -27,7 +27,7 @@ export const addSurvey = createAsyncThunk("addSurvey", async (state) => {
     Swal.fire({
       timer: 1000,
       icon: "success",
-      title: "Başarılı",
+      title: "Success",
       showConfirmButton: false,
     }).then((res) => {
       state.history.push(getLayoutName(state.history) + "/surveys")
@@ -42,7 +42,7 @@ export const updateSurvey = createAsyncThunk("updateSurvey", async (state) => {
     Swal.fire({
       timer: 1000,
       icon: "success",
-      title: "Başarılı",
+      title: "Success",
       showConfirmButton: false,
     }).then((res) =>
       state.history.push(getLayoutName(state.history) + "/surveys")

@@ -70,7 +70,7 @@ const Demografik = () => {
                 edit: getLayoutName(history) + "/edit/demografik/",
               }}
               tableData={demografikData}
-              columns={[{ description: "Açıklama" }]}
+              columns={[{ description: "Description" }]}
               idKey="id"
             />
           </CardBody>

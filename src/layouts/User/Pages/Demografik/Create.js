@@ -138,7 +138,7 @@ export default Create;
 //           </Form>
 //         </CardBody>
 //         <CardFooter>
-//           <Button color="success">Kaydet</Button>
+//           <Button color="success">Save</Button>
 //         </CardFooter>
 //       </Card>
 //     </div>

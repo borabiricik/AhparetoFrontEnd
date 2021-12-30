@@ -36,7 +36,7 @@ const CreatePollsterGroup = () => {
           if (await success) {
             console.log(await success)
             Swal.fire({
-              title: "Başarılı",
+              title: "Success",
               icon: "success",
               showConfirmButton: false,
               timer: 1000,
@@ -50,7 +50,7 @@ const CreatePollsterGroup = () => {
         {({ values, handleSubmit, handleChange }) => {
           return (
             <Card>
-              <CardHeader tag={"h2"}>Anketör Grubu Oluştur</CardHeader>
+              <CardHeader tag={"h2"}>Create Pollster Group</CardHeader>
               <CardBody>
                 <Form onSubmit={handleSubmit}>
                   <Row>
@@ -63,7 +63,7 @@ const CreatePollsterGroup = () => {
               </CardBody>
               <CardFooter>
                 <Button color="success" onClick={handleSubmit}>
-                  Kaydet
+                  Save
                 </Button>
               </CardFooter>
             </Card>

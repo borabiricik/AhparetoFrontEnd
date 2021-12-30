@@ -17,20 +17,20 @@ const validationSchema = Yup.object().shape({
   options: Yup.array()
     .of(
       Yup.object().shape({
-        description: Yup.string().required("Zorunlu Alan"),
+        description: Yup.string().required("Required"),
       })
     )
     .min(1)
-    .required("Zorunlu Alan"),
+    .required("Required"),
   // questions: Yup.array().of(Yup.object().shape({
   //   description: Yup.object().required()
   // })).min(1).required("Zorunlu Alan"),
-  name: Yup.string().required("Zorunlu Alan"),
-  purpose: Yup.string().required("Zorunlu Alan"),
-  startDate: Yup.date("Geçerli Bir Tarih Giriniz").required("Zorunlu Alan"),
-  endDate: Yup.date("Geçerli Bir Tarih Giriniz").required("Zorunlu Alan"),
-  participantsCount: Yup.number().required("Zorunlu Alan"),
-  firstDescription: Yup.string().required("Zorunlu Alan").trim(),
+  name: Yup.string().required("Required"),
+  purpose: Yup.string().required("Required"),
+  startDate: Yup.date("Please Select Valid Date").required("Required"),
+  endDate: Yup.date("Please Select Valid Date").required("Required"),
+  participantsCount: Yup.number().required("Required"),
+  firstDescription: Yup.string().required("Required").trim(),
 });
 
 const CreateSurvey = () => {
@@ -80,7 +80,7 @@ const CreateSurvey = () => {
         }) => {
           const steps = [
             {
-              stepName: "Genel Bilgiler",
+              stepName: "General Info",
               stepIcon: "tim-icons icon-single-02",
               component: Step1,
               stepProps: {
@@ -89,7 +89,7 @@ const CreateSurvey = () => {
               },
             },
             {
-              stepName: "Demografik Bilgiler",
+              stepName: "Demographic Info",
               stepIcon: "tim-icons icon-settings-gear-63",
               component: Step2,
               stepProps: {
@@ -98,7 +98,7 @@ const CreateSurvey = () => {
               },
             },
             {
-              stepName: "Anketör Bilgileri",
+              stepName: "Pollster Info",
               stepIcon: "tim-icons icon-delivery-fast",
               component: Step3,
               stepProps: {
@@ -106,7 +106,7 @@ const CreateSurvey = () => {
               },
             },
             {
-              stepName: "Seçenekler",
+              stepName: "Options",
               stepIcon: "tim-icons icon-delivery-fast",
               component: Step4,
               stepProps: {
@@ -117,7 +117,7 @@ const CreateSurvey = () => {
               },
             },
             {
-              stepName: "Sorular",
+              stepName: "Questions",
               stepIcon: "tim-icons icon-delivery-fast",
               component: Step5,
               stepProps: {
@@ -135,7 +135,7 @@ const CreateSurvey = () => {
                   steps={steps}
                   navSteps
                   validate
-                  title="Anket Oluştur"
+                  title="Create Survey"
                   headerTextCenter
                   finishButtonClasses="btn-wd btn-info"
                   nextButtonClasses="btn-wd btn-info"
@@ -144,7 +144,7 @@ const CreateSurvey = () => {
                   previousButtonText="ÖNCEKİ"
                   finishButtonText="BİTİR"
                   progressbar
-                  description="Anketi oluşturmak için tüm adımları tamamlayın"
+                  description="Fill Every Form to Create New Survey"
                   color="blue"
                   finishButtonClick={handleSubmit}
                 />

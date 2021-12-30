@@ -86,7 +86,7 @@ const EditPollster = ({
                 <Form onSubmit={handleSubmit}>
                   <Row>
                     <Col sm="4">
-                      <label>Ad</label>
+                      <label>Name</label>
                       <Input
                         className="m-0"
                         type="text"
@@ -99,7 +99,7 @@ const EditPollster = ({
                       )}
                     </Col>
                     <Col sm="4">
-                      <label>Soyad</label>
+                      <label>Surname</label>
                       <Input
                         type="text"
                         name="surName"
@@ -130,20 +130,20 @@ const EditPollster = ({
                           return {label:o.name,value:o.id}
                         })}
                         component={CustomMultipleSelect}
-                        placeholder="Select multi languages..."
+                        placeholder="Select Pollster Group..."
                         isMulti={true}
                       />
                     </Col>
                     <Col sm="4">
-                      <label>Doğum Tarihi</label>
+                      <label>Birthday</label>
                       <CustomDatePicker
-                        placeholder="Doğum Tarihi Seçiniz..."
+                        placeholder="Select Birthday..."
                         name="birthDate"
                         value={values.birthDate}
                       />
                     </Col>
                     <Col sm="4">
-                      <label>Kimlik No.</label>
+                      <label>Identity Number</label>
                       <Input
                         type="text"
                         name="identityNumber"
@@ -157,12 +157,12 @@ const EditPollster = ({
                   </Row>
                   <Row>
                     <Col sm="4">
-                      <label>Cinsiyet</label>
+                      <label>Gender</label>
                       <CustomSelect
                         className={`react-select info`}
                         options={[
-                          { value: 0, label: "Erkek" },
-                          { value: 1, label: "Kadın" },
+                          { value: 0, label: "Male" },
+                          { value: 1, label: "Female" },
                         ]}
                         value={values.value}
                         onChange={(inputValue) =>
@@ -171,7 +171,7 @@ const EditPollster = ({
                       />
                     </Col>
                     <Col sm="4">
-                      <label>Telefon No. (Örn: +905432123567)</label>
+                      <label>Phone Number (Örn: (+90) 5432123567)</label>
                       <Input
                         type="text"
                         name="phone"
@@ -187,7 +187,7 @@ const EditPollster = ({
               </CardBody>
               <CardFooter>
                 <Button color="info" onClick={handleSubmit}>
-                  Kaydet
+                  Save
                 </Button>
               </CardFooter>
             </Card>

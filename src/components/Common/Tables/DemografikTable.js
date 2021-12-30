@@ -92,11 +92,11 @@ const DemografikTable = () => {
                 resizable={true}
                 columns={[
                   {
-                    Header: "Açıklama",
+                    Header: "Description",
                     accessor: "description",
                   },
                   {
-                    Header: "İşlemler",
+                    Header: "Actions",
                     accessor: "actions",
                     sortable: false,
                     filterable: false,

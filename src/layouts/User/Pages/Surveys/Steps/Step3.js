@@ -34,7 +34,7 @@ const Step3 = React.forwardRef((props, ref) => {
   if (loading === false) {
     return (
       <div>
-        <h2>Anketör Bilgisi Ekle</h2>
+        <h2>Create Pollster Info</h2>
         <Col sm="4">
           <FieldArray
             render={(arrayHelper) => {
@@ -42,7 +42,7 @@ const Step3 = React.forwardRef((props, ref) => {
                 <Select
                   className="react-select info"
                   classNamePrefix="react-select"
-                  placeholder="Anketör Bilgisi Seçiniz..."
+                  placeholder="Select Pollster Info..."
                   name="pollsterJson"
                   closeMenuOnSelect={false}
                   isMulti

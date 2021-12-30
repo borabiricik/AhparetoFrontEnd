@@ -28,7 +28,7 @@ export const createPollster = createAsyncThunk(
       Swal.fire({
         timer: 1000,
         showConfirmButton: false,
-        title:"Başarılı",
+        title:"Success",
         icon:"success"
       }).then((res=> state.history.push(getLayoutName(state.history)+"/pollsters")))
     }
@@ -56,7 +56,7 @@ export const deletePollster = createAsyncThunk("deletePollster" ,async (state) =
   if(response.data.success){
     Swal.fire({
       timer:1000,
-      title:"Başarılı",
+      title:"Success",
       icon:"success",
       showConfirmButton:false
     }).then(res=>state.history.push(getLayoutName(state.history)+ "/pollsters"))

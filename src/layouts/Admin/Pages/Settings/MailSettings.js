@@ -53,7 +53,7 @@ const MailSettings = () => {
                       <CardBody>
                         <Row >
                           <Col sm="4" className="my-2">
-                            <label>Mail Başlığı</label>
+                            <label>Mail Title</label>
                             <Input
                               name="emailTittle"
                               value={values.emailTittle}
@@ -61,7 +61,7 @@ const MailSettings = () => {
                             />
                           </Col>
                           <Col sm="4" className="my-2">
-                            <label>Mail Adresi</label>
+                            <label>Mail Address</label>
                             <Input
                               name="email"
                               value={values.email}
@@ -69,7 +69,7 @@ const MailSettings = () => {
                             />
                           </Col>
                           <Col sm="4" className="my-2">
-                            <label>Şifre</label>
+                            <label>Password</label>
                             <Input
                               name="password"
                               value={values.password}
@@ -77,7 +77,7 @@ const MailSettings = () => {
                             />
                           </Col>
                           <Col sm="4" className="my-2">
-                            <label>Konu</label>
+                            <label>Subject</label>
                             <Input
                               name="subject"
                               value={values.subject}
@@ -103,7 +103,7 @@ const MailSettings = () => {
                         </Row>
                       </CardBody>
                       <CardFooter>
-                        <Button color="success" onClick={handleSubmit}>Kaydet</Button>
+                        <Button color="success" onClick={handleSubmit}>Save</Button>
                       </CardFooter>
                     </Card>
                   );

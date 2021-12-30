@@ -37,9 +37,9 @@ const Surveys = () => {
           <CardHeader>
             <Row className="justify-content-between align-items-center">
               <CardTitle className="m-0 p-0" tag={"h2"}>
-                Anket Listesi
+                Surveys
               </CardTitle>
-              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/survey")}>Anket Oluştur</Button>
+              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/survey")}>Create Survey</Button>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">
@@ -50,7 +50,7 @@ const Surveys = () => {
                     <CardText tag={"h2"} className="m-0">
                       {surveys.length}
                     </CardText>
-                    <p>Anket Sayısı</p>
+                    <p>Surveys</p>
                   </div>
 
                   <div className="bg-primary rounded-circle p-3">
@@ -63,12 +63,12 @@ const Surveys = () => {
             </Col>
 
             <CommonTable
-              title={"Anket Listesi"}
+              title={"Survey List"}
               columns={[
-                { name: "Anket Adı" },
-                { startDate: "Başlangıç Tarihi", date: true },
-                { endDate: "Bitiş Tarihi", date: true },
-                { pollsterAnswerCount: "Katılım Sayısı" },
+                { name: "Survey Title" },
+                { startDate: "Start Date", date: true },
+                { endDate: "End Date", date: true },
+                { pollsterAnswerCount: "Participant Count" },
               ]}
               tableData={surveys}
               actionPageNames={{

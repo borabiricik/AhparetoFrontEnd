@@ -62,7 +62,7 @@ const EditPrice = ({
                 </CardBody>
                 <CardFooter>
                     <Button color="success" onClick={handleSubmit}>
-                        Kaydet
+                        Save
                     </Button>
                 </CardFooter>
               </Card>

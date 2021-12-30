@@ -39,9 +39,9 @@ const EditDemografik = ({
   );
  
   const options = [
-    { value: 1, label: "Sayı" },
-    { value: 2, label: "Metin" },
-    { value: 3, label: "Tarih" },
+    { value: 1, label: "Number" },
+    { value: 2, label: "Text" },
+    { value: 3, label: "Date" },
   ];
 if(demografikData){
   const editData = demografikData.find((data) => data.id == id);
@@ -106,7 +106,7 @@ if(demografikData){
             </CardBody>
             <CardFooter>
               <Button color="info" onClick={handleSubmit}>
-                Kaydet
+                Save
               </Button>
             </CardFooter>
           </Card>

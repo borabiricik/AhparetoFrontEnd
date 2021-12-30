@@ -34,7 +34,7 @@ export const createPollsterGroup = createAsyncThunk(
     if(response.data.success){
       Swal.fire({
         icon:"success",
-        title:"Başarılı",
+        title:"Success",
         timer:1000,
         showConfirmButton:false
       }).then(res=>state.history.push(getLayoutName(state.history)+"/pollstergroups"))
@@ -52,7 +52,7 @@ export const deletePollsterGroup = createAsyncThunk(
     if(response.data.success){
       Swal.fire({
         icon:"success",
-        title:"Başarılı",
+        title:"Success",
         timer:1000,
         showConfirmButton:false
       }).then(res=>state.history.push(getLayoutName(state.history)+"/pollstergroups"))
@@ -71,7 +71,7 @@ export const updatePollsterGroup = createAsyncThunk(
     if(response.data.success){
       Swal.fire({
         icon:"success",
-        title:"Başarılı",
+        title:"Success",
         timer:1000,
         showConfirmButton:false
       }).then(res=>state.history.push(getLayoutName(state.history)+"/pollstergroups"))

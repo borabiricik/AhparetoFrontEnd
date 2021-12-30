@@ -175,8 +175,8 @@ const User = (props) => {
           routes={userRoutes}
           activeColor={activeColor}
           logo={{
-            outterLink: "https://www.creative-tim.com/",
-            text: "Creative Tim",
+            outterLink: "https://ahpareto.com",
+            text: "Ahprateo",
             imgSrc: logo,
           }}
           closeSidebar={closeSidebar}

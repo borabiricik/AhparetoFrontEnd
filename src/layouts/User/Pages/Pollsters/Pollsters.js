@@ -42,7 +42,7 @@ const Pollsters = ({match:{params:{id}}}) => {
           <CardHeader>
             <Row className="justify-content-between align-items-center">
               <CardTitle className="m-0 p-0" tag={"h2"}>
-                Anketör Listesi
+                Pollster List
               </CardTitle>
               <Button
                 color="info"
@@ -50,7 +50,7 @@ const Pollsters = ({match:{params:{id}}}) => {
                   history.push(getLayoutName(history) + "/create/pollster")
                 }
               >
-                Anketör Oluştur
+                Create Pollster
               </Button>
             </Row>
           </CardHeader>
@@ -62,7 +62,7 @@ const Pollsters = ({match:{params:{id}}}) => {
                     <CardText tag={"h2"} className="m-0">
                       {pollstersData && pollstersData.length}
                     </CardText>
-                    <p>Anketör Sayısı</p>
+                    <p>Pollsters</p>
                   </div>
 
                   <div className="bg-primary rounded-circle p-3">
@@ -77,11 +77,11 @@ const Pollsters = ({match:{params:{id}}}) => {
             <CommonTable
               tableData={pollstersData}
               columns={[
-                { nameSurName: "Grup İsmi" },
+                { nameSurName: "Group Name" },
                 { email: "E-mail" },
-                { phone: "Tel.No." },
-                { identityNumber: "Kimlik No" },
-                { pollsterGroup: "Grup Adı", isArray: true },
+                { phone: "Phone Number" },
+                { identityNumber: "Identity Number" },
+                { pollsterGroup: "Group Name", isArray: true },
               ]}
               // actionPageNames={{
               //   edit: getLayoutName(history) + "/edit/pollster/",

@@ -40,7 +40,7 @@ const PollsterGroups = () => {
           <CardHeader>
             <Row className="justify-content-between align-items-center">
               <CardTitle className="m-0 p-0" tag={"h2"}>
-                Anketör Grubu Listesi
+                Pollster Groups
               </CardTitle>
               <Button
                 color="info"
@@ -48,7 +48,7 @@ const PollsterGroups = () => {
                   history.push(getLayoutName(history) + "/create/pollstergroup")
                 }
               >
-                Anketör Grubu Oluştur
+                Create Pollster Groups
               </Button>
             </Row>
           </CardHeader>
@@ -60,7 +60,7 @@ const PollsterGroups = () => {
                     <CardText tag={"h2"} className="m-0">
                       {pollsterGroupsData.length}
                     </CardText>
-                    <p>Anketör Grubu Sayısı</p>
+                    <p>Pollster Groups</p>
                   </div>
 
                   <div className="bg-primary rounded-circle p-3">
@@ -77,7 +77,7 @@ const PollsterGroups = () => {
               actionPageNames={{
                 edit: getLayoutName(history) + "/edit/pollstergroup/",
               }}
-              columns={[{ name: "Grup İsmi" }]}
+              columns={[{ name: "Group Name" }]}
               deleteAction={deletePollsterGroup}
             />
           </CardBody>
