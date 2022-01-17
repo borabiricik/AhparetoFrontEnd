@@ -20,7 +20,7 @@ const Footer = (props) => {
               href="http://www.ahpareto.com"
               target="_blank"
             >
-              Hakkımızda
+              About Us
             </a>
           </li>
           <li className="nav-item">
@@ -30,7 +30,7 @@ const Footer = (props) => {
           </li>
         </ul>
         <div className="copyright">
-          © {new Date().getFullYear()} - Ahpareto Tüm Hakları Saklıdır.         
+          © {new Date().getFullYear()} - Ahpareto All Rights Reserved.        
         </div>
       </Container>
     </footer>

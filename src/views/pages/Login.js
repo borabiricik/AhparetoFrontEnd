@@ -12,7 +12,6 @@ import {
   CardFooter,
   CardTitle,
   Form,
-  Input,
   InputGroupAddon,
   InputGroupText,
   InputGroup,
@@ -25,9 +24,7 @@ import { useDispatch } from "react-redux";
 import { login } from "stores/Auth/authSlice";
 
 const Login = (props) => {
-  const [state, setState] = React.useState({});
-  const [username, setusername] = useState("");
-  const [password, setpassword] = useState("");
+  const [state, setState] = useState({});
   React.useEffect(() => {
     document.body.classList.toggle("login-page");
     return function cleanup() {
@@ -41,7 +38,6 @@ const Login = (props) => {
   const {
     handleSubmit,
     register,
-    formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
     dispatch(login({ ...data, history }));

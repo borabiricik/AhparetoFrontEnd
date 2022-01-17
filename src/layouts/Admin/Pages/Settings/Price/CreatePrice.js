@@ -43,7 +43,7 @@ const CreatePrice = ({
         {({ values, handleSubmit, handleChange }) => {
           return (
             <Card>
-              <CardHeader tag={"h2"}>Paket Düzenle</CardHeader>
+              <CardHeader tag={"h2"}>Create Package</CardHeader>
               <CardBody>
                 <Row>
                   <Col sm="3" className="my-2">

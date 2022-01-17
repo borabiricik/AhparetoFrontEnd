@@ -91,9 +91,9 @@ const CommonTable = ({
                 onClick={() => {
                   if (deleteAction) {
                     Swal.fire({
-                      title: "Silmek istediğinize emin misiniz ?",
-                      confirmButtonText: "Evet",
-                      cancelButtonText: "Hayıt",
+                      title: "Are you sure want to delete ? ",
+                      confirmButtonText: "Yes",
+                      cancelButtonText: "No",
                       showCancelButton: true,
                     }).then((result) => {
                       if (result.isConfirmed) {

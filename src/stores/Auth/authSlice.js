@@ -64,7 +64,6 @@ export const authSlice = createSlice({
     [login.fulfilled]: (state, action) => {
       if (action.payload.data.success) {
         const { token, expiration, role, id } = action.payload.data.data;
-        const expirationDate = new Date(expiration);
         AuthSuccessAlert(
           "Succesfully Logined !",
           action.payload.history,

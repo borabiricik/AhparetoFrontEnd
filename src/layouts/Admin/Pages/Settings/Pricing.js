@@ -34,7 +34,7 @@ const Pricing = () => {
                 history.push(getLayoutName(history) + "/create/price")
               }
             >
-              Paket Oluştur
+              Create Package
             </Button>
           </Row>
           </CardHeader>

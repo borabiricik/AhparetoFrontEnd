@@ -42,7 +42,7 @@ const Demografik = () => {
                 Demografik Bilgi Listesi
               </CardTitle>
 
-              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/demografik")}>Demografik Bilgi oluştur</Button>
+              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/demografik")}>Create Demographic Info</Button>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">
