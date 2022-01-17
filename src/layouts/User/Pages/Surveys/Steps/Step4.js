@@ -76,8 +76,6 @@ const Step4 = React.forwardRef((props, ref) => {
                       onChange={(e) => {
                         var value = e.target.value
                         props.setFieldValue(`options[${index}].description`,value)
-                        props.setFieldValue(`options[${index}].id`,index)
-                        props.setFieldValue(`options[${index}].scor`,0)
                       }}
                     />
                   </CardBody>

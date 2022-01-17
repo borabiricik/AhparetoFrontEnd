@@ -59,7 +59,7 @@ const Login = (props) => {
                     className="text-dark font-weight-700 text-center"
                     tag="h5"
                   >
-                    Giriş Yap
+                    Login
                   </CardTitle>
                 </CardHeader>
                 <CardBody>

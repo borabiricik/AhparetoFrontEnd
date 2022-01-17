@@ -40,6 +40,7 @@ const CreateSurvey = () => {
     <>
       <Formik
         initialValues={{
+          // id:0,
           name: "",
           purpose: "",
           startDate: "",
@@ -58,8 +59,6 @@ const CreateSurvey = () => {
             },
           ],
           userId: parseInt(localStorage.getItem("userId")),
-          isSms: true,
-          draft: true,
           shipmentText:"",
           participantJson: "[]",
           surveyAnswers:[]

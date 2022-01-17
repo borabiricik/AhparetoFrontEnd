@@ -66,7 +66,7 @@ export const authSlice = createSlice({
         const { token, expiration, role, id } = action.payload.data.data;
         const expirationDate = new Date(expiration);
         AuthSuccessAlert(
-          "Başarıyla Giriş Yapıldı",
+          "Succesfully Logined !",
           action.payload.history,
           "/admin"
         );
