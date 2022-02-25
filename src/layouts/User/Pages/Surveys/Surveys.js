@@ -8,8 +8,10 @@ import {
   CardTitle,
   Col,
   Row,
+  UncontrolledTooltip,
 } from "reactstrap";
 import { FaRegUserCircle } from "@react-icons/all-files/fa/FaRegUserCircle";
+import { IoMdSettings } from "react-icons/io";
 import CustomTable from "components/Common/Tables/CustomTable";
 import { useDispatch } from "react-redux";
 import { getSurveys } from "stores/Survyes/surveySlice";
@@ -17,9 +19,11 @@ import { useSelector } from "react-redux";
 import CommonTable from "components/Common/Tables/CommonTable";
 import { getLayoutName } from "Functions/Router";
 import { useHistory } from "react-router-dom";
+import ReactTable from "react-table-6";
+import classNames from "classnames";
 
 const Surveys = () => {
-  const history = useHistory()
+  const history = useHistory();
   const surveys = useSelector((state) => state.surveys.surveysData);
   const loading = useSelector((state) => state.surveys.loading);
   const dispatch = useDispatch();
@@ -39,7 +43,14 @@ const Surveys = () => {
               <CardTitle className="m-0 p-0" tag={"h2"}>
                 Surveys
               </CardTitle>
-              <Button color="info" onClick={()=>history.push(getLayoutName(history)+"/create/survey")}>Create Survey</Button>
+              <Button
+                color="info"
+                onClick={() =>
+                  history.push(getLayoutName(history) + "/create/survey")
+                }
+              >
+                Create Survey
+              </Button>
             </Row>
           </CardHeader>
           <CardBody className="p-0 my-5">
@@ -62,20 +73,63 @@ const Surveys = () => {
               </Card>
             </Col>
 
-            <CommonTable
-              title={"Survey List"}
+            <ReactTable
+              data={surveys}
+              filterable
+              resizable={false}
+              minRows={0}
               columns={[
-                { name: "Survey Title" },
-                { startDate: "Start Date", date: true },
-                { endDate: "End Date", date: true },
-                { pollsterAnswerCount: "Participant Count" },
+                {
+                  Header: "Name",
+                  accessor: "Name",
+                },
+                {
+                  Header: "Actions",
+                  accessor: "actions",
+                  sortable: false,
+                  filterable: false,
+                  Cell: (row) => {
+                    return (
+                      <Row className="w-100 justify-content-end">
+                        <Button
+                          color="warning"
+                          size="sm"
+                          id="editSurveyBtn"
+                          className={classNames("btn-icon btn-round")}
+                          onClick={() => {
+                            history.push(
+                              getLayoutName(history) +
+                                "/edit/survey/" +
+                                row.original.Id
+                            );
+                          }}
+                        >
+                          <i className="fa fa-edit"></i>
+                        </Button>
+
+                        <Button
+                          color="info"
+                          id="answerSettingsBtn"
+                          size="sm"
+                          className={classNames("btn-icon btn-round")}
+                          onClick={() => {
+                            history.push(
+                              getLayoutName(history) +
+                                "/edit/survey/" +
+                                row.original.Id
+                            );
+                          }}
+                        >
+                          <IoMdSettings />
+                        </Button>
+                      </Row>
+                    );
+                  },
+                },
               ]}
-              tableData={surveys}
-              actionPageNames={{
-                edit: getLayoutName(history) + "/edit/survey/",
-              }}
-              // deleteAction={}
-              idKey = "id"
+              defaultPageSize={10}
+              showPaginationBottom
+              className="-striped -highlight"
             />
           </CardBody>
         </Card>

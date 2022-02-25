@@ -26,22 +26,29 @@ const EditSurvey = ({
   const history = useHistory();
   const surveyData = useSelector((state) => state.surveys.surveysData);
   if (surveyData) {
-    const editData = surveyData.find((survey) => survey.id == id);
+    const editData = surveyData.find((survey) => survey.Id == id);
 
     return (
       <div className="content">
         <Formik
           initialValues={{
-            id,
-            name: editData.name,
-            purpose: editData.purpose,
-            startDate: new Date(editData.startDate),
-            endDate: new Date(editData.endDate),
-            participantsCount: editData.participantsCount,
-            firstDescription: editData.firstDescription,
+            Id: parseInt(id),
+            Name: editData.Name,
+            Purpose: editData.Purpose,
+            StartDate: new Date(editData.StartDate),
+            EndDate: new Date(editData.EndDate),
+            ParticipantsCount: editData.ParticipantsCount,
+            FirstDescription: editData.FirstDescription,
           }}
           onSubmit={(values) => {
-            dispatch(updateSurvey({ ...values, history }));
+            dispatch(
+              updateSurvey({
+                ...values,
+                StartDate: values.StartDate.toISOString(),
+                EndDate: values.StartDate.toISOString(),
+                history,
+              })
+            );
           }}
         >
           {({ handleChange, values, handleSubmit }) => {
@@ -53,17 +60,17 @@ const EditSurvey = ({
                     <Col sm="4" className="p-3">
                       <label>Survey Title*</label>
                       <Input
-                        name="name"
+                        name="Name"
                         onChange={handleChange}
-                        value={values.name}
+                        value={values.Name}
                       />
                     </Col>
                     <Col sm="4" className="p-3">
                       <label>Survey Purpos*</label>
                       <Input
-                        name="name"
+                        name="Purpose"
                         onChange={handleChange}
-                        value={values.purpose}
+                        value={values.Purpose}
                       />
                     </Col>
                   </Row>
@@ -73,25 +80,25 @@ const EditSurvey = ({
                       <label>Start Date*</label>
                       <CustomDatePicker
                         placeholder="Select Start Date..."
-                        name="startDate"
-                        value={values.startDate}
+                        name="StartDate"
+                        value={values.StartDate}
                       />
                     </Col>
                     <Col sm="4" className="p-3">
                       <label>End Date*</label>
                       <CustomDatePicker
                         placeholder="Select End Date...."
-                        name="endDate"
-                        value={values.endDate}
+                        name="EndDate"
+                        value={values.EndDate}
                       />
                     </Col>
                     <Col sm="4" className="p-3">
                       <label>Participant Count*</label>
                       <Input
                         type="number"
-                        name="participantsCount"
+                        name="ParticipantsCount"
                         onChange={handleChange}
-                        value={values.participantsCount}
+                        value={values.ParticipantsCount}
                       />
                     </Col>
                   </Row>
@@ -101,8 +108,9 @@ const EditSurvey = ({
                       <Input
                         type="textarea"
                         onChange={handleChange}
-                        value={values.firstDescription}
+                        value={values.FirstDescription}
                         className="p-2"
+                        name="FirstDescription"
                       />
                     </Col>
                   </Row>
@@ -119,9 +127,7 @@ const EditSurvey = ({
       </div>
     );
   } else {
-    return (
-      <Redirect to={getLayoutName(history)+"/surveys"} />
-    )
+    return <Redirect to={getLayoutName(history) + "/surveys"} />;
   }
 };
 

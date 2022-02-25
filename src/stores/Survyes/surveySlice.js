@@ -1,4 +1,5 @@
 import axios from "axios";
+import { nodeAPI } from "Constants/api";
 import { apiUrl } from "Constants/api";
 import { getLayoutName } from "Functions/Router";
 import Swal from "sweetalert2";
@@ -11,42 +12,46 @@ const initialState = {
 };
 
 export const getSurveys = createAsyncThunk("getSurveys", async (state) => {
-  const response = await axios.get(
-    apiUrl + "User/GetAllSurvey/" + localStorage.getItem("userId")
+  const response = nodeAPI.get(
+    "/survey/getByUserId/" + localStorage.getItem("userId")
   );
   return response;
 });
 
 export const addSurvey = createAsyncThunk("addSurvey", async (state) => {
-  const response = await axios.post(apiUrl + "User/AddSurvey", {
+  const response = await nodeAPI.post("/survey/create", {
     ...state,
-    demografikJson: JSON.stringify(state.demografikJson),
-    pollsterJson: JSON.stringify(state.pollsterJson),
+    UserId: parseInt(localStorage.getItem("userId")),
   });
-  if (response.data.success) {
+  if (!response.data.success) {
     Swal.fire({
       timer: 1000,
       icon: "success",
       title: "Success",
       showConfirmButton: false,
     }).then((res) => {
-      state.history.push(getLayoutName(state.history) + "/surveys")
+      state.history.push(getLayoutName(state.history) + "/surveys");
     });
   }
+
   return response;
 });
 
 export const updateSurvey = createAsyncThunk("updateSurvey", async (state) => {
-  const response = await axios.post(apiUrl + "User/UpdateSurvey", state);
+  const response = await nodeAPI.patch(
+    "/survey/edit/" + state.Id,
+    state
+  )
   if (response.status === 200) {
     Swal.fire({
       timer: 1000,
       icon: "success",
       title: "Success",
       showConfirmButton: false,
-    }).then((res) =>
-      state.history.push(getLayoutName(state.history) + "/surveys")
-    );
+    }).then((res) => {
+      state.history.push(getLayoutName(state.history) + "/surveys");
+      
+    });
   }
   return response;
 });
@@ -56,12 +61,16 @@ const surveySlice = createSlice({
   initialState,
   extraReducers: (builder) => {
     builder.addCase(getSurveys.fulfilled, (state, action) => {
-      state.surveysData = action.payload.data.data;
+      console.log(action.payload);
+      state.surveysData = action.payload.data;
       state.loading = false;
     });
     builder.addCase(addSurvey.fulfilled, (state, action) => {
       console.log(action.payload);
     });
+    builder.addCase(updateSurvey.fulfilled,(state,action) => {
+      console.log(action.payload)
+    })
   },
 });
 

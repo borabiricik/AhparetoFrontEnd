@@ -61,7 +61,7 @@ const CommonTable = ({
     });
 
     dataColumns[dataColumns.length] = {
-      Header: "İşlemler",
+      Header: "ACTIONS",
       accessor: "actions",
       Cell: (props) => {
         return (
@@ -71,7 +71,7 @@ const CommonTable = ({
               size="sm"
               className={classNames("btn-icon btn-round btn-warning")}
               onClick={() => {
-                console.log(props.row.original);
+                // console.log(props.row.original);
                 if (actionPageNames) {
                   history.push(
                     actionPageNames["edit"] + props.row.original[idKey]
