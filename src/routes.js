@@ -17,7 +17,10 @@ import EditPollster from "layouts/User/Pages/Pollsters/EditPollster";
 import Pollsters from "layouts/User/Pages/Pollsters/Pollsters";
 import CreateSurvey from "layouts/User/Pages/Surveys/CreateSurvey";
 import EditSurvey from "layouts/User/Pages/Surveys/EditSurvey";
+import AddItems from "layouts/User/Pages/Surveys/Items/AddItems";
+import ViewItems from "layouts/User/Pages/Surveys/Items/ViewItems";
 import Surveys from "layouts/User/Pages/Surveys/Surveys";
+import SurveySettings from "layouts/User/Pages/Surveys/SurveySettings";
 import Login from "views/pages/Login";
 import Register from "views/pages/Register";
 
@@ -29,7 +32,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: Login,
     layout: "/auth",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/register",
@@ -38,7 +41,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: Register,
     layout: "/auth",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/dashboard",
@@ -72,7 +75,7 @@ export default [
     component: Demografik,
     layout: "/admin",
   },
- 
+
   {
     path: "/create/demografik",
     name: "Create Demographic",
@@ -80,7 +83,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreateDemografik,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/demografik/:id",
@@ -89,7 +92,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditDemografik,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/pollstergroups",
@@ -106,7 +109,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreatePollsterGroup,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/pollstergroup/:id",
@@ -115,7 +118,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditPollsterGroup,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/create/pollster",
@@ -124,7 +127,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreatePollster,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/pollster/:id",
@@ -133,7 +136,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditPollster,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/edit/survey/:id",
@@ -142,8 +145,36 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: EditSurvey,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
+  {
+    path: "/settings/survey/:id/viewItems",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewItems,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/addItems",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: AddItems,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id",
+    name: "Survey Settings",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: SurveySettings,
+    layout: "/admin",
+    invisible: true,
+  },
+
   {
     path: "/create/survey",
     name: "Create Survey",
@@ -151,7 +182,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: CreateSurvey,
     layout: "/admin",
-    invisible:true
+    invisible: true,
   },
   {
     collapse: true,
@@ -213,7 +244,7 @@ export default [
         rtlMini: "زم",
         component: EditPrice,
         layout: "/admin",
-        invisible:true
+        invisible: true,
       },
       {
         path: "/create/price",
@@ -223,9 +254,8 @@ export default [
         rtlMini: "زم",
         component: CreatePrice,
         layout: "/admin",
-        invisible:true
+        invisible: true,
       },
-      
     ],
   },
 ];

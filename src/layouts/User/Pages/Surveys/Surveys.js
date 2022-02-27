@@ -115,7 +115,7 @@ const Surveys = () => {
                           onClick={() => {
                             history.push(
                               getLayoutName(history) +
-                                "/edit/survey/" +
+                                "/settings/survey/" +
                                 row.original.Id
                             );
                           }}
