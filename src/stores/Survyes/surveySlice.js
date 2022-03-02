@@ -2,6 +2,7 @@ import axios from "axios";
 import { nodeAPI } from "Constants/api";
 import { apiUrl } from "Constants/api";
 import { getLayoutName } from "Functions/Router";
+import build from "react-jvectormap";
 import Swal from "sweetalert2";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
@@ -11,6 +12,11 @@ const initialState = {
   loading: true,
   itemsLoading: false,
   items: null,
+  criterias: null,
+  itemCriterias: null,
+  itemCriteriasLoading: false,
+  questions: null,
+  questionsLoading: false,
 };
 
 export const getSurveys = createAsyncThunk("getSurveys", async (state) => {
@@ -71,6 +77,53 @@ export const getSurveyItems = createAsyncThunk(
   }
 );
 
+export const getSurveyCriterias = createAsyncThunk(
+  "getSurveyCriterias",
+  async (state) => {
+    const response = await nodeAPI.get("/criteria/getCriterias/" + state);
+    return response;
+  }
+);
+
+export const getSurveyItemCriteria = createAsyncThunk(
+  "getSurveyItemCriterias",
+  async (state) => {
+    const response = await nodeAPI.get(
+      "/itemcriteria/getItemCriteria/" + state
+    );
+    return response;
+  }
+);
+
+export const addItemCriterias = createAsyncThunk("addItemCriteria", async (state) => {
+  const response = await nodeAPI.post("/itemcriteria/addItemCriterias/"+state.id,{
+    itemCriterias: state.itemCriterias,
+  })
+  return {...response, history:state.history};
+})
+
+export const getSurveyQuestions = createAsyncThunk(
+  "getSurveyQuestions",
+  async (state) => {
+    const response = await nodeAPI.get("/question/getQuestion/" + state);
+    return response;
+  }
+);
+
+export const addQuestions = createAsyncThunk("addQuestions", async (state) => {
+  const response = await nodeAPI.post("/question/addQuestions/" + state.Id, {
+    questions: state.questions,
+  });
+  return response
+});
+
+export const addCriterias = createAsyncThunk("addCriterias", async (state) => {
+  const response = await nodeAPI.post("/criteria/addCriterias/" + state.id, {
+    criterias: state.criterias,
+  });
+  return response;
+});
+
 const surveySlice = createSlice({
   name: "surveys",
   initialState,
@@ -105,6 +158,55 @@ const surveySlice = createSlice({
         });
       }
     });
+
+    builder.addCase(getSurveyCriterias.fulfilled, (state, action) => {
+      state.criterias = action.payload.data;
+    });
+
+    builder.addCase(addCriterias.fulfilled, (state, action) => {
+      if (action.payload.data.success) {
+        Swal.fire({
+          timer: 2000,
+          icon: "success",
+          title: "Success",
+          showConfirmButton: false,
+        });
+      }
+    });
+    builder.addCase(getSurveyItemCriteria.pending, (state, action) => {
+      state.itemCriteriasLoading = true;
+    });
+    builder.addCase(getSurveyItemCriteria.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.itemCriterias = action.payload.data;
+      state.itemCriteriasLoading = false;
+    });
+    builder.addCase(getSurveyQuestions.pending, (state, action) => {
+      state.questionsLoading = true;
+    });
+    builder.addCase(getSurveyQuestions.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.questions = action.payload.data;
+      state.questionsLoading = false;
+    });
+    builder.addCase(addQuestions.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
+
+    builder.addCase(addItemCriterias.fulfilled, (state, action) => {
+      console.log(action)
+      if (action.payload.data.success) {
+        Swal.fire({
+          timer: 2000,
+          icon: "success",
+          title: "Success",
+          showConfirmButton: false,
+        }).then(res=> {
+          // action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
+        })
+      }
+    })
+
   },
 });
 

@@ -10,7 +10,7 @@ import UserLayout from "layouts/User/UserLayout";
 import { useHistory } from "react-router-dom";
 
 const App = () => {
-  var date = new Date(); // Or the date you'd like converted.
+  var date = new Date();
   var isoDateTime = new Date(
     date.getTime() - date.getTimezoneOffset() * 60000
   ).toISOString();
