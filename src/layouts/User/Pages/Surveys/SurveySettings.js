@@ -25,6 +25,9 @@ import { getSurveyItems } from "stores/Survyes/surveySlice";
 import { getSurveyCriterias } from "stores/Survyes/surveySlice";
 import { getSurveyQuestions } from "stores/Survyes/surveySlice";
 import { getSurveyItemCriteria } from "stores/Survyes/surveySlice";
+import { Bar } from "react-chartjs-2";
+import SurveyResults from "components/Survey/SurveyResults";
+import { getSurveyResults } from "stores/Survyes/surveySlice";
 
 const SurveySettings = () => {
   const history = useHistory();
@@ -33,15 +36,17 @@ const SurveySettings = () => {
   useEffect(() => {
     dispatch(getSurveyItems(id));
     dispatch(getSurveyCriterias(id));
-    dispatch(getSurveyQuestions(id))
-    dispatch(getSurveyItemCriteria(id))
+    dispatch(getSurveyQuestions(id));
+    dispatch(getSurveyItemCriteria(id));
+    dispatch(getSurveyResults(id));
   }, []);
 
   const items = useSelector((state) => state.surveys.items);
   const criterias = useSelector((state) => state.surveys.criterias);
   const questions = useSelector((state) => state.surveys.questions);
   const itemCriterias = useSelector((state) => state.surveys.itemCriterias);
-  if (items && criterias && questions && itemCriterias) {
+  const surveyResults = useSelector((state) => state.surveys.surveyResults);
+  if (items && criterias && questions && itemCriterias && surveyResults) {
     return (
       <div className="content">
         <Card>
@@ -225,10 +230,7 @@ const SurveySettings = () => {
                 </SettingsCard>
               </Col>
             </Row>
-            <SettingsCard>
-              <CardHeader tag={"h4"}>Survey Results</CardHeader>
-              <CardBody></CardBody>
-            </SettingsCard>
+            <SurveyResults data={surveyResults} />
           </CardBody>
         </Card>
       </div>

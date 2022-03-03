@@ -17,6 +17,7 @@ const initialState = {
   itemCriteriasLoading: false,
   questions: null,
   questionsLoading: false,
+  surveyResults: null,
 };
 
 export const getSurveys = createAsyncThunk("getSurveys", async (state) => {
@@ -95,12 +96,18 @@ export const getSurveyItemCriteria = createAsyncThunk(
   }
 );
 
-export const addItemCriterias = createAsyncThunk("addItemCriteria", async (state) => {
-  const response = await nodeAPI.post("/itemcriteria/addItemCriterias/"+state.id,{
-    itemCriterias: state.itemCriterias,
-  })
-  return {...response, history:state.history};
-})
+export const addItemCriterias = createAsyncThunk(
+  "addItemCriteria",
+  async (state) => {
+    const response = await nodeAPI.post(
+      "/itemcriteria/addItemCriterias/" + state.id,
+      {
+        itemCriterias: state.itemCriterias,
+      }
+    );
+    return { ...response, history: state.history };
+  }
+);
 
 export const getSurveyQuestions = createAsyncThunk(
   "getSurveyQuestions",
@@ -114,7 +121,7 @@ export const addQuestions = createAsyncThunk("addQuestions", async (state) => {
   const response = await nodeAPI.post("/question/addQuestions/" + state.Id, {
     questions: state.questions,
   });
-  return response
+  return response;
 });
 
 export const addCriterias = createAsyncThunk("addCriterias", async (state) => {
@@ -123,6 +130,14 @@ export const addCriterias = createAsyncThunk("addCriterias", async (state) => {
   });
   return response;
 });
+
+export const getSurveyResults = createAsyncThunk(
+  "getSurveyResults",
+  async (state) => {
+    const response = nodeAPI.get("/surveyResults/getSurveyResults/" + state);
+    return response;
+  }
+);
 
 const surveySlice = createSlice({
   name: "surveys",
@@ -194,19 +209,23 @@ const surveySlice = createSlice({
     });
 
     builder.addCase(addItemCriterias.fulfilled, (state, action) => {
-      console.log(action)
+      console.log(action);
       if (action.payload.data.success) {
         Swal.fire({
           timer: 2000,
           icon: "success",
           title: "Success",
           showConfirmButton: false,
-        }).then(res=> {
+        }).then((res) => {
           // action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
-        })
+        });
       }
-    })
+    });
 
+    builder.addCase(getSurveyResults.fulfilled, (state, action) => {
+      console.log(action.payload);
+      state.surveyResults = action.payload.data;
+    });
   },
 });
 
