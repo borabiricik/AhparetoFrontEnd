@@ -17,6 +17,7 @@ import { useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { getLayoutName } from "Functions/Router";
 import { deletePollsterGroup } from "stores/PollsterGroups/pollsterGroupSlice";
+import Loading from "components/Common/Loading";
 
 const PollsterGroups = () => {
   const dispatch = useDispatch();
@@ -86,9 +87,7 @@ const PollsterGroups = () => {
     );
   } else {
     return (
-      <div className="content">
-        <h2>Yükleniyor...</h2>
-      </div>
+      <Loading />
     );
   }
 };

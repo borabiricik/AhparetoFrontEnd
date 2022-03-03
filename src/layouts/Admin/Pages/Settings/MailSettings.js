@@ -1,3 +1,4 @@
+import Loading from "components/Common/Loading";
 import { Formik } from "formik";
 import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
@@ -114,9 +115,7 @@ const MailSettings = () => {
     }
     else{
         return (
-            <div className="content">
-                <h2>Yükleniyor...</h2>
-            </div>
+            <Loading />
         )
     }
  

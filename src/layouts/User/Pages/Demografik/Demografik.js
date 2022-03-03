@@ -17,6 +17,7 @@ import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 import { getLayoutName } from "Functions/Router";
 import { Link } from "react-router-dom";
 import { deleteDemografik } from "stores/Demografik/demografikSlice";
+import Loading from "components/Common/Loading";
 
 const Demografik = () => {
   const dispatch = useDispatch();
@@ -79,9 +80,7 @@ const Demografik = () => {
     );
   } else {
     return (
-      <div className="content">
-        <h1>Yükleniyor...</h1>
-      </div>
+      <Loading />
     );
   }
 };

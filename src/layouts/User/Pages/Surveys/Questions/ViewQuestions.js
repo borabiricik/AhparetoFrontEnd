@@ -1,3 +1,4 @@
+import Loading from "components/Common/Loading";
 import { Formik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -82,7 +83,7 @@ const ViewQuestions = () => {
       </div>
     );
   } else {
-    return <h2>Loading...</h2>;
+    return <Loading />;
   }
 };
 

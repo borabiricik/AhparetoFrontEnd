@@ -21,6 +21,7 @@ import { getLayoutName } from "Functions/Router";
 import { useHistory } from "react-router-dom";
 import ReactTable from "react-table-6";
 import classNames from "classnames";
+import Loading from "components/Common/Loading";
 
 const Surveys = () => {
   const history = useHistory();
@@ -137,9 +138,7 @@ const Surveys = () => {
     );
   } else {
     return (
-      <div className="content">
-        <h2>Yükleniyor...</h2>
-      </div>
+      <Loading />
     );
   }
 };

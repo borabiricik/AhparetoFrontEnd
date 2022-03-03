@@ -25,6 +25,7 @@ import * as Yup from "yup";
 import Datetime from "react-datetime";
 import { CustomDatePicker } from "components/CustomComponents/CustomDatePicker";
 import { createPollster } from "stores/Pollsters/pollsterSlice";
+import Loading from "components/Common/Loading";
 
 const phoneRegExp = /^(\+?\d{0,4})?\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{3}\)?)\s?-?\s?(\(?\d{4}\)?)?$/;
 
@@ -180,9 +181,7 @@ const CreatePollster = () => {
     );
   } else {
     return (
-      <div className="content">
-        <h2>Yükleniyor...</h2>
-      </div>
+      <Loading />
     );
   }
 };

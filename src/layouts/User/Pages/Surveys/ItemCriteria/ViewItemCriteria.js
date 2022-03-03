@@ -23,6 +23,7 @@ import { addItems } from "stores/Survyes/surveySlice";
 import Swal from "sweetalert2";
 import Select from "react-select";
 import { addItemCriterias } from "stores/Survyes/surveySlice";
+import Loading from "components/Common/Loading";
 
 const ViewItemCriteria = () => {
   const dispatch = useDispatch();
@@ -106,7 +107,7 @@ const ViewItemCriteria = () => {
       </div>
     );
   } else {
-    return <h2>Yükleniyor...</h2>;
+    return <Loading />
   }
 };
 

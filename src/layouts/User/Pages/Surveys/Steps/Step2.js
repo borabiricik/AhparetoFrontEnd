@@ -7,6 +7,7 @@ import { getDemografik } from "stores/Demografik/demografikSlice";
 import { Field, FieldArray, useField, useFormikContext } from "formik";
 import { getPollsters } from "stores/Pollsters/pollsterSlice";
 import FormErrorMessage from "components/CustomComponents/FormErrorMessage";
+import Loading from "components/Common/Loading";
 
 const Step2 = React.forwardRef((props, ref) => {
   const demografikData = useSelector(
@@ -80,7 +81,7 @@ const Step2 = React.forwardRef((props, ref) => {
       </div>
     );
   } else {
-    return <h2>Yükleniyor...</h2>;
+    return <Loading />
   }
 });
 

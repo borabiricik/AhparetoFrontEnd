@@ -28,6 +28,7 @@ import { getSurveyItemCriteria } from "stores/Survyes/surveySlice";
 import { Bar } from "react-chartjs-2";
 import SurveyResults from "components/Survey/SurveyResults";
 import { getSurveyResults } from "stores/Survyes/surveySlice";
+import Loading from "components/Common/Loading";
 
 const SurveySettings = () => {
   const history = useHistory();
@@ -230,16 +231,20 @@ const SurveySettings = () => {
                 </SettingsCard>
               </Col>
             </Row>
-            <SurveyResults data={surveyResults} />
+            {surveyResults.length > 0 ? (
+              <SurveyResults data={surveyResults} />
+            ) : (
+              <div>
+                <h1>No Results</h1>
+              </div>
+            )}
           </CardBody>
         </Card>
       </div>
     );
   } else {
     return (
-      <div className="content">
-        <h2>Yükleniyor...</h2>
-      </div>
+      <Loading />
     );
   }
 };

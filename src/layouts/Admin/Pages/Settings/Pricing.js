@@ -1,3 +1,4 @@
+import Loading from "components/Common/Loading";
 import CommonTable from "components/Common/Tables/CommonTable";
 import { getLayoutName } from "Functions/Router";
 import React, { useEffect } from "react";
@@ -61,9 +62,7 @@ const Pricing = () => {
     );
   } else {
     return (
-      <div className="content">
-        <h2>Yükleniyor...</h2>
-      </div>
+     <Loading />
     );
   }
 };

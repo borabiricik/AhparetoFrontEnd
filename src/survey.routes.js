@@ -3,7 +3,7 @@ import Login from "views/pages/Login";
 
 export default [
   {
-    path: "/",
+    path: "/:id/:verificationCode",
     name: "FillSurvey",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",

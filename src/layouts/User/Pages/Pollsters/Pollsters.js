@@ -18,6 +18,7 @@ import { getLayoutName } from "Functions/Router";
 import { useHistory } from "react-router-dom";
 import { deletePollsterGroup } from "stores/PollsterGroups/pollsterGroupSlice";
 import { deletePollster } from "stores/Pollsters/pollsterSlice";
+import Loading from "components/Common/Loading";
 
 const Pollsters = ({match:{params:{id}}}) => {
   const dispatch = useDispatch();
@@ -95,9 +96,7 @@ const Pollsters = ({match:{params:{id}}}) => {
     );
   } else {
     return (
-      <div className="content">
-        <h2>Yükleniyor...</h2>
-      </div>
+      <Loading />
     );
   }
 };

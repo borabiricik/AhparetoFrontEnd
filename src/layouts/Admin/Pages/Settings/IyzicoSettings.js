@@ -6,6 +6,7 @@ import { Button, Card, CardBody, CardFooter, CardHeader, Col, Input } from "reac
 import { updatePaymentConfig } from "stores/Settings/iyzicoSlice";
 import { getPaymentConfig } from "stores/Settings/iyzicoSlice";
 import {useHistory} from "react-router-dom"
+import Loading from "components/Common/Loading";
 
 const IyzicoSettings = () => {
   const dispatch = useDispatch();
@@ -63,9 +64,7 @@ const IyzicoSettings = () => {
     );
   } else {
     return (
-      <div className="content">
-        <h2>Yükleniyor ...</h2>
-      </div>
+      <Loading />
     );
   }
 };

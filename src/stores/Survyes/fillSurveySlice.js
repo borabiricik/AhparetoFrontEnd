@@ -18,6 +18,27 @@ export const getCriterias = createAsyncThunk("getCriterias", async (state) => {
   return response;
 });
 
+export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
+  const response = nodeAPI.post(
+    "surveyActions/finishSurvey/" + state.SurveyId,
+    {
+      VerificationCode: state.VerificationCode,
+      DemografikDetails: [
+        {
+          DemografikId: 1106,
+          DemografikValue: "Erkek",
+        },
+        {
+          DemografikId: 1107,
+          DemografikValue: "Lise",
+        },
+      ],
+      AnswersJson: JSON.stringify(state.Results),
+    }
+  );
+  return response;
+});
+
 const fillSurveySlice = createSlice({
   name: "fillSurveySlice",
   initialState,
@@ -36,6 +57,12 @@ const fillSurveySlice = createSlice({
     addCase(getCriterias.fulfilled, (state, action) => {
       state.criteria = action.payload.data;
       state.isLoading = false;
+    });
+    addCase(finishSurvey.fulfilled, (state, action) => {
+      console.log(action.payload);
+    });
+    addCase(finishSurvey.rejected, (state, action) => {
+      console.log(action.payload);
     });
   },
 });
