@@ -8,13 +8,14 @@ import "assets/scss/black-dashboard-pro-react.scss?v=1.2.0";
 import "assets/demo/demo.css";
 import UserLayout from "layouts/User/UserLayout";
 import { useHistory } from "react-router-dom";
+import SurveyLayout from "layouts/Survey/SurveyLayout";
 
 const App = () => {
   var date = new Date();
   var isoDateTime = new Date(
     date.getTime() - date.getTimezoneOffset() * 60000
   ).toISOString();
-  const history = useHistory()
+  const history = useHistory();
   return (
     <Switch>
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
@@ -27,7 +28,7 @@ const App = () => {
           ) {
             return <AdminLayout {...props} />;
           } else {
-            return <UserLayout {...props} />;
+            return <SurveyLayout {...props} />;
           }
         }}
       />
@@ -44,6 +45,15 @@ const App = () => {
           }
         }}
       />
+
+      <Route
+        path="/survey"
+        render={(props) => {
+          return <SurveyLayout {...props} />;
+        }}
+      />
+
+      {/* <Route path={"/survey"} component={Survey} /> */}
       {localStorage.getItem("token") == null &&
       localStorage.getItem("role") == "user" ? (
         <Redirect from="/" to="/auth/login" />
@@ -57,7 +67,9 @@ const App = () => {
         <Redirect from="/" to="/admin/dashboard" />
       )}
       {localStorage.getItem("token") &&
-      localStorage.getItem("expiration") < isoDateTime ? history.replace("/auth/login") : null}
+      localStorage.getItem("expiration") < isoDateTime
+        ? history.replace("/auth/login")
+        : null}
     </Switch>
   );
 };

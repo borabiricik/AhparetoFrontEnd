@@ -68,6 +68,7 @@ const Pages = (props) => {
         <div className={"full-page " + getFullPageName(routes)}>
           <Switch>
             {getRoutes(routes)}
+
             <Redirect from="*" to="/auth/login" />
           </Switch>
           <Footer fluid />

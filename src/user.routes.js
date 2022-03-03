@@ -1,5 +1,6 @@
 import BuyCredits from "layouts/Admin/Pages/Actions/BuyCredits";
 import PasswordActions from "layouts/Admin/Pages/Actions/PasswordActions";
+import SurveyLayout from "layouts/Survey/SurveyLayout";
 import Dashboard from "layouts/User/Pages/Dashboard";
 import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
 import Demografik from "layouts/User/Pages/Demografik/Demografik";

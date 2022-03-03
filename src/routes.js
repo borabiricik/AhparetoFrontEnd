@@ -5,6 +5,8 @@ import MailSettings from "layouts/Admin/Pages/Settings/MailSettings";
 import CreatePrice from "layouts/Admin/Pages/Settings/Price/CreatePrice";
 import EditPrice from "layouts/Admin/Pages/Settings/Price/EditPrice";
 import Pricing from "layouts/Admin/Pages/Settings/Pricing";
+import FillSurvey from "layouts/Survey/Fill/FillSurvey";
+import SurveyLayout from "layouts/Survey/SurveyLayout";
 import Dashboard from "layouts/User/Pages/Dashboard";
 import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
 import Demografik from "layouts/User/Pages/Demografik/Demografik";
