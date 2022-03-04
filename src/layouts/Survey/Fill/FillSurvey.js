@@ -1,6 +1,7 @@
 import { Formik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import {
   Button,
@@ -24,6 +25,7 @@ const FillSurvey = () => {
   const criterias = useSelector((state) => state.fillSurvey.criteria);
   const dispatch = useDispatch();
   const { id, verificationCode } = useParams();
+  const history = useHistory();
 
   const getData = async () => {
     await dispatch(getQuestions());
@@ -47,6 +49,7 @@ const FillSurvey = () => {
                 Results: values.Results,
                 VerificationCode: verificationCode,
                 SurveyId: id,
+                history,
               })
             );
           }}

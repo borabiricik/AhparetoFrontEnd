@@ -68,7 +68,10 @@ const App = () => {
       )}
       {localStorage.getItem("token") &&
       localStorage.getItem("expiration") < isoDateTime
-        ? history.replace("/auth/login")
+        ? () => {
+            history.replace("/auth/login");
+            localStorage.removeItem("token");
+          }
         : null}
     </Switch>
   );

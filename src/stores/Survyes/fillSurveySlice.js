@@ -1,4 +1,5 @@
 import { nodeAPI } from "Constants/api";
+import Swal from "sweetalert2";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
@@ -6,6 +7,10 @@ const initialState = {
   isLoading: false,
   questions: null,
   criteria: null,
+  surveyResults: null,
+  VerificationCode: null,
+  SurveyId: null,
+  isResultsLoading: false,
 };
 
 export const getQuestions = createAsyncThunk("getQuestions", async (state) => {
@@ -19,7 +24,7 @@ export const getCriterias = createAsyncThunk("getCriterias", async (state) => {
 });
 
 export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
-  const response = nodeAPI.post(
+  const response = await nodeAPI.post(
     "surveyActions/finishSurvey/" + state.SurveyId,
     {
       VerificationCode: state.VerificationCode,
@@ -36,7 +41,29 @@ export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
       AnswersJson: JSON.stringify(state.Results),
     }
   );
-  return response;
+
+  if (response.data.success) {
+    state.history.push(
+      "/survey/results/" +
+        state.SurveyId +
+        "/" +
+        state.VerificationCode
+    );
+  }
+  else{
+    Swal.fire({
+      text: response.data.message,
+      icon: "error",
+      showConfirmButton:false,
+      timer:2000
+    });
+  }
+  return {
+    ...response,
+    history: state.history,
+    VerificationCode: state.VerificationCode,
+    SurveyId: state.SurveyId,
+  };
 });
 
 const fillSurveySlice = createSlice({
@@ -59,9 +86,6 @@ const fillSurveySlice = createSlice({
       state.isLoading = false;
     });
     addCase(finishSurvey.fulfilled, (state, action) => {
-      console.log(action.payload);
-    });
-    addCase(finishSurvey.rejected, (state, action) => {
       console.log(action.payload);
     });
   },

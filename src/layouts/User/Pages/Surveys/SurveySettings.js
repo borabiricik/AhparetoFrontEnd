@@ -29,6 +29,7 @@ import { Bar } from "react-chartjs-2";
 import SurveyResults from "components/Survey/SurveyResults";
 import { getSurveyResults } from "stores/Survyes/surveySlice";
 import Loading from "components/Common/Loading";
+import { BiEdit } from "react-icons/bi";
 
 const SurveySettings = () => {
   const history = useHistory();
@@ -230,6 +231,33 @@ const SurveySettings = () => {
                   </CardFooter>
                 </SettingsCard>
               </Col>
+              <Col sm={12} md={4}>
+                <SettingsCard>
+                  <CardHeader tag={"h4"}>Participant Info (SMS-Mail)</CardHeader>
+                  <CardBody></CardBody>
+                  <CardFooter className="row align-items-center justify-content-between px-5">
+                    {itemCriterias.length > 0 ? <Approved /> : <Waiting />}
+
+                    <Row>
+                      <Button
+                        className="btn-icon btn-round"
+                        color="secondary"
+                        onClick={() => {}}
+                      >
+                        <AiOutlineEye size={24} />
+                      </Button>
+
+                      <Button
+                        className="btn-icon btn-round"
+                        color="success"
+                        onClick={() => {}}
+                      >
+                        <BiEdit size={24} />
+                      </Button>
+                    </Row>
+                  </CardFooter>
+                </SettingsCard>
+              </Col>
             </Row>
             {surveyResults.length > 0 ? (
               <SurveyResults data={surveyResults} />
@@ -243,9 +271,7 @@ const SurveySettings = () => {
       </div>
     );
   } else {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 };
 

@@ -9,6 +9,7 @@ import priceSlice from "./Settings/priceSlice";
 import surveySlice from "./Survyes/surveySlice";
 import wizardSlice from "./Wizard/wizardSlice";
 import fillSurveySlice from "./Survyes/fillSurveySlice";
+import surveyResultsSlice from "./Survyes/surveyResultsSlice";
 
 export default configureStore({
   reducer: {
@@ -21,9 +22,10 @@ export default configureStore({
     iyzico: iyzicoSlice,
     mail:mailSlice,
     price: priceSlice,
-    fillSurvey: fillSurveySlice
+    fillSurvey: fillSurveySlice,
+    surveyResults: surveyResultsSlice,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware({serializableCheck:false}),
-  devTools:true
+  devTools:false
 });
 
