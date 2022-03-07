@@ -28,8 +28,8 @@ const FillSurvey = () => {
   const history = useHistory();
 
   const getData = async () => {
-    await dispatch(getQuestions());
-    await dispatch(getCriterias());
+    await dispatch(getQuestions(id));
+    await dispatch(getCriterias(id));
   };
 
   useEffect(() => {

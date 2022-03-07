@@ -11,15 +11,16 @@ const initialState = {
   VerificationCode: null,
   SurveyId: null,
   isResultsLoading: false,
+  survey: null,
 };
 
 export const getQuestions = createAsyncThunk("getQuestions", async (state) => {
-  const response = nodeAPI.get("question/getQuestion/133");
+  const response = nodeAPI.get("question/getQuestion/" + state);
   return response;
 });
 
 export const getCriterias = createAsyncThunk("getCriterias", async (state) => {
-  const response = nodeAPI.get("criteria/getCriterias/133");
+  const response = nodeAPI.get("criteria/getCriterias/" + state);
   return response;
 });
 
@@ -44,18 +45,14 @@ export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
 
   if (response.data.success) {
     state.history.push(
-      "/survey/results/" +
-        state.SurveyId +
-        "/" +
-        state.VerificationCode
+      "/survey/results/" + state.SurveyId + "/" + state.VerificationCode
     );
-  }
-  else{
+  } else {
     Swal.fire({
       text: response.data.message,
       icon: "error",
-      showConfirmButton:false,
-      timer:2000
+      showConfirmButton: false,
+      timer: 2000,
     });
   }
   return {
@@ -64,6 +61,11 @@ export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
     VerificationCode: state.VerificationCode,
     SurveyId: state.SurveyId,
   };
+});
+
+export const getSurvey = createAsyncThunk("getSurvey", async (state) => {
+  const response = await nodeAPI.get("/survey/getById/" + state);
+  return response;
 });
 
 const fillSurveySlice = createSlice({
@@ -87,6 +89,15 @@ const fillSurveySlice = createSlice({
     });
     addCase(finishSurvey.fulfilled, (state, action) => {
       console.log(action.payload);
+    });
+
+    addCase(getSurvey.pending, (state, action) => {
+      state.survey = null;
+    });
+
+    addCase(getSurvey.fulfilled, (state, action) => {
+      console.log(action.payload.data)
+      state.survey = action.payload.data;
     });
   },
 });

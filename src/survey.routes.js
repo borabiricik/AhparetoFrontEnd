@@ -1,7 +1,18 @@
 import FillSurvey from "layouts/Survey/Fill/FillSurvey";
+import SurveyIntroduction from "layouts/Survey/Fill/SurveyIntroduction";
 import UserResults from "layouts/Survey/Results/UserResults";
 
 export default [
+  {
+    path: "/introduction/:id/:verificationCode",
+    name: "FillSurvey",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: SurveyIntroduction,
+    layout: "/survey",
+    invisible: true,
+  },
+
   {
     path: "/results/:id/:verificationCode",
     name: "FillSurvey",
@@ -12,7 +23,7 @@ export default [
     invisible: true,
   },
   {
-    path: "/:id/:verificationCode",
+    path: "/fill/:id/:verificationCode",
     name: "FillSurvey",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
@@ -20,5 +31,4 @@ export default [
     layout: "/survey",
     invisible: true,
   },
-  
 ];
