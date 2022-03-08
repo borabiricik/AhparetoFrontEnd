@@ -1,11 +1,20 @@
 import React, { useState } from "react";
+import { Accordion, useAccordionToggle } from "react-bootstrap";
 import { FcApproval } from "react-icons/fc";
 import { Button, Card, CardBody, Col, Row } from "reactstrap";
 import { criteriaFinder } from "utils/criteriaFinder";
 
-const Question = ({ question, values, criterias }) => {
+const Question = ({ question, values, criterias, eventKey }) => {
   const [isActive, setisActive] = useState(true);
   const [isNextQuestion, setisNextQuestion] = useState(false);
+  const [selectedCriteria, setselectedCriteria] = useState("");
+  const [unselectedCriteria, setunselectedCriteria] = useState("");
+  const accordionNextQuestion = useAccordionToggle(
+    eventKey+1,
+    () => {
+      console.log(eventKey)
+    }
+  );
   const onEqual = (Criteria1Id, Criteria2Id) => {
     values.Results.push({
       Criteria1Id,
@@ -16,7 +25,9 @@ const Question = ({ question, values, criterias }) => {
   };
   const disableQuestion = () => {
     setisActive(false);
+    accordionNextQuestion()
   };
+
   const criteriaWeightSet = (value) => {
     values.Results.push({
       Criteria1Id: question.Criteria1Id,
@@ -26,10 +37,29 @@ const Question = ({ question, values, criterias }) => {
     });
     disableQuestion();
   };
+
+  const changeAnswer = (question) => {
+    const foundItem = values.Results.find((value) => {
+      if (
+        value.Criteria1Id === question.Criteria1Id &&
+        value.Criteria2Id === question.Criteria2Id
+      ) {
+        return value;
+      }
+    });
+
+    values.Results.pop(foundItem);
+    setisNextQuestion(false);
+    setisActive(true);
+  };
   return (
-    <Card className={`card-chart `}>
-      <CardBody>
-        <h2 className="text-center">{question.Text}</h2>
+    <Accordion.Collapse eventKey={question.Id} className={`card-chart`}>
+      <div className="p-4">
+        <h2 className="text-center">
+          {isNextQuestion
+            ? `${selectedCriteria}, ${unselectedCriteria} göre ne kadar önemli ? `
+            : question.Text}
+        </h2>
         {isActive === true ? (
           isNextQuestion ? (
             <div>
@@ -46,13 +76,33 @@ const Question = ({ question, values, criterias }) => {
             <div>
               <Row>
                 <Col className="row justify-content-center no-gutters">
-                  <Button onClick={() => setisNextQuestion(true)}>
+                  <Button
+                    onClick={() => {
+                      setselectedCriteria(
+                        criteriaFinder(criterias, question.Criteria1Id).Name
+                      );
+                      setunselectedCriteria(
+                        criteriaFinder(criterias, question.Criteria2Id).Name
+                      );
+                      setisNextQuestion(true);
+                    }}
+                  >
                     {criteriaFinder(criterias, question.Criteria1Id).Name}
                   </Button>
                 </Col>
 
                 <Col className="row justify-content-center no-gutters">
-                  <Button onClick={() => setisNextQuestion(true)}>
+                  <Button
+                    onClick={() => {
+                      setselectedCriteria(
+                        criteriaFinder(criterias, question.Criteria2Id).Name
+                      );
+                      setunselectedCriteria(
+                        criteriaFinder(criterias, question.Criteria1Id).Name
+                      );
+                      setisNextQuestion(true);
+                    }}
+                  >
                     {criteriaFinder(criterias, question.Criteria2Id).Name}
                   </Button>
                 </Col>
@@ -73,12 +123,27 @@ const Question = ({ question, values, criterias }) => {
             </div>
           )
         ) : (
-          <h2 className="text-center">
-            <FcApproval color="#5CECC0" size={24} />
-          </h2>
+          <Row className="justify-content-center">
+            <div>
+              <Row className="text-center py-3">
+                <FcApproval color="#5CECC0" className="mx-2" size={24} />
+                <p>Question Answered</p>
+              </Row>
+
+              <div>
+                <Button
+                  className="btn-simple"
+                  color="twitter"
+                  onClick={() => changeAnswer(question)}
+                >
+                  Yanıtı Değiştir
+                </Button>
+              </div>
+            </div>
+          </Row>
         )}
-      </CardBody>
-    </Card>
+      </div>
+    </Accordion.Collapse>
   );
 };
 

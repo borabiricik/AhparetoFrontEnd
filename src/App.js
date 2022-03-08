@@ -9,6 +9,7 @@ import "assets/demo/demo.css";
 import UserLayout from "layouts/User/UserLayout";
 import { useHistory } from "react-router-dom";
 import SurveyLayout from "layouts/Survey/SurveyLayout";
+import PollsterLayout from "layouts/Pollster/PollsterLayout";
 
 const App = () => {
   var date = new Date();
@@ -50,6 +51,13 @@ const App = () => {
         path="/survey"
         render={(props) => {
           return <SurveyLayout {...props} />;
+        }}
+      />
+
+      <Route
+        path="/pollster"
+        render={(props) => {
+          return <PollsterLayout {...props} />;
         }}
       />
 

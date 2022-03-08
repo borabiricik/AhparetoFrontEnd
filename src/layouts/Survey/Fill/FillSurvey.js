@@ -1,5 +1,7 @@
+import Logo from "components/Common/Logo";
 import { Formik } from "formik";
 import React, { useEffect } from "react";
+import { Accordion } from "react-bootstrap";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
@@ -15,6 +17,7 @@ import {
 import { getCriterias } from "stores/Survyes/fillSurveySlice";
 import { finishSurvey } from "stores/Survyes/fillSurveySlice";
 import { getQuestions } from "stores/Survyes/fillSurveySlice";
+import Swal from "sweetalert2";
 import Loading from "../../../components/Common/Loading";
 import Question from "./Question";
 
@@ -38,20 +41,30 @@ const FillSurvey = () => {
 
   if (!isLoading && questions && criterias) {
     return (
-      <div className="content">
+      <div className="container">
+        <Logo />
         <Formik
           initialValues={{
             Results: [],
           }}
           onSubmit={(values) => {
-            dispatch(
-              finishSurvey({
-                Results: values.Results,
-                VerificationCode: verificationCode,
-                SurveyId: id,
-                history,
-              })
-            );
+            console.log(values);
+            if (values.Results.length < questions.length) {
+              Swal.fire({
+                text: "Please fill all the questions",
+                timer: 2000,
+                showConfirmButton: false,
+              });
+            } else {
+              dispatch(
+                finishSurvey({
+                  Results: values.Results,
+                  VerificationCode: verificationCode,
+                  SurveyId: id,
+                  history,
+                })
+              );
+            }
           }}
         >
           {({ values, handleSubmit }) => {
@@ -59,15 +72,31 @@ const FillSurvey = () => {
               <Card>
                 <CardHeader tag={"h2"}>Fill Survey</CardHeader>
                 <CardBody>
-                  {questions.map((question) => {
-                    return (
-                      <Question
-                        question={question}
-                        values={values}
-                        criterias={criterias}
-                      />
-                    );
-                  })}
+                  <Accordion defaultActiveKey={questions[0].Id}>
+                    {questions.map((question, index) => {
+  
+                      return (
+                        <div className="border-bottom border-dark">
+                          <CardHeader className="row justify-content-center">
+                            <Accordion.Toggle
+                              as={"h2"}
+                              className="btn-link btn-success "
+                              style={{ cursor: "pointer" }}
+                              eventKey={question.Id}
+                            >
+                              Question #{index + 1}
+                            </Accordion.Toggle>
+                          </CardHeader>
+                          <Question
+                            question={question}
+                            values={values}
+                            criterias={criterias}
+                            eventKey={question.Id}
+                          />
+                        </div>
+                      );
+                    })}
+                  </Accordion>
                 </CardBody>
                 <CardFooter className="row justify-content-center">
                   <Button color="success" onClick={handleSubmit}>

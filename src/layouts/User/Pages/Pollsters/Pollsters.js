@@ -20,11 +20,14 @@ import { deletePollsterGroup } from "stores/PollsterGroups/pollsterGroupSlice";
 import { deletePollster } from "stores/Pollsters/pollsterSlice";
 import Loading from "components/Common/Loading";
 
-const Pollsters = ({match:{params:{id}}}) => {
+const Pollsters = ({
+  match: {
+    params: { id },
+  },
+}) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const pollstersData = useSelector((state) => state.pollsters.pollstersData);
-  
 
   const loading = useSelector((state) => state.pollsters.loading);
   const getData = () => {
@@ -35,8 +38,8 @@ const Pollsters = ({match:{params:{id}}}) => {
   }, []);
 
   if (loading === false && pollstersData) {
-    const editData = pollstersData.find(d=> d.pollsterId == id)
-    console.log(editData)
+    // const editData = pollstersData.find(d=> d.PollsterId == id)
+    // console.log(editData)
     return (
       <div className="content">
         <Card className="p-3">
@@ -78,11 +81,12 @@ const Pollsters = ({match:{params:{id}}}) => {
             <CommonTable
               tableData={pollstersData}
               columns={[
-                { nameSurName: "Group Name" },
-                { email: "E-mail" },
-                { phone: "Phone Number" },
-                { identityNumber: "Identity Number" },
-                { pollsterGroup: "Group Name", isArray: true },
+                { Name: "Name" },
+                { SurName: "Soyad" },
+                { Email: "E-mail" },
+                { Phone: "Phone Number" },
+                { IdentityNumber: "Identity Number" },
+                { PollsterGroup: "Group Name", isArray: true },
               ]}
               // actionPageNames={{
               //   edit: getLayoutName(history) + "/edit/pollster/",
@@ -95,9 +99,7 @@ const Pollsters = ({match:{params:{id}}}) => {
       </div>
     );
   } else {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 };
 

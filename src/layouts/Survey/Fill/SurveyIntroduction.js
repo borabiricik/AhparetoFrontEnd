@@ -1,4 +1,5 @@
 import Loading from "components/Common/Loading";
+import Logo from "components/Common/Logo";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -13,7 +14,6 @@ import {
   Row,
 } from "reactstrap";
 import { getSurvey } from "stores/Survyes/fillSurveySlice";
-
 
 const SurveyIntroduction = () => {
   const dispatch = useDispatch();
@@ -30,13 +30,8 @@ const SurveyIntroduction = () => {
   if (survey) {
     return (
       <>
-        <Row className="justify-content-center no-gutters">
-          <img
-            className="logo-image"
-            src="https://www.freepnglogos.com/uploads/a-letter-logo-png-6.png"
-          />
-        </Row>
-        
+       <Logo />
+
         <Container className="introduction-container">
           <Card className="p-4">
             <CardHeader className="text-center font-weight-bolder" tag={"h1"}>

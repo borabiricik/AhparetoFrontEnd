@@ -60,14 +60,14 @@ const CreatePollster = () => {
       <div className="content">
         <Formik
           initialValues={{
-            name: "",
-            surName: "",
-            email: "",
-            pollsterGroup: 0,
-            birthDate: "",
-            identityNumber: 0,
-            userId: localStorage.getItem("userId"),
-            phone:0
+            Name: "",
+            SurName: "",
+            Email: "",
+            PollsterGroupId: 0,
+            BirthDate: "",
+            IdentityNumber: 0,
+            UserId: localStorage.getItem("userId"),
+            Phone:0
           }}
           validationSchema={validationSchema}
           onSubmit={(values) => {
@@ -82,25 +82,25 @@ const CreatePollster = () => {
                   <Row>
                     <Col sm="4">
                       <label>Name</label>
-                      <Input className="m-0" type="text" name="name" onChange={handleChange} />
-                      {errors.name && (
-                        <FormErrorMessage message={errors.name} />
+                      <Input className="m-0" type="text" name="Name" onChange={handleChange} />
+                      {errors.Name && (
+                        <FormErrorMessage message={errors.Name} />
                       )}
                     </Col>
                     <Col sm="4">
                       <label>Surname</label>
                       <Input
                         type="text"
-                        name="surName"
+                        name="SurName"
                         onChange={handleChange}
                         className="m-0"
                       />
-                      <label>{errors.surName && errors.surName}</label>
+                      <label>{errors.SurName && errors.SurName}</label>
                     </Col>
                     <Col sm="4">
                       <label>E-Mail</label>
-                      <Input type="text" name="email" onChange={handleChange} />
-                      <label>{errors.email && errors.email}</label>
+                      <Input type="text" name="Email" onChange={handleChange} />
+                      <label>{errors.Email && errors.Email}</label>
                     </Col>
                   </Row>
                   <Row>
@@ -109,34 +109,34 @@ const CreatePollster = () => {
                       <CustomSelect
                         className={`react-select info m-0 `}
                         options={options}
-                        value={values.name}
+                        value={values.Name}
                         onChange={(inputValue) =>
-                          setFieldValue("pollsterGroup", inputValue.value)
+                          setFieldValue("PollsterGroupId", inputValue.value)
                         }
                         fromApi={true}
                         labelKey={"name"}
                         valueKey={"id"}
                       />
-                      {errors.pollsterGroup && (
-                        <FormErrorMessage message={errors.pollsterGroup} />
+                      {errors.PollsterGroupId && (
+                        <FormErrorMessage message={errors.PollsterGroupId} />
                       )}
                     </Col>
                     <Col sm="4">
                       <label>Birthday</label>
                       <CustomDatePicker
                         placeholder="Select Birthday..."
-                        name="birthDate"
+                        name="BirthDate"
                       />
                     </Col>
                     <Col sm="4">
                       <label>Identity Number</label>
                       <Input
                         type="text"
-                        name="identityNumber"
+                        name="IdentityNumber"
                         onChange={handleChange}
                       />
                       <label>
-                        {errors.identityNumber && errors.identityNumber}
+                        {errors.IdentityNumber && errors.IdentityNumber}
                       </label>
                     </Col>
                   </Row>
@@ -151,7 +151,7 @@ const CreatePollster = () => {
                         ]}
                         value={values.value}
                         onChange={(inputValue) =>
-                          setFieldValue("genderId", inputValue.value)
+                          setFieldValue("GenderId", inputValue.value)
                         }
                       />
                     </Col>
@@ -159,11 +159,11 @@ const CreatePollster = () => {
                       <label>Phone Number. (Örn: (+90) 5432123567)</label>
                       <Input
                         type="text"
-                        name="phone"
+                        name="Phone"
                         onChange={handleChange}
                       />
                       <label>
-                      <FormErrorMessage message={errors.phone} />
+                      <FormErrorMessage message={errors.Phone} />
                       </label>
                     </Col>
                   </Row>

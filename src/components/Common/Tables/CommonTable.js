@@ -45,7 +45,7 @@ const CommonTable = ({
         return {
           Header: Object.values(column)[0].toString(),
           accessor: (row) => {
-            return row[Object.keys(column)[0].toString()][0].name;
+            return row[Object.keys(column)[0].toString()];
           },
           sortable: true,
           filterable: true,

@@ -3,7 +3,7 @@ import { Formik } from "formik";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import ReactTable from "react-table-6";
+
 import {
   Button,
   Card,
@@ -15,14 +15,14 @@ import {
 } from "reactstrap";
 import { getSurveyCriterias } from "stores/Survyes/surveySlice";
 import { getSurveyQuestions } from "stores/Survyes/surveySlice";
-import { getSurveyItemCriteria } from "stores/Survyes/surveySlice";
-import { getSurveyItems } from "stores/Survyes/surveySlice";
+import { combinations } from "utils/combinations";
 
 const ViewQuestions = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const questions = useSelector((state) => state.surveys.questions);
   const criterias = useSelector((state) => state.surveys.criterias);
+  const items = useSelector((state) => state.surveys.items);
   const isLoading = useSelector((state) => state.surveys.questionsLoading);
   useEffect(() => {
     dispatch(getSurveyCriterias(params.id));
@@ -40,6 +40,12 @@ const ViewQuestions = () => {
               <Card>
                 <CardHeader tag="h2">Questions</CardHeader>
                 <CardBody>
+                  {items && criterias && (
+                    <h4 className="text-info text-right">
+                      Recommended Question Count:{" "}
+                      {combinations(criterias.length,2)}
+                    </h4>
+                  )}
                   {questions.map((question) => {
                     return (
                       <Card>
