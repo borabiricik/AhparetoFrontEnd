@@ -19,7 +19,8 @@ const initialState = {
   questionsLoading: false,
   surveyResults: null,
   demografikLoading: false,
-  demografik:null
+  mydemografik: null,
+  isDemografikLoading: false,
 };
 
 export const getSurveys = createAsyncThunk("getSurveys", async (state) => {
@@ -151,6 +152,27 @@ export const getSurveyResultsByDemografik = createAsyncThunk(
   }
 );
 
+export const addDemografik = createAsyncThunk(
+  "addDemografik",
+  async (state) => {
+    const response = await nodeAPI.post(
+      "/survey/addDemografik/" + state.id,
+      state.DemografikDetails
+    );
+    console.log(response);
+    return response;
+  }
+);
+
+export const getDemografik = createAsyncThunk(
+  "getDemografik",
+  async (state) => {
+    const response = await nodeAPI.get("/survey/getDemografik/" + state);
+    console.log(response);
+    return response;
+  }
+);
+
 const surveySlice = createSlice({
   name: "surveys",
   initialState,
@@ -246,6 +268,15 @@ const surveySlice = createSlice({
     builder.addCase(getSurveyResultsByDemografik.fulfilled, (state, action) => {
       state.demografik = action.payload.data[0];
       state.demografikLoading = false;
+    });
+
+    builder.addCase(getDemografik.pending, (state, action) => {
+      state.isDemografikLoading = true;
+    });
+
+    builder.addCase(getDemografik.fulfilled, (state, action) => {
+      state.mydemografik = action.payload.data;
+      state.isDemografikLoading = false;
     });
   },
 });

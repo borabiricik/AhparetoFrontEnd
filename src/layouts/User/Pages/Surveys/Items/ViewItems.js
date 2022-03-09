@@ -18,9 +18,7 @@ const ViewItems = () => {
     return () => {};
   }, []);
 
-  if (itemsLoading) {
-    return <Loading />
-  } else {
+  if (!itemsLoading && items) {
     return (
       <div className="content">
         <Formik>
@@ -52,6 +50,8 @@ const ViewItems = () => {
         </Formik>
       </div>
     );
+  } else {
+   return <Loading />;
   }
 };
 

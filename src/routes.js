@@ -20,6 +20,8 @@ import Pollsters from "layouts/User/Pages/Pollsters/Pollsters";
 import CreateSurvey from "layouts/User/Pages/Surveys/CreateSurvey";
 import AddCriterias from "layouts/User/Pages/Surveys/Criterias/AddCriterias";
 import ViewCriterias from "layouts/User/Pages/Surveys/Criterias/ViewCriterias";
+import AddDemografik from "layouts/User/Pages/Surveys/Demografik/AddDemografik";
+import ViewDemografik from "layouts/User/Pages/Surveys/Demografik/ViewDemografik";
 import EditSurvey from "layouts/User/Pages/Surveys/EditSurvey";
 import AddItemCriteria from "layouts/User/Pages/Surveys/ItemCriteria/AddItemCriteria";
 import ViewItemCriteria from "layouts/User/Pages/Surveys/ItemCriteria/ViewItemCriteria";
@@ -246,6 +248,24 @@ export default [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: AddItems,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/viewDemografik",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewDemografik,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/addDemografik",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: AddDemografik,
     layout: "/admin",
     invisible: true,
   },

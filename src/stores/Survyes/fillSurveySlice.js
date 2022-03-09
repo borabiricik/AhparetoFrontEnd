@@ -30,17 +30,8 @@ export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
     "surveyActions/finishSurvey/" + state.SurveyId,
     {
       VerificationCode: state.VerificationCode,
-      DemografikDetails: state.DemografikDetails,
-      // DemografikDetails: [
-      //   {
-      //     DemografikId: 1106,
-      //     DemografikValue: "Erkek",
-      //   },
-      //   {
-      //     DemografikId: 1107,
-      //     DemografikValue: "Lise",
-      //   },
-      // ],
+      DemografikDetails: JSON.parse(localStorage.getItem("DemografikDetails")),
+
       AnswersJson: JSON.stringify(state.Results),
     }
   );
@@ -67,6 +58,7 @@ export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
 
 export const getSurvey = createAsyncThunk("getSurvey", async (state) => {
   const response = await nodeAPI.get("/survey/getById/" + state);
+  console.log(response);
   return response;
 });
 

@@ -39,6 +39,10 @@ const FillSurvey = () => {
     getData();
   }, []);
 
+  if(!localStorage.getItem("DemografikDetails")){
+    history.goBack()
+  }
+
   if (!isLoading && questions && criterias) {
     return (
       <div className="container">

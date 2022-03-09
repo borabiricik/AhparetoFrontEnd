@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import {
   Card,
@@ -13,49 +13,6 @@ import { readExcel } from "utils/readExcel";
 
 const EditParticipants = () => {
   const [isExcel, setisExcel] = useState(false);
-  const { getRootProps, getInputProps, isDragActive,isDragAccept,isFocused,isDragReject} = useDropzone({
-    accept: ".xlsx",
-    maxFiles: 1,
-    
-  });
-  const baseStyle = {
-    flex: 1,
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    padding: "80px",
-    borderWidth: 2,
-    borderRadius: 2,
-    borderColor: "#eeeeee",
-    borderStyle: "dashed",
-    backgroundColor: "#344675",
-    color: "#black",
-    outline: "none",
-    transition: "border .24s ease-in-out",
-  };
-
-  const focusedStyle = {
-    borderColor: "#2196f3",
-  };
-
-  const acceptStyle = {
-    borderColor: "#00e676",
-  };
-
-  const rejectStyle = {
-    borderColor: "#ff1744",
-  };
-
-  const style = useMemo(
-    () => ({
-      ...baseStyle,
-      ...(isFocused ? focusedStyle : {}),
-      ...(isDragAccept ? acceptStyle : {}),
-      ...(isDragReject ? rejectStyle : {}),
-    }),
-    [isFocused, isDragAccept, isDragReject]
-  );
-
   return (
     <div className="content">
       <Card>
@@ -75,19 +32,13 @@ const EditParticipants = () => {
             </Label>
           </FormGroup>
 
-          {isExcel && (
-            <div {...getRootProps({ style })}>
-              <input {...getInputProps()} />
-              {isDragActive ? (
-                <p className="text-dark">
-                    Drop the excel file here ...
-                </p>
-              ) : (
-                <p>Drag & drop Excel file here, or click to select files</p>
-              )}
-            </div>
-          )}
-
+          <Input
+            type="file"
+            onChange={async (e) => {
+              const file = e.target.files[0];
+              console.log(await readExcel(file))
+            }}
+          />
         </CardBody>
       </Card>
     </div>

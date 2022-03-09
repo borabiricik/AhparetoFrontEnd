@@ -60,17 +60,15 @@ const SurveyIntroduction = () => {
                 <Button
                   color="success"
                   onClick={() =>
-                    history.push(`/survey/fill/${id}/${verificationCode}`)
+                    history.push(
+                      `/survey/demographic/${id}/${verificationCode}`
+                    )
                   }
                 >
                   Ankete Başla
                 </Button>
               ) : (
-                <Button
-                  color="danger"
-                >
-                  Survey Already Answered
-                </Button>
+                <Button color="danger">Survey Already Answered</Button>
               )}
             </CardFooter>
           </Card>

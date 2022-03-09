@@ -1,4 +1,5 @@
 import FillSurvey from "layouts/Survey/Fill/FillSurvey";
+import SurveyDemografik from "layouts/Survey/Fill/SurveyDemografik";
 import SurveyIntroduction from "layouts/Survey/Fill/SurveyIntroduction";
 import UserResults from "layouts/Survey/Results/UserResults";
 
@@ -12,7 +13,15 @@ export default [
     layout: "/survey",
     invisible: true,
   },
-
+  {
+    path: "/demographic/:id/:verificationCode",
+    name: "FillSurvey",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: SurveyDemografik,
+    layout: "/survey",
+    invisible: true,
+  },
   {
     path: "/results/:id/:verificationCode",
     name: "FillSurvey",
