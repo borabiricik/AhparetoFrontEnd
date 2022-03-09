@@ -25,6 +25,8 @@ import AddItemCriteria from "layouts/User/Pages/Surveys/ItemCriteria/AddItemCrit
 import ViewItemCriteria from "layouts/User/Pages/Surveys/ItemCriteria/ViewItemCriteria";
 import AddItems from "layouts/User/Pages/Surveys/Items/AddItems";
 import ViewItems from "layouts/User/Pages/Surveys/Items/ViewItems";
+import EditParticipants from "layouts/User/Pages/Surveys/Participants/EditParticipants";
+import ViewParticipants from "layouts/User/Pages/Surveys/Participants/ViewParticipants";
 import AddQuestions from "layouts/User/Pages/Surveys/Questions/AddQuestions";
 import ViewQuestions from "layouts/User/Pages/Surveys/Questions/ViewQuestions";
 import Surveys from "layouts/User/Pages/Surveys/Surveys";
@@ -164,6 +166,26 @@ export default [
     layout: "/admin",
     invisible: true,
   },
+  {
+    path: "/settings/survey/:id/editParticipants",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditParticipants,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/viewParticipants",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewParticipants,
+    layout: "/admin",
+    invisible: true,
+  },
+
+  
   {
     path: "/settings/survey/:id/viewQuestions",
     name: "Add Items",

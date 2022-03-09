@@ -18,6 +18,8 @@ const initialState = {
   questions: null,
   questionsLoading: false,
   surveyResults: null,
+  demografikLoading: false,
+  demografik:null
 };
 
 export const getSurveys = createAsyncThunk("getSurveys", async (state) => {
@@ -139,6 +141,16 @@ export const getSurveyResults = createAsyncThunk(
   }
 );
 
+export const getSurveyResultsByDemografik = createAsyncThunk(
+  "getSurveyResultsByDemografik",
+  async (state) => {
+    const response = await nodeAPI.get(
+      "/surveyResults/getSurveyResultsByDemografik/" + state
+    );
+    return response;
+  }
+);
+
 const surveySlice = createSlice({
   name: "surveys",
   initialState,
@@ -225,6 +237,15 @@ const surveySlice = createSlice({
     builder.addCase(getSurveyResults.fulfilled, (state, action) => {
       console.log(action.payload);
       state.surveyResults = action.payload.data;
+    });
+
+    builder.addCase(getSurveyResultsByDemografik.pending, (state, action) => {
+      state.demografikLoading = true;
+    });
+
+    builder.addCase(getSurveyResultsByDemografik.fulfilled, (state, action) => {
+      state.demografik = action.payload.data[0];
+      state.demografikLoading = false;
     });
   },
 });

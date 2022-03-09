@@ -61,6 +61,14 @@ const FillSurvey = () => {
                   Results: values.Results,
                   VerificationCode: verificationCode,
                   SurveyId: id,
+                  DemografikDetails: [
+                    {
+                      DemografikValue: "Kadın",
+                    },
+                    {
+                      DemografikValue: "Üniversite",
+                    },
+                  ],
                   history,
                 })
               );
@@ -74,7 +82,6 @@ const FillSurvey = () => {
                 <CardBody>
                   <Accordion defaultActiveKey={questions[0].Id}>
                     {questions.map((question, index) => {
-  
                       return (
                         <div className="border-bottom border-dark">
                           <CardHeader className="row justify-content-center">

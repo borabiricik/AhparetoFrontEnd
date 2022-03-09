@@ -12,6 +12,7 @@ const initialState = {
   SurveyId: null,
   isResultsLoading: false,
   survey: null,
+  isSurveyFilled: null,
 };
 
 export const getQuestions = createAsyncThunk("getQuestions", async (state) => {
@@ -29,16 +30,17 @@ export const finishSurvey = createAsyncThunk("finishSurvey", async (state) => {
     "surveyActions/finishSurvey/" + state.SurveyId,
     {
       VerificationCode: state.VerificationCode,
-      DemografikDetails: [
-        {
-          DemografikId: 1106,
-          DemografikValue: "Erkek",
-        },
-        {
-          DemografikId: 1107,
-          DemografikValue: "Lise",
-        },
-      ],
+      DemografikDetails: state.DemografikDetails,
+      // DemografikDetails: [
+      //   {
+      //     DemografikId: 1106,
+      //     DemografikValue: "Erkek",
+      //   },
+      //   {
+      //     DemografikId: 1107,
+      //     DemografikValue: "Lise",
+      //   },
+      // ],
       AnswersJson: JSON.stringify(state.Results),
     }
   );
@@ -68,6 +70,17 @@ export const getSurvey = createAsyncThunk("getSurvey", async (state) => {
   return response;
 });
 
+export const getSurveyIsUsed = createAsyncThunk(
+  "getSurveyIsUsed",
+  async (state) => {
+    const response = await nodeAPI.get(
+      "/survey/isSurveyFilled/" + state.id + "/" + state.verificationCode
+    );
+
+    return response;
+  }
+);
+
 const fillSurveySlice = createSlice({
   name: "fillSurveySlice",
   initialState,
@@ -96,8 +109,18 @@ const fillSurveySlice = createSlice({
     });
 
     addCase(getSurvey.fulfilled, (state, action) => {
-      console.log(action.payload.data)
+      console.log(action.payload.data);
       state.survey = action.payload.data;
+    });
+
+    addCase(getSurveyIsUsed.pending, (state, action) => {
+      state.isLoading = true;
+      state.isSurveyFilled = null;
+    });
+
+    addCase(getSurveyIsUsed.fulfilled, (state, action) => {
+      state.isSurveyFilled = action.payload.data.isUsed;
+      state.isLoading = false;
     });
   },
 });

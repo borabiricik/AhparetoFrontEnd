@@ -21,6 +21,7 @@
     "nouislider": "14.6.3",
     "perfect-scrollbar": "1.4.0",
     "prop-types": "^15.7.2",
+    "randomcolor": "^0.6.2",
     "react": "17.0.1",
     "react-big-calendar": "0.30.0",
     "react-bootstrap": "^1.6.4",
@@ -29,6 +30,7 @@
     "react-chartjs-2": "^2.11.1",
     "react-datetime": "3.0.4",
     "react-dom": "17.0.1",
+    "react-dropzone": "^12.0.4",
     "react-hook-form": "^6.15.5",
     "react-icons": "^4.3.1",
     "react-jvectormap": "0.0.16",
@@ -41,10 +43,12 @@
     "react-spinners": "^0.11.0",
     "react-table": "7.6.2",
     "react-table-6": "^6.11.0",
+    "react-to-pdf": "0.0.14",
     "reactstrap": "8.7.1",
     "sass": "^1.49.8",
     "sweetalert2": "^11.3.0",
     "uuid": "^8.3.2",
+    "xlsx": "^0.18.3",
     "yup": "^0.32.11"
   },
   "optionalDependencies": {

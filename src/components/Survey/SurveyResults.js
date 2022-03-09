@@ -1,13 +1,14 @@
 import SettingsCard from "components/Common/Tables/SettingsCard";
+import randomColor from "randomcolor";
 import React from "react";
 import { Bar, Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
 const chartColor = "#FFFFFF";
 
-const SurveyResults = () => {
+const SurveyResults = ({ demografik }) => {
   const surveyResults = useSelector((state) => state.surveys.surveyResults);
-  console.log(surveyResults);
+
   if (surveyResults) {
     const data = (canvas) => {
       const items = surveyResults.map((item) => item.Name);
@@ -18,7 +19,7 @@ const SurveyResults = () => {
 
       gradientStroke.addColorStop(1, "rgba(72,72,176,0.1)");
       gradientStroke.addColorStop(0.4, "rgba(72,72,176,0.0)");
-      gradientStroke.addColorStop(0, "rgba(119,52,169,0)"); //purple colors
+      gradientStroke.addColorStop(0, "rgba(119,52,169,0)");
 
       return {
         labels: items,
@@ -65,7 +66,6 @@ const SurveyResults = () => {
               fontColor: "#9e9e9e",
             },
           },
-          
         ],
         xAxes: [
           {
@@ -83,16 +83,18 @@ const SurveyResults = () => {
       },
     };
     return (
-      <Row className="justify-content-center">
-        <Col sm={6}>
+      <div className="">
+        <Col>
           <Card className="card-chart">
-            <CardHeader tag={"h4"}>Survey Results</CardHeader>
+            <CardHeader tag={"h4"}>
+              Survey Results {demografik && "(Demographic)"}
+            </CardHeader>
             <CardBody>
               <Bar data={data} options={options} />
             </CardBody>
           </Card>
         </Col>
-      </Row>
+      </div>
     );
   } else {
     return <h2>Anket Sonucu Yok</h2>;

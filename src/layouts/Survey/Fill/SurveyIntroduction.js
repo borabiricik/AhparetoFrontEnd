@@ -13,15 +13,20 @@ import {
   Container,
   Row,
 } from "reactstrap";
+import { getSurveyIsUsed } from "stores/Survyes/fillSurveySlice";
 import { getSurvey } from "stores/Survyes/fillSurveySlice";
 
 const SurveyIntroduction = () => {
   const dispatch = useDispatch();
   const survey = useSelector((state) => state.fillSurvey.survey);
+  const isSurveyFilled = useSelector(
+    (state) => state.fillSurvey.isSurveyFilled
+  );
   const { id, verificationCode } = useParams();
   const history = useHistory();
   const getData = async () => {
     await dispatch(getSurvey(id));
+    await dispatch(getSurveyIsUsed({ id, verificationCode }));
   };
   useEffect(() => {
     getData();
@@ -30,7 +35,7 @@ const SurveyIntroduction = () => {
   if (survey) {
     return (
       <>
-       <Logo />
+        <Logo />
 
         <Container className="introduction-container">
           <Card className="p-4">
@@ -50,14 +55,23 @@ const SurveyIntroduction = () => {
               </div>
             </CardBody>
             <CardFooter className="row justify-content-center">
-              <Button
-                color="success"
-                onClick={() =>
-                  history.push(`/survey/fill/${id}/${verificationCode}`)
-                }
-              >
-                Ankete Başla
-              </Button>
+              {console.log(isSurveyFilled)}
+              {!isSurveyFilled ? (
+                <Button
+                  color="success"
+                  onClick={() =>
+                    history.push(`/survey/fill/${id}/${verificationCode}`)
+                  }
+                >
+                  Ankete Başla
+                </Button>
+              ) : (
+                <Button
+                  color="danger"
+                >
+                  Survey Already Answered
+                </Button>
+              )}
             </CardFooter>
           </Card>
         </Container>
