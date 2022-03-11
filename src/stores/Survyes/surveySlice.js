@@ -65,11 +65,11 @@ export const updateSurvey = createAsyncThunk("updateSurvey", async (state) => {
 });
 
 export const addItems = createAsyncThunk("addItems", async (state) => {
-  console.log(state.items);
+
   const response = await nodeAPI.post("/item/addItems/" + state.id, {
     items: state.items,
   });
-  console.log(response);
+
   return response;
 });
 
@@ -159,7 +159,6 @@ export const addDemografik = createAsyncThunk(
       "/survey/addDemografik/" + state.id,
       state.DemografikDetails
     );
-    console.log(response);
     return response;
   }
 );
@@ -168,25 +167,31 @@ export const getDemografik = createAsyncThunk(
   "getDemografik",
   async (state) => {
     const response = await nodeAPI.get("/survey/getDemografik/" + state);
-    console.log(response);
     return response;
   }
 );
+
+export const releaseSurvey = createAsyncThunk(
+  "releaseSurvey",
+  async (state) => {
+    const response = await nodeAPI.post("/survey/releaseSurvey/" + state.id);
+    return { ...response, history: state.history };
+  }
+);
+
+
 
 const surveySlice = createSlice({
   name: "surveys",
   initialState,
   extraReducers: (builder) => {
     builder.addCase(getSurveys.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.surveysData = action.payload.data;
       state.loading = false;
     });
     builder.addCase(addSurvey.fulfilled, (state, action) => {
-      console.log(action.payload);
     });
     builder.addCase(updateSurvey.fulfilled, (state, action) => {
-      console.log(action.payload);
     });
     builder.addCase(getSurveyItems.pending, (state, action) => {
       state.items = null;
@@ -195,7 +200,6 @@ const surveySlice = createSlice({
     builder.addCase(getSurveyItems.fulfilled, (state, action) => {
       state.items = action.payload.data;
       state.itemsLoading = false;
-      console.log(action.payload.data);
     });
     builder.addCase(addItems.fulfilled, (state, action) => {
       if (action.payload.data.success) {
@@ -226,7 +230,6 @@ const surveySlice = createSlice({
       state.itemCriteriasLoading = true;
     });
     builder.addCase(getSurveyItemCriteria.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.itemCriterias = action.payload.data;
       state.itemCriteriasLoading = false;
     });
@@ -234,16 +237,11 @@ const surveySlice = createSlice({
       state.questionsLoading = true;
     });
     builder.addCase(getSurveyQuestions.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.questions = action.payload.data;
       state.questionsLoading = false;
     });
-    builder.addCase(addQuestions.fulfilled, (state, action) => {
-      console.log(action.payload);
-    });
 
     builder.addCase(addItemCriterias.fulfilled, (state, action) => {
-      console.log(action);
       if (action.payload.data.success) {
         Swal.fire({
           timer: 2000,
@@ -257,7 +255,6 @@ const surveySlice = createSlice({
     });
 
     builder.addCase(getSurveyResults.fulfilled, (state, action) => {
-      console.log(action.payload);
       state.surveyResults = action.payload.data;
     });
 
@@ -277,6 +274,21 @@ const surveySlice = createSlice({
     builder.addCase(getDemografik.fulfilled, (state, action) => {
       state.mydemografik = action.payload.data;
       state.isDemografikLoading = false;
+    });
+
+    builder.addCase(releaseSurvey.fulfilled, (state, action) => {
+      if (action.payload.data.success) {
+        Swal.fire({
+          timer: 2000,
+          icon: "success",
+          title: "Success",
+          showConfirmButton: false,
+        }).then((res) => {
+          action.payload.history.go(
+            getLayoutName(action.payload.history) + "/surveys"
+          );
+        });
+      }
     });
   },
 });

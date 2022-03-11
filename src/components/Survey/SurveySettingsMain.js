@@ -33,6 +33,7 @@ import { BiEdit } from "react-icons/bi";
 import { getSurveyResultsByDemografik } from "stores/Survyes/surveySlice";
 import { IoCloudDownloadOutline } from "react-icons/io5";
 import { getDemografik } from "stores/Survyes/surveySlice";
+import { getSurveyParticipants } from "stores/Participants/participantsStore";
 
 const SurveySettingsMain = () => {
   const history = useHistory();
@@ -46,6 +47,7 @@ const SurveySettingsMain = () => {
     dispatch(getSurveyResults(id));
     dispatch(getSurveyResultsByDemografik(id));
     dispatch(getDemografik(id));
+    dispatch(getSurveyParticipants(id));
   }, []);
 
   const items = useSelector((state) => state.surveys.items);
@@ -54,13 +56,15 @@ const SurveySettingsMain = () => {
   const itemCriterias = useSelector((state) => state.surveys.itemCriterias);
   const surveyResults = useSelector((state) => state.surveys.surveyResults);
   const demografikResults = useSelector((state) => state.surveys.demografik);
+  const participants = useSelector((state) => state.participants.participants);
   if (
     items &&
     criterias &&
     questions &&
     itemCriterias &&
     surveyResults &&
-    demografikResults
+    demografikResults &&
+    participants
   ) {
     return (
       <CardBody>
@@ -266,20 +270,22 @@ const SurveySettingsMain = () => {
                     <AiOutlineEye size={24} />
                   </Button>
 
-                  <Button
-                    className="btn-icon btn-round"
-                    color="success"
-                    onClick={() => {
-                      history.push(
-                        getLayoutName(history) +
-                          "/settings/survey/" +
-                          id +
-                          "/editParticipants"
-                      );
-                    }}
-                  >
-                    <BiEdit size={24} />
-                  </Button>
+                  {!participants && (
+                    <Button
+                      className="btn-icon btn-round"
+                      color="success"
+                      onClick={() => {
+                        history.push(
+                          getLayoutName(history) +
+                            "/settings/survey/" +
+                            id +
+                            "/editParticipants"
+                        );
+                      }}
+                    >
+                      <BiEdit size={24} />
+                    </Button>
+                  )}
                 </Row>
               </CardFooter>
             </SettingsCard>

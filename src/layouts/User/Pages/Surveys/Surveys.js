@@ -22,6 +22,9 @@ import { useHistory } from "react-router-dom";
 import ReactTable from "react-table-6";
 import classNames from "classnames";
 import Loading from "components/Common/Loading";
+import { releaseSurvey } from "stores/Survyes/surveySlice";
+import { BsBoxArrowUpRight } from "react-icons/bs";
+import Swal from "sweetalert2";
 
 const Surveys = () => {
   const history = useHistory();
@@ -92,6 +95,32 @@ const Surveys = () => {
                   Cell: (row) => {
                     return (
                       <Row className="w-100 justify-content-end">
+                        {!row.original.Draft && (
+                          <Button
+                            color="danger"
+                            size="sm"
+                            id="deleteSurveyBtn"
+                            className={classNames("btn-icon btn-round")}
+                            onClick={() => {
+                              Swal.fire({
+                                title: "Are you sure?",
+                                text: "You won't be able to revert this!",
+                                icon: "warning",
+                                showCancelButton: true,
+                                confirmButtonColor: "#3085d6",
+                                cancelButtonColor: "#d33",
+                              }).then(
+                                ({ isConfirmed }) =>
+                                  isConfirmed &&
+                                  dispatch(
+                                    releaseSurvey({ id: row.original.Id,history })
+                                  )
+                              );
+                            }}
+                          >
+                            <BsBoxArrowUpRight />
+                          </Button>
+                        )}
                         <Button
                           color="warning"
                           size="sm"
@@ -137,9 +166,7 @@ const Surveys = () => {
       </div>
     );
   } else {
-    return (
-      <Loading />
-    );
+    return <Loading />;
   }
 };
 
