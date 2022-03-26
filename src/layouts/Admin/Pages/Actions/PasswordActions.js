@@ -13,7 +13,7 @@ import {
   Container,
   Input,
 } from "reactstrap";
-import { rePassword } from "stores/Auth/authSlice";
+// import { rePassword } from "stores/Auth/authSlice";
 
 const PasswordActions = () => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const PasswordActions = () => {
               userId: localStorage.getItem("userId"),
             }}
             onSubmit={(values) => {
-              dispatch(rePassword({ ...values, history }));
+              // dispatch(rePassword({ ...values, history }));
             }}
           >
             {({ values, handleChange, handleSubmit }) => {

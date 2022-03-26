@@ -196,14 +196,10 @@ const AdminNavbar = (props) => {
                   </NavLink>
                   <DropdownItem divider tag="li" />
                   <NavLink tag="li">
-                    <DropdownItem
-                      
-                      className="nav-item text-danger font-bold"
-                    >
-                      <div onClick={()=> dispatch(logout(history))}>
+                    <DropdownItem className="nav-item text-danger font-bold">
+                      <div onClick={() => dispatch(logout({ history }))}>
                         Log Out
                       </div>
-                      
                     </DropdownItem>
                   </NavLink>
                 </DropdownMenu>

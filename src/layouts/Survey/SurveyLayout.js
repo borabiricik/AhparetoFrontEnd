@@ -12,13 +12,6 @@ import PerfectScrollbar from "perfect-scrollbar";
 import NotificationAlert from "react-notification-alert";
 
 // core components
-import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Footer from "components/Footer/Footer.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
-
-import logo from "assets/img/react-logo.png";
-import surveySoutes from "survey.routes";
 import surveyRoutes from "survey.routes";
 
 var ps;
@@ -165,7 +158,7 @@ const SurveyLayout = (props) => {
         <div className="main-panel" ref={mainPanelRef} data={activeColor}>
           <Switch>
             {getRoutes(surveyRoutes)}
-            <Redirect from="*" to="/survey" />
+            {/* <Redirect from="*" to="/survey" /> */}
           </Switch>
         </div>
       </div>

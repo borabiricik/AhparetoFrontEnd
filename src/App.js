@@ -10,39 +10,33 @@ import UserLayout from "layouts/User/UserLayout";
 import { useHistory } from "react-router-dom";
 import SurveyLayout from "layouts/Survey/SurveyLayout";
 import PollsterLayout from "layouts/Pollster/PollsterLayout";
+import jwtDecode from "jwt-decode";
 
 const App = () => {
   var date = new Date();
-  var isoDateTime = new Date(
-    date.getTime() - date.getTimezoneOffset() * 60000
-  ).toISOString();
   const history = useHistory();
   return (
     <Switch>
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-      <Route
-        path="/admin"
-        render={(props) => {
-          if (
-            localStorage.getItem("token") &&
-            localStorage.getItem("role") == "admin"
-          ) {
-            return <AdminLayout {...props} />;
-          } else {
-            return <SurveyLayout {...props} />;
-          }
-        }}
-      />
+
       <Route
         path="/user"
         render={(props) => {
-          if (
-            localStorage.getItem("token") &&
-            localStorage.getItem("role") == "user"
-          ) {
+          if (jwtDecode(localStorage.getItem("token")).isAdmin === false) {
             return <UserLayout {...props} />;
           } else {
             return <Redirect to={"/auth/login"} />;
+          }
+        }}
+      />
+
+      <Route
+        path="/admin"
+        render={(props) => {
+          if (jwtDecode(localStorage.getItem("token")).isAdmin === true) {
+            return <AdminLayout {...props} />;
+          } else {
+            return <SurveyLayout {...props} />;
           }
         }}
       />
@@ -62,25 +56,6 @@ const App = () => {
       />
 
       {/* <Route path={"/survey"} component={Survey} /> */}
-      {localStorage.getItem("token") == null &&
-      localStorage.getItem("role") == "user" ? (
-        <Redirect from="/" to="/auth/login" />
-      ) : (
-        <Redirect from="/" to="/user/dashboard" />
-      )}
-      {localStorage.getItem("token") == null &&
-      localStorage.getItem("role") == "admin" ? (
-        <Redirect from="/" to="/auth/login" />
-      ) : (
-        <Redirect from="/" to="/admin/dashboard" />
-      )}
-      {localStorage.getItem("token") &&
-      localStorage.getItem("expiration") < isoDateTime
-        ? () => {
-            history.replace("/auth/login");
-            localStorage.removeItem("token");
-          }
-        : null}
     </Switch>
   );
 };

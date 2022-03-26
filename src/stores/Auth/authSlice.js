@@ -1,112 +1,90 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-import { AuthSuccessAlert } from "components/Alerts/AuthSuccessAlert";
-import { FailAlert } from "components/Alerts/FailAlert";
-import { apiUrl } from "Constants/api";
-import { getLayoutName } from "Functions/Router";
-import Swal from "sweetalert2";
+import { nodeAPI } from "Constants/api";
+import jwtDecode from "jwt-decode";
+import { FireSwal } from "utils/FireSwal";
 
-const initialState = {
-  id: null,
-};
+const initialState = {};
 
-export const registerF = createAsyncThunk(
-  "registerF",
-  async (state, action) => {
-    const response = await axios.post(apiUrl + "Auth/register", {
-      email: state.email,
-      password: state.password,
-      firstName: state.firstName,
-      lastName: state.lastName,
-    });
-    const history = state.history;
-    return await { ...response, history };
+export const login = createAsyncThunk(
+  "login",
+  async (state, { rejectWithValue }) => {
+    try {
+      const response = await nodeAPI.post("/auth/login", state);
+      return { ...response, history: state.history };
+    } catch (e) {
+      return rejectWithValue(e.response.data);
+    }
   }
 );
 
-export const login = createAsyncThunk("loginF", async (state) => {
-  const response = await axios.post(apiUrl + "Auth/login", {
-    email: state.email,
-    password: state.password,
-  });
-  const history = state.history;
-  return { ...response, history };
-});
-
-export const logout = createAsyncThunk("logoutF", async (state, action) => {
-  localStorage.removeItem("token");
-  localStorage.removeItem("role");
-  localStorage.removeItem("expiration");
-  state.go("/auth/login");
-});
-
-export const rePassword = createAsyncThunk("rePassword", async (state) => {
-  const response = await axios.post(apiUrl + "Auth/rePassword", state);
-  return { ...response, history: state.history };
-});
+export const register = createAsyncThunk(
+  "register",
+  async (state, { rejectWithValue }) => {
+    try {
+      const response = await nodeAPI.post("/auth/register", state);
+      return { ...response, history: state.history };
+    } catch (e) {
+      return rejectWithValue(e.response.data);
+    }
+  }
+);
 
 export const authSlice = createSlice({
   name: "auth",
   initialState,
-  reducers: {},
-  extraReducers: {
-    [registerF.fulfilled]: (state, action) => {
-      if (action.payload.data.success) {
-        AuthSuccessAlert(
-          "Successfully Registered",
-          action.payload.history,
-          "/auth/login"
-        );
-      } else {
-        FailAlert(action.payload.data.message);
-      }
+  reducers: {
+    logout: (state, action) => {
+      console.log(action.payload);
+      localStorage.removeItem("token");
+      action.payload.history.push("/auth/login");
     },
-    [login.fulfilled]: (state, action) => {
+  },
+  extraReducers: ({ addCase }) => {
+    addCase(login.fulfilled, (state, action) => {
       if (action.payload.data.success) {
-        const { token, expiration, role, id } = action.payload.data.data;
-        AuthSuccessAlert(
-          "Succesfully Logined !",
-          action.payload.history,
-          "/admin"
-        );
-        localStorage.removeItem("token");
-        localStorage.removeItem("role");
-        localStorage.removeItem("expiration");
-        localStorage.removeItem("userId");
-        localStorage.setItem("token", token);
-        localStorage.setItem("userId", id);
-        localStorage.setItem("role", role);
-        localStorage.setItem("expiration", expiration);
-        state.id = id;
+        localStorage.setItem("token", action.payload.data.token);
+        FireSwal({ message: "Giriş Yapıldı" }).then(() => {
+          action.payload.history.push("/admin/dashboard");
+          if (jwtDecode(action.payload.data.token).isAdmin) {
+            action.payload.history.push("/admin/dashboard");
+          } else {
+            action.payload.history.push("/user/dashboard");
+          }
+        });
       } else {
-        FailAlert(action.payload.data.message);
+        FireSwal({ message: "Giriş Yapılamadı", error: true });
       }
-    },
-    [rePassword.fulfilled]: (state,action) => {
-      console.log(action.payload)
-      const {history,data} = action.payload
-      if (data.success) {
-        Swal.fire({
-          timer: 1000,
-          showConfirmButton: false,
-          title:"Success",
-          icon:"success"
-        }).then((res=> {
-          logout()
-          history.push(getLayoutName(history)+"/dashboard")
-        }))
+    });
+
+    addCase(login.rejected, (state, action) => {
+      FireSwal({
+        message: action.payload.message,
+        error: true,
+        statusCode: action.payload.statusCode,
+      });
+    });
+
+    addCase(register.fulfilled, (state, action) => {
+      if (action.payload.data.success) {
+        localStorage.setItem("token", action.payload.data.token);
+        FireSwal({ message: "Registered Successfully" }).then(() => {
+          action.payload.history.push("/auth/login");
+        });
+      } else {
+        FireSwal({ message: "Kayıt Başarısız", error: true });
       }
-      else{
-        Swal.fire({
-          title:"Başarısız",
-          showConfirmButton:false,
-          timer:3000,
-          icon:"error",
-          text: data.message
-        })
-      }
-    }
+    });
+
+    addCase(register.rejected, (state, action) => {
+      FireSwal({
+        message: action.payload.message,
+        error: true,
+        statusCode: action.payload.statusCode,
+      });
+    });
   },
 });
 
 export default authSlice.reducer;
+
+export const { logout } = authSlice.actions;
