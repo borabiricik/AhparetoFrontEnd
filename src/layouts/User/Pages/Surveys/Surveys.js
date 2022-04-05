@@ -1,30 +1,16 @@
-import React, { useEffect } from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardHeader,
-  CardText,
-  CardTitle,
-  Col,
-  Row,
-  UncontrolledTooltip,
-} from "reactstrap";
-import { FaRegUserCircle } from "@react-icons/all-files/fa/FaRegUserCircle";
-import { IoMdSettings } from "react-icons/io";
-import CustomTable from "components/Common/Tables/CustomTable";
-import { useDispatch } from "react-redux";
-import { getSurveys } from "stores/Survyes/surveySlice";
-import { useSelector } from "react-redux";
-import CommonTable from "components/Common/Tables/CommonTable";
-import { getLayoutName } from "Functions/Router";
-import { useHistory } from "react-router-dom";
-import ReactTable from "react-table-6";
-import classNames from "classnames";
-import Loading from "components/Common/Loading";
-import { releaseSurvey } from "stores/Survyes/surveySlice";
-import { BsBoxArrowUpRight } from "react-icons/bs";
-import Swal from "sweetalert2";
+import { FaRegUserCircle } from '@react-icons/all-files/fa/FaRegUserCircle';
+import classNames from 'classnames';
+import Loading from 'components/Common/Loading';
+import { getLayoutName } from 'Functions/Router';
+import React, { useEffect } from 'react';
+import { BsBoxArrowUpRight } from 'react-icons/bs';
+import { IoMdSettings } from 'react-icons/io';
+import { useDispatch, useSelector } from 'react-redux';
+import { useHistory } from 'react-router-dom';
+import ReactTable from 'react-table-6';
+import { Button, Card, CardBody, CardHeader, CardText, CardTitle, Col, Row } from 'reactstrap';
+import { getSurveys, releaseSurvey } from 'stores/Survyes/surveySlice';
+import Swal from 'sweetalert2';
 
 const Surveys = () => {
   const history = useHistory();

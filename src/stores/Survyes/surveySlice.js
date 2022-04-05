@@ -2,6 +2,7 @@ import axios from "axios";
 import { nodeAPI } from "Constants/api";
 import { apiUrl } from "Constants/api";
 import { getLayoutName } from "Functions/Router";
+import jwtDecode from "jwt-decode";
 import build from "react-jvectormap";
 import Swal from "sweetalert2";
 
@@ -25,7 +26,7 @@ const initialState = {
 
 export const getSurveys = createAsyncThunk("getSurveys", async (state) => {
   const response = nodeAPI.get(
-    "/survey/getByUserId/" + localStorage.getItem("userId")
+    "/survey/getByUserId/" + jwtDecode(localStorage.getItem("token")).Id
   );
   return response;
 });
@@ -33,7 +34,7 @@ export const getSurveys = createAsyncThunk("getSurveys", async (state) => {
 export const addSurvey = createAsyncThunk("addSurvey", async (state) => {
   const response = await nodeAPI.post("/survey/create", {
     ...state,
-    UserId: parseInt(localStorage.getItem("userId")),
+    UserId: parseInt(jwtDecode(localStorage.getItem("token")).Id),
   });
   if (!response.data.success) {
     Swal.fire({
@@ -65,7 +66,6 @@ export const updateSurvey = createAsyncThunk("updateSurvey", async (state) => {
 });
 
 export const addItems = createAsyncThunk("addItems", async (state) => {
-
   const response = await nodeAPI.post("/item/addItems/" + state.id, {
     items: state.items,
   });
@@ -179,8 +179,6 @@ export const releaseSurvey = createAsyncThunk(
   }
 );
 
-
-
 const surveySlice = createSlice({
   name: "surveys",
   initialState,
@@ -189,10 +187,8 @@ const surveySlice = createSlice({
       state.surveysData = action.payload.data;
       state.loading = false;
     });
-    builder.addCase(addSurvey.fulfilled, (state, action) => {
-    });
-    builder.addCase(updateSurvey.fulfilled, (state, action) => {
-    });
+    builder.addCase(addSurvey.fulfilled, (state, action) => {});
+    builder.addCase(updateSurvey.fulfilled, (state, action) => {});
     builder.addCase(getSurveyItems.pending, (state, action) => {
       state.items = null;
       state.itemsLoading = true;

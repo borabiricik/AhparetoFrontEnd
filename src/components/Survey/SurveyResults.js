@@ -1,10 +1,7 @@
-import SettingsCard from "components/Common/Tables/SettingsCard";
-import randomColor from "randomcolor";
 import React from "react";
 import { Bar, Line } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import { Card, CardBody, CardHeader, Col, Row } from "reactstrap";
-const chartColor = "#FFFFFF";
 
 const SurveyResults = ({ demografik }) => {
   const surveyResults = useSelector((state) => state.surveys.surveyResults);

@@ -1,20 +1,27 @@
-import React from "react";
-import AuthLayout from "layouts/Auth/Auth.js";
-import AdminLayout from "layouts/Admin/Admin.js";
-import { BrowserRouter, Redirect, Route, Switch } from "react-router-dom";
 import "assets/css/nucleo-icons.css";
-import "react-notification-alert/dist/animate.css";
-import "assets/scss/black-dashboard-pro-react.scss?v=1.2.0";
 import "assets/demo/demo.css";
-import UserLayout from "layouts/User/UserLayout";
-import { useHistory } from "react-router-dom";
-import SurveyLayout from "layouts/Survey/SurveyLayout";
-import PollsterLayout from "layouts/Pollster/PollsterLayout";
+import "assets/scss/black-dashboard-pro-react.scss?v=1.2.0";
+import "react-notification-alert/dist/animate.css";
+
 import jwtDecode from "jwt-decode";
+import AdminLayout from "layouts/Admin/Admin.js";
+import AuthLayout from "layouts/Auth/Auth.js";
+import PollsterLayout from "layouts/Pollster/PollsterLayout";
+import SurveyLayout from "layouts/Survey/SurveyLayout";
+import UserLayout from "layouts/User/UserLayout";
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { Redirect, Route, Switch, useLocation } from "react-router-dom";
+import { getUser } from "stores/Auth/authSlice";
+import PollsterLogin from "layouts/Pollster/Auth/Login";
 
 const App = () => {
-  var date = new Date();
-  const history = useHistory();
+  const dispatch = useDispatch();
+  const location = useLocation();
+  useEffect(() => {
+    dispatch(getUser());
+  }, [location.pathname]);
+
   return (
     <Switch>
       <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
@@ -47,7 +54,10 @@ const App = () => {
           return <SurveyLayout {...props} />;
         }}
       />
-
+      <Route
+        path="/pollsterAuth"
+        render={(props) => <PollsterLogin {...props} />}
+      />
       <Route
         path="/pollster"
         render={(props) => {

@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import ReactTable from "react-table-6";
 import { Card, CardBody, CardHeader, Col, Input, Row } from "reactstrap";
+import { getSurveyParticipants } from "stores/Participants/participantsStore";
 import { getSurveyItems } from "stores/Survyes/surveySlice";
 
 const ViewParticipants = () => {
   const params = useParams();
   const dispatch = useDispatch();
   const participants = useSelector((state) => state.participants.participants);
-  const itemsLoading = useSelector((state) => state.surveys.itemsLoading);
   useEffect(() => {
-    dispatch(getSurveyItems(params.id));
+    dispatch(getSurveyParticipants(params.id));
   }, []);
 
   if (participants) {

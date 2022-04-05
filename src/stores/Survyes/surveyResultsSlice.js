@@ -5,6 +5,7 @@ const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 const initialState = {
   isLoading: false,
   results: null,
+  pollsterSingleResults: null,
 };
 
 export const getSurveyResultsByVerificationCode = createAsyncThunk(
@@ -15,6 +16,16 @@ export const getSurveyResultsByVerificationCode = createAsyncThunk(
         state.SurveyId +
         "/" +
         state.VerificationCode
+    );
+    return response;
+  }
+);
+
+export const getPollsterSingleResult = createAsyncThunk(
+  "getPollsterSingleResult",
+  async (state) => {
+    const response = nodeAPI.get(
+      `/surveyResults/getSurveyResultsByResultId/${state.SurveyId}/${state.ResultId}`
     );
     return response;
   }
@@ -31,6 +42,10 @@ const surveyResultsSlice = createSlice({
       console.log(action.payload);
       state.results = action.payload.data;
       state.isLoading = false;
+    });
+
+    addCase(getPollsterSingleResult.fulfilled, (state, action) => {
+      state.pollsterSingleResults = action.payload.data;
     });
   },
 });

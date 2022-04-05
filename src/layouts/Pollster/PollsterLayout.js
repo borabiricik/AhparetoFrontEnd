@@ -19,6 +19,7 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import logo from "assets/img/react-logo.png";
 import pollsterRoutes from "pollster.routes";
+import PollsterNavbar from "components/Navbars/PollsterNavbar";
 
 var ps;
 
@@ -161,12 +162,53 @@ const PollsterLayout = (props) => {
         <div className="rna-container">
           <NotificationAlert ref={notificationAlertRef} />
         </div>
+        <div className="navbar-minimize-fixed" style={{ opacity: opacity }}>
+          <button
+            className="minimize-sidebar btn btn-link btn-just-icon"
+            onClick={handleMiniClick}
+          >
+            <i className="tim-icons icon-align-center visible-on-sidebar-regular text-muted" />
+            <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
+          </button>
+        </div>
+
+        <Sidebar
+          {...props}
+          routes={pollsterRoutes}
+          activeColor={activeColor}
+          logo={{
+            outterLink: "https://ahpareto.com",
+            text: "Ahprateo",
+            imgSrc: logo,
+          }}
+          closeSidebar={closeSidebar}
+        />
         <div className="main-panel" ref={mainPanelRef} data={activeColor}>
+          <PollsterNavbar
+            {...props}
+            handleMiniClick={handleMiniClick}
+            brandText={getActiveRoute(pollsterRoutes)}
+            sidebarOpened={sidebarOpened}
+            toggleSidebar={toggleSidebar}
+          />
           <Switch>
             {getRoutes(pollsterRoutes)}
-            <Redirect from="*" to="/pollster/login" />
+            <Redirect from="*" to="/pollster/dashboard" />
           </Switch>
+          {/* {
+            // we don't want the Footer to be rendered on full screen maps page
+            props.location.pathname.indexOf("full-screen-map") !== -1 ? null : (
+              <Footer fluid />
+            )
+          } */}
         </div>
+        <FixedPlugin
+          activeColor={activeColor}
+          sidebarMini={sidebarMini}
+          handleActiveClick={handleActiveClick}
+          handleMiniClick={handleMiniClick}
+        />
+        <Footer fluid />
       </div>
     );
   // } else {

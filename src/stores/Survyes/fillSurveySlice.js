@@ -92,9 +92,6 @@ const fillSurveySlice = createSlice({
       state.criteria = action.payload.data;
       state.isLoading = false;
     });
-    addCase(finishSurvey.fulfilled, (state, action) => {
-      console.log(action.payload);
-    });
 
     addCase(getSurvey.pending, (state, action) => {
       state.survey = null;

@@ -1,3 +1,4 @@
+import Payment from "components/Payment/Payment";
 import BuyCredits from "layouts/Admin/Pages/Actions/BuyCredits";
 import PasswordActions from "layouts/Admin/Pages/Actions/PasswordActions";
 import SurveyLayout from "layouts/Survey/SurveyLayout";
@@ -5,6 +6,7 @@ import Dashboard from "layouts/User/Pages/Dashboard";
 import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
 import Demografik from "layouts/User/Pages/Demografik/Demografik";
 import EditDemografik from "layouts/User/Pages/Demografik/EditDemografik";
+import CallBack from "layouts/User/Pages/Payment/CallBack";
 import CreatePollsterGroup from "layouts/User/Pages/PollsterGroups/CreatePollsterGroup";
 import EditPollsterGroup from "layouts/User/Pages/PollsterGroups/EditPollsterGroup";
 import PollsterGroups from "layouts/User/Pages/PollsterGroups/PollsterGroups";
@@ -16,7 +18,7 @@ import EditSurvey from "layouts/User/Pages/Surveys/EditSurvey";
 import Surveys from "layouts/User/Pages/Surveys/Surveys";
 import Login from "views/pages/Login";
 import Register from "views/pages/Register";
-
+import Buy from "components/Payment/Buy";
 export default [
   {
     path: "/login",
@@ -25,7 +27,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: Login,
     layout: "/auth",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/register",
@@ -34,7 +36,7 @@ export default [
     icon: "tim-icons icon-chart-pie-36",
     component: Register,
     layout: "/auth",
-    invisible:true
+    invisible: true,
   },
   {
     path: "/dashboard",
@@ -68,6 +70,33 @@ export default [
     component: Demografik,
     layout: "/user",
   },
+  {
+    path: "/payment/buy/:id",
+    name: "Buy Credits",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Buy,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/payment/callback",
+    name: "Payment CallBack",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CallBack,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/payment",
+    name: "Payment",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Payment,
+    layout: "/user",
+  },
+
   {
     path: "/create/demografik",
     name: "Create Demographic",

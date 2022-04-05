@@ -170,6 +170,7 @@ const User = (props) => {
             <i className="tim-icons icon-bullet-list-67 visible-on-sidebar-mini text-muted" />
           </button>
         </div>
+
         <Sidebar
           {...props}
           routes={userRoutes}

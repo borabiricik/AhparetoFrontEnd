@@ -47,7 +47,6 @@ const SurveySettingsMain = () => {
     dispatch(getSurveyResults(id));
     dispatch(getSurveyResultsByDemografik(id));
     dispatch(getDemografik(id));
-    dispatch(getSurveyParticipants(id));
   }, []);
 
   const items = useSelector((state) => state.surveys.items);
@@ -57,15 +56,7 @@ const SurveySettingsMain = () => {
   const surveyResults = useSelector((state) => state.surveys.surveyResults);
   const demografikResults = useSelector((state) => state.surveys.demografik);
   const participants = useSelector((state) => state.participants.participants);
-  if (
-    items &&
-    criterias &&
-    questions &&
-    itemCriterias &&
-    surveyResults &&
-    demografikResults &&
-    participants
-  ) {
+  if (items && criterias && questions && itemCriterias) {
     return (
       <CardBody>
         <Row>

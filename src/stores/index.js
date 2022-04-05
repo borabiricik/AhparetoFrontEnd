@@ -11,6 +11,7 @@ import wizardSlice from "./Wizard/wizardSlice";
 import fillSurveySlice from "./Survyes/fillSurveySlice";
 import surveyResultsSlice from "./Survyes/surveyResultsSlice";
 import participantsStore from "./Participants/participantsStore";
+import paymentsStore from "./Payments/paymentsStore";
 
 export default configureStore({
   reducer: {
@@ -26,6 +27,7 @@ export default configureStore({
     fillSurvey: fillSurveySlice,
     surveyResults: surveyResultsSlice,
     participants: participantsStore,
+    payments: paymentsStore
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

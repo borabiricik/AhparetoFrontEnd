@@ -23,7 +23,7 @@ import Swal from "sweetalert2";
 const SurveyDemografik = () => {
   const dispatch = useDispatch();
   const survey = useSelector((state) => state.fillSurvey.survey);
-  const { id, verificationCode } = useParams();
+  const { id } = useParams();
   const history = useHistory();
 
   useEffect(() => {
@@ -56,7 +56,7 @@ const SurveyDemografik = () => {
                   "DemografikDetails",
                   JSON.stringify(values.DemografikDetails)
                 );
-                history.push("/survey/fill/" + id + "/" + verificationCode);
+                history.push("/pollster/survey/fill/" + id);
               }
             }}
           >
@@ -125,8 +125,12 @@ const SurveyDemografik = () => {
                                 }
                               )
                             ) : (
-                              <h2>
-                                Cannot find Demographic Answers. Contact Admin
+                              <h2
+                                className="text-danger"
+                                style={{ textAlign: "center" }}
+                              >
+                                Cannot Find Demographic Information. Contact
+                                Admin
                               </h2>
                             )}
                           </Row>

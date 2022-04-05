@@ -5,8 +5,6 @@ import MailSettings from "layouts/Admin/Pages/Settings/MailSettings";
 import CreatePrice from "layouts/Admin/Pages/Settings/Price/CreatePrice";
 import EditPrice from "layouts/Admin/Pages/Settings/Price/EditPrice";
 import Pricing from "layouts/Admin/Pages/Settings/Pricing";
-import FillSurvey from "layouts/Survey/Fill/FillSurvey";
-import SurveyLayout from "layouts/Survey/SurveyLayout";
 import Dashboard from "layouts/User/Pages/Dashboard";
 import CreateDemografik from "layouts/User/Pages/Demografik/CreateDemografik";
 import Demografik from "layouts/User/Pages/Demografik/Demografik";
@@ -35,6 +33,9 @@ import Surveys from "layouts/User/Pages/Surveys/Surveys";
 import SurveySettings from "layouts/User/Pages/Surveys/SurveySettings";
 import Login from "views/pages/Login";
 import Register from "views/pages/Register";
+import Payment from "components/Payment/Payment";
+import PollsterLogin from "layouts/Pollster/Auth/Login";
+
 
 export default [
   {
@@ -46,6 +47,7 @@ export default [
     layout: "/auth",
     invisible: true,
   },
+  
   {
     path: "/register",
     name: "Register",
@@ -79,32 +81,14 @@ export default [
     component: Pollsters,
     layout: "/admin",
   },
+  
   {
-    path: "/demografik",
-    name: "Demographic",
+    path: "/payment",
+    name: "Payment",
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
-    component: Demografik,
+    component: Payment,
     layout: "/admin",
-  },
-
-  {
-    path: "/create/demografik",
-    name: "Create Demographic",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-chart-pie-36",
-    component: CreateDemografik,
-    layout: "/admin",
-    invisible: true,
-  },
-  {
-    path: "/edit/demografik/:id",
-    name: "Edit Demographic",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-chart-pie-36",
-    component: EditDemografik,
-    layout: "/admin",
-    invisible: true,
   },
   {
     path: "/pollstergroups",
@@ -187,7 +171,6 @@ export default [
     invisible: true,
   },
 
-  
   {
     path: "/settings/survey/:id/viewQuestions",
     name: "Add Items",
@@ -323,7 +306,7 @@ export default [
         layout: "/admin",
       },
       {
-        path: "/buy-credits",
+        path: "/payment",
         name: "Buy Credits",
         rtlName: "خرائط جوجل",
         mini: "KR",

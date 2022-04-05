@@ -80,7 +80,6 @@ const SurveySettings = () => {
           <SurveySettingsMain />
         </Card>
       </div>
-      <div></div>
     </div>
   );
 };

@@ -1,23 +1,13 @@
-import { Formik } from "formik";
-import React, { useState } from "react";
-import {
-  Button,
-  Card,
-  CardBody,
-  CardFooter,
-  CardHeader,
-  FormGroup,
-  Input,
-  Label,
-  Row,
-} from "reactstrap";
-import { readExcel } from "utils/readExcel";
-import { useParams } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { addParticipants } from "stores/Participants/participantsStore";
-import { Link, useHistory } from "react-router-dom/cjs/react-router-dom.min";
-import Swal from "sweetalert2";
-import ReactTable from "react-table-6";
+import { Formik } from 'formik';
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useHistory } from 'react-router-dom/cjs/react-router-dom.min';
+import ReactTable from 'react-table-6';
+import { Button, Card, CardBody, CardFooter, CardHeader, FormGroup, Input, Label, Row } from 'reactstrap';
+import { addParticipants } from 'stores/Participants/participantsStore';
+import Swal from 'sweetalert2';
+import { readExcel } from 'utils/readExcel';
 
 const EditParticipants = () => {
   const [isExcel, setisExcel] = useState(false);

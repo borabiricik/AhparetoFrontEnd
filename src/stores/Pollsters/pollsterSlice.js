@@ -2,11 +2,13 @@ import axios from "axios";
 import { nodeAPI } from "Constants/api";
 import { apiUrl } from "Constants/api";
 import { getLayoutName } from "Functions/Router";
+import jwtDecode from "jwt-decode";
 import Swal from "sweetalert2";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
 const initialState = {
+  surveys: null,
   pollstersData: null,
   loading: null,
 };
@@ -18,10 +20,60 @@ export const getPollsters = createAsyncThunk("getPollsters", async (state) => {
   return response;
 });
 
+export const getPollsterSurveys = createAsyncThunk(
+  "getPollsterSurveys",
+  async (state) => {
+    const response = await nodeAPI.get(
+      "/pollster/getPollsterSurveys/" +
+        jwtDecode(localStorage.getItem("token")).Id
+    );
+    return response;
+  }
+);
+
+export const finishSurveyPollster = createAsyncThunk(
+  "finishSurveyPollster",
+  async (state) => {
+    const response = await nodeAPI.post(
+      "surveyActions/finishSurveyPollster/" + state.SurveyId,
+      {
+        VerificationCode: state.VerificationCode,
+        DemografikDetails: JSON.parse(
+          localStorage.getItem("DemografikDetails")
+        ),
+        PollsterId: jwtDecode(localStorage.getItem("token")).Id,
+        AnswersJson: JSON.stringify(state.Results),
+      }
+    );
+
+    if (response.data.success) {
+      console.log(response.data)
+      state.history.push(
+        "/pollster/survey/results/" + state.SurveyId + "/" + response.data.Id
+      );
+    } else {
+      Swal.fire({
+        text: response.data.message,
+        icon: "error",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+    }
+    return {
+      ...response,
+      history: state.history,
+      SurveyId: state.SurveyId,
+    };
+  }
+);
+
 export const createPollster = createAsyncThunk(
   "createPollster",
   async (state) => {
-    const response = await nodeAPI.post("/pollster/create", {...state,UserId: localStorage.getItem("userId")});
+    const response = await nodeAPI.post("/pollster/create", {
+      ...state,
+      UserId: localStorage.getItem("userId"),
+    });
     if (response.data.success) {
       Swal.fire({
         timer: 1000,
@@ -70,12 +122,16 @@ export const deletePollster = createAsyncThunk(
 const pollsterSlice = createSlice({
   name: "pollsters",
   initialState,
-  extraReducers: (builder) => {
-    builder.addCase(getPollsters.fulfilled, (state, action) => {
-      console.log(action.payload.data)
+  extraReducers: ({ addCase }) => {
+    addCase(getPollsters.fulfilled, (state, action) => {
+      console.log(action.payload.data);
       // console.log(action.payload.data.data)
       state.pollstersData = action.payload.data;
       state.loading = false;
+    });
+
+    addCase(getPollsterSurveys.fulfilled, (state, action) => {
+      state.surveys = action.payload.data;
     });
   },
 });

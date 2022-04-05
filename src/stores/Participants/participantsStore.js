@@ -1,6 +1,7 @@
 import { nodeAPI } from "Constants/api";
 import { getLayoutName } from "Functions/Router";
 import Swal from "sweetalert2";
+import { FireSwal } from "utils/FireSwal";
 
 const { createSlice, createAsyncThunk } = require("@reduxjs/toolkit");
 
@@ -23,11 +24,15 @@ export const addParticipants = createAsyncThunk(
 
 export const getSurveyParticipants = createAsyncThunk(
   "getSurveyParticipants",
-  async (state) => {
-    const response = await nodeAPI.get(
-      "/participants/getParticipants/" + state
-    );
-    return response;
+  async (state, { rejectWithValue }) => {
+    try {
+      const response = await nodeAPI.get(
+        "/participants/getParticipants/" + state
+      );
+      return response;
+    } catch (error) {
+      return rejectWithValue(error.response.data);
+    }
   }
 );
 
@@ -58,9 +63,17 @@ const participantsStore = createSlice({
     });
 
     addCase(getSurveyParticipants.fulfilled, (state, action) => {
-      console.log(action.payload.data)
+      console.log(action.payload.data);
       state.participants = action.payload.data;
       state.loading = false;
+    });
+
+    addCase(getSurveyParticipants.rejected, (state,action) => {
+      FireSwal({
+        message: action.payload.message,
+        error: true,
+        statusCode: action.payload.statusCode,
+      });
     });
   },
 });

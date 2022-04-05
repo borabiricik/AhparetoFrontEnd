@@ -24,7 +24,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { logout } from "stores/Auth/authSlice";
 import { getLayoutName } from "Functions/Router";
 import { useHistory } from "react-router-dom";
-const AdminNavbar = (props) => {
+import { logoutPollster } from "stores/Auth/authSlice";
+const PollsterNavbar = (props) => {
 
   const credit = useSelector((state) => state.auth.credit);
   const [collapseOpen, setCollapseOpen] = React.useState(false);
@@ -120,13 +121,6 @@ const AdminNavbar = (props) => {
             <span className="navbar-toggler-bar navbar-kebab" />
             <span className="navbar-toggler-bar navbar-kebab" />
           </button>
-          <div className="ml-auto text-bold">
-            <b>Credit:</b>
-            <span className="text-success"> {credit}</span>
-            <Button onClick={()=> history.push(getLayoutName(history) + "/payment")} size="sm" color="info" className="row align-items-center">
-              Buy Credits <i className="tim-icons icon-cart" />
-            </Button>
-          </div>
           <Collapse navbar isOpen={collapseOpen}>
             <Nav className="ml-auto" navbar>
               <UncontrolledDropdown nav>
@@ -156,7 +150,7 @@ const AdminNavbar = (props) => {
                   <DropdownItem divider tag="li" />
                   <NavLink tag="li">
                     <DropdownItem className="nav-item text-danger font-bold">
-                      <div onClick={() => dispatch(logout({ history }))}>
+                      <div onClick={() => dispatch(logoutPollster({ history }))}>
                         Log Out
                       </div>
                     </DropdownItem>
@@ -190,4 +184,4 @@ const AdminNavbar = (props) => {
   );
 };
 
-export default AdminNavbar;
+export default PollsterNavbar;
