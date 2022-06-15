@@ -194,6 +194,15 @@ export default [
         layout: "/user",
       },
       {
+        path: "/fill-profile",
+        name: "Fill Profile",
+        rtlName: "خرائط جوجل",
+        mini: "FP",
+        rtlMini: "زم",
+        component: PasswordActions,
+        layout: "/user",
+      },
+      {
         path: "/password-actions",
         name: "Password Actions",
         rtlName: "خرائط جوجل",

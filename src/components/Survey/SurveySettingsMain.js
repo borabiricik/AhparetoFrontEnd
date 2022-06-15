@@ -310,7 +310,7 @@ const SurveySettingsMain = () => {
                         getLayoutName(history) +
                           "/settings/survey/" +
                           id +
-                          "/editParticipants"
+                          "/addDemografik"
                       );
                     }}
                   >

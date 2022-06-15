@@ -35,7 +35,8 @@ import Login from "views/pages/Login";
 import Register from "views/pages/Register";
 import Payment from "components/Payment/Payment";
 import PollsterLogin from "layouts/Pollster/Auth/Login";
-
+import Buy from "components/Payment/Buy";
+import CallBack from "layouts/User/Pages/Payment/CallBack";
 
 export default [
   {
@@ -47,7 +48,7 @@ export default [
     layout: "/auth",
     invisible: true,
   },
-  
+
   {
     path: "/register",
     name: "Register",
@@ -81,7 +82,7 @@ export default [
     component: Pollsters,
     layout: "/admin",
   },
-  
+
   {
     path: "/payment",
     name: "Payment",
@@ -140,6 +141,25 @@ export default [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: EditSurvey,
+    layout: "/admin",
+    invisible: true,
+  },
+
+  {
+    path: "/create/demografik",
+    name: "Create Demographic",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CreateDemografik,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/edit/demografik/:id",
+    name: "Edit Demographic",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditDemografik,
     layout: "/admin",
     invisible: true,
   },
@@ -216,6 +236,7 @@ export default [
     layout: "/admin",
     invisible: true,
   },
+
   {
     path: "/settings/survey/:id/addCriterias",
     name: "Add Items",
@@ -252,6 +273,7 @@ export default [
     layout: "/admin",
     invisible: true,
   },
+
   {
     path: "/settings/survey/:id",
     name: "Survey Settings",
@@ -270,6 +292,32 @@ export default [
     component: CreateSurvey,
     layout: "/admin",
     invisible: true,
+  },
+  {
+    path: "/payment/buy/:id",
+    name: "Buy Credits",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Buy,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/payment/callback",
+    name: "Payment CallBack",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: CallBack,
+    layout: "/admin",
+    invisible: true,
+  },
+  {
+    path: "/payment",
+    name: "Payment",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Payment,
+    layout: "/admin",
   },
   {
     collapse: true,
