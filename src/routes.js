@@ -37,6 +37,7 @@ import Payment from "components/Payment/Payment";
 import PollsterLogin from "layouts/Pollster/Auth/Login";
 import Buy from "components/Payment/Buy";
 import CallBack from "layouts/User/Pages/Payment/CallBack";
+import FillProfile from "views/pages/FillProfile";
 
 export default [
   {
@@ -82,7 +83,15 @@ export default [
     component: Pollsters,
     layout: "/admin",
   },
-
+  {
+    path: "/payment/buy/:id",
+    name: "Buy Credits",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: Buy,
+    layout: "/admin",
+    invisible: true,
+  },
   {
     path: "/payment",
     name: "Payment",
@@ -293,15 +302,7 @@ export default [
     layout: "/admin",
     invisible: true,
   },
-  {
-    path: "/payment/buy/:id",
-    name: "Buy Credits",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-chart-pie-36",
-    component: Buy,
-    layout: "/admin",
-    invisible: true,
-  },
+  
   {
     path: "/payment/callback",
     name: "Payment CallBack",
@@ -310,14 +311,6 @@ export default [
     component: CallBack,
     layout: "/admin",
     invisible: true,
-  },
-  {
-    path: "/payment",
-    name: "Payment",
-    rtlName: "لوحة القيادة",
-    icon: "tim-icons icon-chart-pie-36",
-    component: Payment,
-    layout: "/admin",
   },
   {
     collapse: true,
@@ -360,6 +353,15 @@ export default [
         mini: "KR",
         rtlMini: "زم",
         component: BuyCredits,
+        layout: "/admin",
+      },
+      {
+        path: "/fill-profile",
+        name: "Fill Profile",
+        rtlName: "خرائط جوجل",
+        mini: "FP",
+        rtlMini: "زم",
+        component: FillProfile,
         layout: "/admin",
       },
       {

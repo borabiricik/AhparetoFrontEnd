@@ -19,6 +19,7 @@ import Surveys from "layouts/User/Pages/Surveys/Surveys";
 import Login from "views/pages/Login";
 import Register from "views/pages/Register";
 import Buy from "components/Payment/Buy";
+import FillProfile from "views/pages/FillProfile";
 export default [
   {
     path: "/login",
@@ -199,7 +200,7 @@ export default [
         rtlName: "خرائط جوجل",
         mini: "FP",
         rtlMini: "زم",
-        component: PasswordActions,
+        component: FillProfile,
         layout: "/user",
       },
       {
