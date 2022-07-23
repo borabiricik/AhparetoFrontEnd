@@ -3,6 +3,7 @@ import { FieldArray, Formik } from "formik";
 import React from "react";
 import { BiTrashAlt } from "react-icons/bi";
 import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 import { useParams } from "react-router-dom/cjs/react-router-dom.min";
 import {
   Button,
@@ -20,6 +21,7 @@ import Swal from "sweetalert2";
 const AddItems = () => {
   const dispatch = useDispatch();
   const params = useParams();
+  const history = useHistory()
   return (
     <div className="content">
       <Formik
@@ -35,7 +37,7 @@ const AddItems = () => {
             confirmButtonColor: "#3085d6",
           }).then((res) => {
             if (res.isConfirmed) {
-              dispatch(addItems({ ...values, id: params.id }));
+              dispatch(addItems({ ...values, id: params.id,history }));
             }
           });
         }}

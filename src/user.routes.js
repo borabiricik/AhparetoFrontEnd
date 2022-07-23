@@ -20,6 +20,19 @@ import Login from "views/pages/Login";
 import Register from "views/pages/Register";
 import Buy from "components/Payment/Buy";
 import FillProfile from "views/pages/FillProfile";
+import ViewCriterias from "layouts/User/Pages/Surveys/Criterias/ViewCriterias";
+import EditParticipants from "layouts/User/Pages/Surveys/Participants/EditParticipants";
+import ViewParticipants from "layouts/User/Pages/Surveys/Participants/ViewParticipants";
+import ViewQuestions from "layouts/User/Pages/Surveys/Questions/ViewQuestions";
+import ViewItems from "layouts/User/Pages/Surveys/Items/ViewItems";
+import ViewItemCriteria from "layouts/User/Pages/Surveys/ItemCriteria/ViewItemCriteria";
+import AddItemCriteria from "layouts/User/Pages/Surveys/ItemCriteria/AddItemCriteria";
+import AddQuestions from "layouts/User/Pages/Surveys/Questions/AddQuestions";
+import AddCriterias from "layouts/User/Pages/Surveys/Criterias/AddCriterias";
+import AddItems from "layouts/User/Pages/Surveys/Items/AddItems";
+import ViewDemografik from "layouts/User/Pages/Surveys/Demografik/ViewDemografik";
+import AddDemografik from "layouts/User/Pages/Surveys/Demografik/AddDemografik";
+import SurveySettings from "layouts/User/Pages/Surveys/SurveySettings";
 export default [
   {
     path: "/login",
@@ -175,6 +188,126 @@ export default [
     rtlName: "لوحة القيادة",
     icon: "tim-icons icon-chart-pie-36",
     component: CreateSurvey,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/viewCriterias",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewCriterias,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/editParticipants",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: EditParticipants,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/viewParticipants",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewParticipants,
+    layout: "/user",
+    invisible: true,
+  },
+
+  {
+    path: "/settings/survey/:id/viewQuestions",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewQuestions,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/viewItems",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewItems,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/viewItemCriterias",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewItemCriteria,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/addItemCriteria",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: AddItemCriteria,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/addQuestions",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: AddQuestions,
+    layout: "/user",
+    invisible: true,
+  },
+
+  {
+    path: "/settings/survey/:id/addCriterias",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: AddCriterias,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/addItems",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: AddItems,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/viewDemografik",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: ViewDemografik,
+    layout: "/user",
+    invisible: true,
+  },
+  {
+    path: "/settings/survey/:id/addDemografik",
+    name: "Add Items",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: AddDemografik,
+    layout: "/user",
+    invisible: true,
+  },
+
+  {
+    path: "/settings/survey/:id",
+    name: "Survey Settings",
+    rtlName: "لوحة القيادة",
+    icon: "tim-icons icon-chart-pie-36",
+    component: SurveySettings,
     layout: "/user",
     invisible: true,
   },

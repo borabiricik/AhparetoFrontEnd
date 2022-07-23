@@ -35,18 +35,8 @@ export const addSurvey = createAsyncThunk("addSurvey", async (state) => {
 		...state,
 		UserId: parseInt(jwtDecode(localStorage.getItem("token")).Id),
 	});
-	if (!response.data.success) {
-		Swal.fire({
-			timer: 1000,
-			icon: "success",
-			title: "Success",
-			showConfirmButton: false,
-		}).then((res) => {
-			state.history.push(getLayoutName(state.history) + "/surveys");
-		});
-	}
 
-	return response;
+	return { ...response, history: state.history };
 });
 
 export const updateSurvey = createAsyncThunk("updateSurvey", async (state) => {
@@ -69,7 +59,7 @@ export const addItems = createAsyncThunk("addItems", async (state) => {
 		items: state.items,
 	});
 
-	return response;
+	return { ...response, history: state.history };
 });
 
 export const getSurveyItems = createAsyncThunk("getSurveyItems", async (state) => {
@@ -103,14 +93,14 @@ export const addQuestions = createAsyncThunk("addQuestions", async (state) => {
 	const response = await nodeAPI.post("/question/addQuestions/" + state.Id, {
 		questions: state.questions,
 	});
-	return response;
+	return { ...response, history: state.history };
 });
 
 export const addCriterias = createAsyncThunk("addCriterias", async (state) => {
 	const response = await nodeAPI.post("/criteria/addCriterias/" + state.id, {
 		criterias: state.criterias,
 	});
-	return response;
+	return { ...response, history: state.history };
 });
 
 export const getSurveyResults = createAsyncThunk("getSurveyResults", async (state) => {
@@ -125,7 +115,7 @@ export const getSurveyResultsByDemografik = createAsyncThunk("getSurveyResultsBy
 
 export const addDemografik = createAsyncThunk("addDemografik", async (state) => {
 	const response = await nodeAPI.post("/survey/addDemografik/" + state.id, state.DemografikDetails);
-	return response;
+	return { ...response, history: state.history };
 });
 
 export const getDemografik = createAsyncThunk("getDemografik", async (state) => {
@@ -147,7 +137,10 @@ const surveySlice = createSlice({
 			state.loading = false;
 		});
 		builder.addCase(addSurvey.fulfilled, (state, action) => {
-			FireSwal({ message: "Survey Added Successfully" });
+			FireSwal({ message: "Survey Added Successfully" }).then(() => {
+				action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
+			});
+			console.log(action.payload);
 		});
 		builder.addCase(updateSurvey.fulfilled, (state, action) => {});
 		builder.addCase(getSurveyItems.pending, (state, action) => {
@@ -159,12 +152,15 @@ const surveySlice = createSlice({
 			state.itemsLoading = false;
 		});
 		builder.addCase(addItems.fulfilled, (state, action) => {
+			console.log(action.payload);
 			if (action.payload.data.success) {
 				Swal.fire({
 					timer: 2000,
 					icon: "success",
 					title: "Success",
 					showConfirmButton: false,
+				}).then(() => {
+					action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
 				});
 			}
 		});
@@ -180,6 +176,8 @@ const surveySlice = createSlice({
 					icon: "success",
 					title: "Success",
 					showConfirmButton: false,
+				}).then(() => {
+					action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
 				});
 			}
 		});
@@ -198,6 +196,17 @@ const surveySlice = createSlice({
 			state.questionsLoading = false;
 		});
 
+		builder.addCase(addQuestions.fulfilled, (state, action) => {
+			Swal.fire({
+				timer: 2000,
+				icon: "success",
+				title: "Success",
+				showConfirmButton: false,
+			}).then(() => {
+				action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
+			});
+		});
+
 		builder.addCase(addItemCriterias.fulfilled, (state, action) => {
 			if (action.payload.data.success) {
 				Swal.fire({
@@ -206,7 +215,20 @@ const surveySlice = createSlice({
 					title: "Success",
 					showConfirmButton: false,
 				}).then((res) => {
-					// action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
+					action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
+				});
+			}
+		});
+
+		builder.addCase(addDemografik.fulfilled, (state, action) => {
+			if (action.payload.data.success) {
+				Swal.fire({
+					timer: 2000,
+					icon: "success",
+					title: "Success",
+					showConfirmButton: false,
+				}).then((res) => {
+					action.payload.history.push(getLayoutName(action.payload.history) + "/surveys");
 				});
 			}
 		});
